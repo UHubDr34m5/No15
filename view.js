@@ -1,4 +1,4 @@
-import {CARDS,EVENTS,defaultConfig,isHidden,ranking,cardStats} from './core.js?v=20261018-id1';
+import {CARDS,EVENTS,defaultConfig,isHidden,ranking,cardStats} from './core.js?v=20261018-id2';
 export const esc=x=>String(x??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const btn=(text,act,classes='',attrs='')=>`<button type="button" class="btn ${classes}" data-act="${act}" ${attrs}>${text}</button>`;
 const disabled=x=>x?'disabled':'';
@@ -13,7 +13,7 @@ function topbar(ctx){
 }
 export function renderApp(ctx){
   const b=ctx.backend,game=b?.state;
-  return `${b?.demo?`<div class="demo-bar">体験モード · この画面だけで動作します（別端末とは同期しません） ${btn(ctx.role==='teacher'?'生徒画面へ':'教員画面へ','demo-role','small ghost')}</div>`:''}${b&&!b.online?'<div class="offline-bar" role="alert">接続が切れています。送信の完了を確認できるまで画面を閉じず、再接続をお待ちください。</div>':''}<div class="container">${topbar(ctx)}${game?gamePage(ctx):ctx.joining?joinPage(ctx):homePage(ctx)}<footer class="footer"><span>NO.15 <span class="muted">/</span> NUMBER BATTLE · v1.0.0</span><span>${btn('ルールを確認','rules','ghost small')} ${btn('設定・操作ガイド ↗','guide','ghost small')}</span></footer></div>`;
+  return `${b?.demo?`<div class="demo-bar">体験モード · この画面だけで動作します（別端末とは同期しません） ${btn(ctx.role==='teacher'?'生徒画面へ':'教員画面へ','demo-role','small ghost')}</div>`:''}${b?.sdk&&!b.online?'<div class="offline-bar" role="alert">接続が切れています。送信の完了を確認できるまで画面を閉じず、再接続をお待ちください。</div>':''}<div class="container">${topbar(ctx)}${game?gamePage(ctx):ctx.joining?joinPage(ctx):homePage(ctx)}<footer class="footer"><span>NO.15 <span class="muted">/</span> NUMBER BATTLE · v1.0.0</span><span>${btn('ルールを確認','rules','ghost small')} ${btn('設定・操作ガイド ↗','guide','ghost small')}</span></footer></div>`;
 }
 function homePage(ctx){
   const d=ctx.draft??{};

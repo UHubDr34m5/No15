@@ -1,5 +1,5 @@
-import {VERSION,clone,nickname,createRound,makeEventPlan,scoreMatch,applyResult,defaultConfig} from './core.js?v=20261018-id1';
-import {firebaseConfig} from './config.js?v=20261018-id1';
+import {VERSION,clone,nickname,createRound,makeEventPlan,scoreMatch,applyResult,defaultConfig} from './core.js?v=20261018-id2';
+import {firebaseConfig} from './config.js?v=20261018-id2';
 
 export const configured=()=>!!firebaseConfig.apiKey&&!Object.values(firebaseConfig).some(v=>String(v).includes('YOUR_'));
 const uidToken=()=>crypto.randomUUID().replaceAll('-','').slice(0,18);
