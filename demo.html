@@ -1,0 +1,2878 @@
+<!doctype html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="color-scheme" content="dark"><title>NO.15 | 操作できる体験版</title><link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg'/%3E"><style>@charset "UTF-8";
+:root{--bg:#0d1018;--surface:#151a25;--surface2:#1c2331;--line:#2b3446;--text:#f4f5f9;--muted:#a3aec3;--accent:#d4f76b;--accent2:#a9ce3f;--cyan:#81d5ee;--gold:#ffbf6a;--danger:#ff8c9d;--radius:22px;font-family:Inter,"Hiragino Kaku Gothic ProN","Noto Sans JP",Meiryo,system-ui,sans-serif;color:var(--text);background:var(--bg);font-synthesis:none}
+*{box-sizing:border-box}body{margin:0;min-width:300px;background:radial-gradient(ellipse at 65% -15%,#27312988,transparent 55%),var(--bg);line-height:1.65}button,input,select{font:inherit}button,a,input,select{-webkit-tap-highlight-color:transparent}button,a{touch-action:manipulation}button{cursor:pointer}button:disabled{cursor:not-allowed;opacity:.42}a{color:var(--accent)}button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible{outline:3px solid var(--cyan);outline-offset:4px}h1,h2,h3,p{margin:0}button{color:inherit}button,input,select{min-height:46px}input,select{width:100%;border:1px solid var(--line);background:#101620;color:var(--text);border-radius:12px;padding:11px 13px;font-size:16px}label{display:block;font-weight:650;font-size:14px}label>input,label>select{margin-top:7px}input[type=checkbox]{accent-color:var(--accent);width:20px;min-height:20px;height:20px;flex-shrink:0;margin:0}input[type=number]{max-width:120px}small{font-size:12px;color:var(--muted)}.mono,.number,.rank-num,.score,.timer,.room-code{font-variant-numeric:tabular-nums}.muted{color:var(--muted)}.accent{color:var(--accent)}.gold{color:var(--gold)}.caps{font-size:11px;font-weight:800;letter-spacing:.17em;color:var(--muted)}.container{max-width:1280px;margin:auto;padding:0 30px}.topbar{min-height:88px;display:flex;align-items:center;justify-content:space-between;gap:20px;border-bottom:1px solid var(--line)}.brand{display:flex;align-items:center;gap:13px;text-decoration:none;color:var(--text);background:none;border:0;padding:0;min-height:44px}.wordmark{font-size:31px;letter-spacing:-2px;font-weight:950;line-height:1}.wordmark span{color:var(--accent)}.brand-sub{font-size:10px;letter-spacing:.09em;color:var(--muted);border-left:1px solid var(--line);padding-left:14px}.top-actions,.row{display:flex;align-items:center;gap:12px;flex-wrap:wrap}.row.between{justify-content:space-between}.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:47px;padding:11px 19px;border:1px solid var(--line);border-radius:12px;background:var(--surface2);text-decoration:none;color:var(--text);font-weight:750;line-height:1.5;transition:background .15s,transform .15s}.btn:hover:not(:disabled){background:#303a4b;transform:translateY(-1px)}.btn.primary{background:var(--accent);border-color:var(--accent);color:#141a0d;box-shadow:0 3px 20px #d4f76b13}.btn.primary:hover:not(:disabled){background:#e5ff9b}.btn.ghost{background:transparent}.btn.danger{color:var(--danger);border-color:#75414a}.btn.gold{color:#19160f;background:var(--gold);border-color:var(--gold)}.btn.small{min-height:40px;padding:8px 13px;font-size:13px}.btn.wide{width:100%}.btn.big{min-height:58px;font-size:17px}.pill{display:inline-flex;align-items:center;gap:7px;font-size:11px;font-weight:750;letter-spacing:.035em;padding:5px 10px;background:#222b38;border:1px solid var(--line);border-radius:30px;white-space:nowrap}.pill.live{color:var(--accent)}.dot{width:6px;height:6px;display:inline-block;border-radius:100%;background:currentColor}.demo-bar,.offline-bar{padding:9px 18px;text-align:center;font-size:12px;background:#3b321b;color:#ffdb9b;border-bottom:1px solid #5d4b24}.offline-bar{background:#4d2330;color:#ffc4d1}.hero{display:grid;grid-template-columns:1.15fr 1fr;align-items:center;gap:45px;padding:66px 0 54px;position:relative}.hero h1{font-size:clamp(35px,4.3vw,63px);font-weight:850;line-height:1.35;letter-spacing:-.055em;margin:14px 0 24px}.hero p{font-size:15px;color:var(--muted);line-height:1.95}.hero-kicker{color:var(--accent);font-size:12px;letter-spacing:.16em;font-weight:800}.hero-art{height:300px;position:relative;display:flex;align-items:center;justify-content:center}.hero-card{position:absolute;width:145px;height:209px;border-radius:20px;border:1px solid #525b62;background:#252c38;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:92px;box-shadow:0 22px 40px #0005;transform:rotate(-19deg) translate(-87px,8px);color:#737d8b}.hero-card.c2{transform:rotate(16deg) translate(94px,1px);background:#34455b;color:#a7c5d2}.hero-card.c3{background:var(--accent);color:#18200d;transform:rotate(-2deg);width:155px;height:223px;border-color:#efffbd}.hero-card:before{content:'NO.15';font-size:10px;position:absolute;top:13px;left:13px;letter-spacing:.1em}.hero-card:after{content:'NUMBER BATTLE';font-size:8px;position:absolute;bottom:12px;letter-spacing:.13em}.hero-caption{position:absolute;bottom:-6px;color:var(--muted);font-size:11px;letter-spacing:.12em}.home-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:20px;padding-bottom:35px}.panel{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:25px;min-width:0}.panel-heading{font-size:19px;font-weight:800;letter-spacing:-.02em}.panel-heading small{font-size:12px;font-weight:500;letter-spacing:0}.panel p.description{color:var(--muted);font-size:13px;margin:7px 0 21px}.form-grid{display:grid;grid-template-columns:1fr 1.3fr;gap:13px}.stack{display:grid;gap:15px}.space-top{margin-top:18px}.help-text{font-size:12px;color:var(--muted);margin-top:12px}.steps{display:flex;gap:14px;margin-top:22px}.steps>span{flex:1;display:grid;gap:3px;font-size:11px;color:var(--muted)}.steps b{font-size:21px;color:var(--text)}.footer{padding:25px 0 35px;border-top:1px solid var(--line);font-size:11px;color:var(--muted);display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}.footer a{color:var(--muted)}.game-header{display:flex;align-items:center;justify-content:space-between;gap:15px;padding:26px 0 20px}.game-title{font-size:22px;font-weight:800;letter-spacing:-.03em}.game-sub{font-size:12px;color:var(--muted);margin-top:3px}.counter{display:flex;gap:22px}.counter-cell{display:grid;line-height:1.35}.counter-cell strong{font-size:26px;font-weight:850}.counter-cell small{font-size:10px;letter-spacing:.13em}.tabs{display:flex;gap:6px;border-bottom:1px solid var(--line);margin-bottom:25px;overflow-x:auto;scrollbar-width:none}.tab{border:0;border-bottom:3px solid transparent;background:none;min-width:76px;padding:12px 16px;font-size:13px;font-weight:750;color:var(--muted);white-space:nowrap}.tab[aria-selected=true]{color:var(--accent);border-bottom-color:var(--accent)}.game-layout{display:grid;grid-template-columns:minmax(0,1fr) 310px;gap:23px;padding-bottom:35px}.stage{border:1px solid var(--line);border-radius:var(--radius);background:radial-gradient(ellipse at 50% 25%,#2a35313a,transparent 75%),var(--surface);padding:30px;min-width:0;position:relative;overflow:hidden}.stage .kicker{text-align:center;color:var(--muted);font-size:11px;letter-spacing:.2em}.stage-title{font-size:clamp(25px,3vw,38px);font-weight:850;line-height:1.4;text-align:center;letter-spacing:-.035em;margin:10px 0}.stage-sub{font-size:13px;text-align:center;color:var(--muted);margin-top:8px}.center{text-align:center}.submit-count{font-size:clamp(70px,10vw,116px);font-weight:850;line-height:1.1;letter-spacing:-.05em;margin:28px auto 4px}.submit-count small{font-size:32px;font-weight:500;letter-spacing:0;color:var(--muted)}.progress-line{height:5px;background:#27303c;border-radius:8px;overflow:hidden;margin:26px 0}.progress-line>i{display:block;height:100%;background:var(--accent);transition:width .35s}.stage-controls{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:24px}.stage-controls .btn.primary{min-width:195px}.timer{display:inline-flex;align-items:center;gap:8px;font-size:15px;font-weight:750;color:var(--muted)}.timer.urgent{color:var(--danger)}.event-banner{display:flex;align-items:center;justify-content:space-between;gap:12px;background:#23302b;border:1px solid #3a4c35;border-radius:15px;padding:13px 17px;margin-bottom:22px}.event-banner.normal{background:#1c2430;border-color:var(--line)}.event-banner strong{font-size:15px;color:var(--accent)}.event-banner.normal strong{color:var(--text)}.event-banner span{display:block;font-size:12px;color:var(--muted)}.side{display:grid;align-content:start;gap:18px}.side .panel{padding:20px}.side-title{font-size:12px;font-weight:750;color:var(--muted);letter-spacing:.04em;margin-bottom:12px}.room-code{font-weight:850;letter-spacing:.12em;font-size:30px;line-height:1.4}.event-list{display:grid;gap:8px;margin:14px 0 0}.event-item{display:flex;gap:10px;align-items:center;font-size:12px}.event-item b{font-size:12px;background:#2b3544;border-radius:7px;min-width:28px;text-align:center;line-height:28px}.event-item.current b{background:var(--accent);color:#17200a}.event-item small{margin-left:auto}.round-track{display:grid;grid-template-columns:repeat(12,1fr);gap:5px;margin:18px 0}.round-track span{height:5px;background:#30394a;border-radius:8px}.round-track .done{background:var(--accent)}.round-track .current{background:#90b341;box-shadow:0 0 9px #d4f76b55}.players{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;margin-top:22px}.player-chip{padding:10px;border:1px solid var(--line);background:#1a2230;border-radius:12px;display:flex;align-items:center;gap:8px;min-width:0}.player-chip .name{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-size:13px}.avatar{width:27px;height:27px;border-radius:8px;background:#344238;display:inline-flex;align-items:center;justify-content:center;color:var(--accent);font-size:12px;font-weight:800;flex-shrink:0}.player-chip .remove{margin-left:auto;background:none;border:0;min-height:32px;min-width:24px;color:var(--muted);padding:0}.solo-badge{display:inline-block;background:var(--accent);color:#17200a;padding:5px 12px;border-radius:40px;font-size:12px;font-weight:850;letter-spacing:.06em}.reveal-number{font-size:clamp(105px,15vw,170px);font-weight:950;line-height:1;letter-spacing:-.07em;margin:18px 0 4px;color:var(--accent);text-shadow:0 0 50px #d4f76b30}.reveal-number.collision{color:var(--text);text-shadow:none}.reveal-players{display:grid;gap:9px;max-width:540px;margin:24px auto 0}.reveal-player{display:flex;align-items:center;justify-content:space-between;gap:14px;text-align:left;background:#202b30;border:1px solid #41563a;border-radius:14px;padding:13px 17px;animation:pop .35s both}.reveal-player.collision{background:#202735;border-color:var(--line)}.reveal-player .score{font-size:28px;font-weight:850;line-height:1.2}.reveal-player .score small{font-size:12px}.bet-tag{font-size:11px;font-weight:750;color:var(--gold);display:block;margin-top:3px}.bet-tag.fail{color:var(--danger)}.empty-state{padding:45px 20px;text-align:center;color:var(--muted);font-size:14px}.empty-icon{font-size:36px;color:var(--accent);margin-bottom:12px}.self-header{display:flex;align-items:center;justify-content:space-between;gap:15px;margin-bottom:18px}.self-name{font-size:19px;font-weight:800}.self-score{text-align:right;display:flex;gap:20px}.self-score strong{display:block;font-size:24px;line-height:1.2}.self-score small{font-size:10px}.hand-grid{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:10px;margin:19px 0}.number-card{position:relative;aspect-ratio:.77;border-radius:14px;border:1px solid #3b465b;background:linear-gradient(145deg,#273246,#1b2434);font-size:clamp(26px,4vw,43px);font-weight:850;color:var(--text);padding:9px 0;transition:border-color .12s,transform .12s,background .12s;min-height:64px}.number-card:before{content:'NO.15';position:absolute;top:7px;left:8px;font-size:7px;letter-spacing:.07em;color:var(--muted);font-weight:650}.number-card:hover:not(:disabled){border-color:var(--accent);transform:translateY(-2px)}.number-card.selected{background:var(--accent);color:#17200a;border-color:var(--accent);box-shadow:0 0 0 3px #d4f76b28;transform:translateY(-4px)}.number-card.selected:before{color:#536627}.number-card.used{background:#151b25;color:#515b6b;opacity:.65;border-color:#27303e}.number-card.used:after{content:'使用済';position:absolute;bottom:6px;left:0;right:0;font-size:9px;font-weight:600;color:#687287}.battle-switch{width:100%;padding:13px 16px;display:flex;align-items:center;justify-content:space-between;gap:12px;background:#201f21;border:1px solid #675335;border-radius:14px;text-align:left}.battle-switch strong{display:block;color:var(--gold);font-size:14px}.battle-switch small{font-size:11px}.battle-switch.active{border-color:var(--gold);background:#3b2b1a}.switch-light{width:40px;height:24px;border-radius:20px;background:#333844;position:relative;flex-shrink:0}.switch-light:after{content:'';width:18px;height:18px;position:absolute;border-radius:50%;top:3px;left:3px;background:#9aa4b5;transition:transform .15s}.active .switch-light{background:var(--gold)}.active .switch-light:after{background:#2c2317;transform:translateX(16px)}.submit-dock{position:sticky;bottom:0;z-index:4;background:#151a25ee;backdrop-filter:blur(15px);border-top:1px solid var(--line);padding:16px 0 max(5px,env(safe-area-inset-bottom));margin-top:17px;display:flex;align-items:center;gap:16px}.submit-dock .selection{font-size:12px;color:var(--muted);min-width:75px}.submit-dock .selection b{font-size:29px;color:var(--text);margin-left:7px}.submit-dock .btn{flex:1}.waiting-card{width:114px;height:155px;background:var(--accent);color:#17200a;border-radius:18px;display:flex;align-items:center;justify-content:center;font-size:75px;font-weight:850;margin:25px auto 16px;transform:rotate(-4deg);box-shadow:0 12px 50px #d4f76b10}.notice{border:1px solid #46512f;background:#222a1b;color:#deedbe;border-radius:13px;padding:12px 15px;font-size:12px;margin-top:15px}.notice.warning{border-color:#6a5132;background:#302619;color:#ffe1b7}.rank-list{display:grid;gap:8px;margin-top:20px}.rank-row{display:flex;align-items:center;gap:14px;border:1px solid var(--line);background:var(--surface2);border-radius:14px;padding:12px 17px;animation:rankMove .65s both;min-width:0}.rank-row.me{border-color:#91a94d;background:#253020}.rank-num{font-size:23px;font-weight:850;color:var(--muted);min-width:31px}.rank-row:nth-child(-n+3) .rank-num{color:var(--accent)}.rank-name{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:14px}.rank-row .score{font-size:25px;font-weight:850}.rank-row .score small{font-size:11px;color:var(--muted);margin-left:4px}.rank-delta{font-size:11px;color:var(--accent);min-width:27px;text-align:right}.rank-delta.down{color:var(--muted)}.rank-switch{display:flex;gap:8px;justify-content:center;margin:16px 0}.podium{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));align-items:end;gap:12px;margin:32px 0 25px;position:relative}.podium-col{text-align:center;padding:16px 10px;background:linear-gradient(0deg,#354244,#202c32);border:1px solid #526062;border-radius:18px 18px 6px 6px;min-height:160px}.podium-col.first{min-height:210px;background:linear-gradient(0deg,#46522d,#26301e);border-color:#a5bb5f}.podium-col.third{min-height:130px}.podium-medal{font-size:30px;font-weight:900;color:var(--gold);line-height:1.3}.podium-name{font-size:14px;font-weight:800;overflow-wrap:anywhere;margin-top:9px}.podium-score{font-size:21px;font-weight:850;color:var(--accent)}.podium-score small{font-size:10px}.stats-grid{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:10px;margin:22px 0}.stat-card{background:var(--surface2);border:1px solid var(--line);border-radius:13px;padding:12px 9px;text-align:center}.stat-card b{display:block;font-size:24px;line-height:1.2}.stat-card span{font-size:11px;color:var(--muted)}.stat-card em{font-style:normal;font-size:12px;color:var(--accent);display:block}.history-player{border:1px solid var(--line);border-radius:14px;margin-top:10px;background:var(--surface)}.history-player summary{cursor:pointer;min-height:52px;padding:13px 16px;font-size:14px;font-weight:700;display:flex;justify-content:space-between;gap:10px;align-items:center}.history-player summary:after{content:'＋';color:var(--muted)}.history-player[open] summary:after{content:'−'}.history-player summary small{margin-left:auto;font-size:11px}.mini-hand{display:grid;grid-template-columns:repeat(15,minmax(0,1fr));gap:5px;padding:0 16px 16px}.mini-card{display:flex;align-items:center;justify-content:center;aspect-ratio:.8;border:1px solid #4a5c3c;color:var(--accent);background:#222e22;border-radius:6px;font-size:12px;font-weight:750;min-width:0}.mini-card.used{color:#727b8c;background:#1d222d;border-color:#303847;text-decoration:line-through}.log-match{border:1px solid var(--line);border-radius:15px;margin-top:13px;background:var(--surface)}.log-match summary{padding:15px;cursor:pointer;font-size:14px;font-weight:750}.log-results{padding:0 15px 15px;display:grid;gap:6px}.log-result{display:grid;grid-template-columns:minmax(0,1fr) 45px 50px 70px;gap:10px;font-size:12px;padding:8px;border-bottom:1px solid var(--line);align-items:center}.log-result .log-name{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.log-result b{text-align:right;color:var(--accent)}.log-result small{font-size:10px}.settings-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:20px}.setting-block{border:1px solid var(--line);border-radius:14px;padding:16px;background:#121925}.setting-block.wide{grid-column:1/-1}.check-label{display:flex;gap:11px;align-items:center;cursor:pointer;font-weight:700;font-size:14px}.setting-block .description{font-size:12px;color:var(--muted);margin:7px 0 0}.match-settings{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:9px;margin-top:12px}.match-setting{background:var(--surface2);border-radius:9px;padding:10px}.match-setting label{font-size:11px;display:flex;gap:6px;align-items:center}.match-setting select{font-size:11px;padding:7px 5px;min-height:36px;margin-top:8px}.hidden-choices{display:grid;grid-template-columns:repeat(6,1fr);gap:8px;margin-top:13px}.hidden-choices label{display:flex;align-items:center;justify-content:center;gap:5px;font-size:12px;min-height:35px;background:var(--surface2);border-radius:8px}.qr-layout{display:flex;flex-direction:column;align-items:center;gap:18px;padding:15px 0}.qr{background:white;border-radius:14px;padding:12px;line-height:0}.qr svg{max-width:100%;height:auto}.copy-url{font-size:11px;overflow-wrap:anywhere;color:var(--muted);max-width:100%}.request{padding:12px;background:var(--surface2);border-radius:12px;margin-top:9px;font-size:12px}.table-note{font-size:12px;color:var(--muted);margin-top:16px}dialog{border:1px solid var(--line);border-radius:24px;background:var(--surface);color:var(--text);padding:28px;width:min(820px,calc(100% - 28px));max-height:90dvh;overflow:auto;box-shadow:0 20px 100px #0008}dialog::backdrop{background:#050911bb;backdrop-filter:blur(5px)}dialog h2{font-size:22px;margin-bottom:12px}dialog p{font-size:14px;color:var(--muted);line-height:1.9}.modal-actions{display:flex;justify-content:flex-end;gap:10px;flex-wrap:wrap;margin-top:24px}.dialog-close{position:absolute;right:19px;top:15px;border:0;background:transparent;color:var(--muted);font-size:21px;min-width:44px}.rules-list{padding-left:22px;font-size:14px;color:var(--muted);line-height:1.95}.rules-list strong{color:var(--text)}#toast{position:fixed;bottom:24px;left:50%;transform:translate(-50%,20px);max-width:min(570px,calc(100vw - 28px));padding:13px 20px;background:#e4efc9;color:#1d2710;border:1px solid #a4bd69;border-radius:13px;font-size:13px;font-weight:650;z-index:20;opacity:0;pointer-events:none;transition:opacity .2s,transform .2s;box-shadow:0 8px 35px #0007}#toast.show{opacity:1;transform:translate(-50%,0)}#toast.error{background:#4a2530;border-color:#a85b71;color:#ffe4ea}.boot{min-height:70vh;display:grid;align-content:center;justify-items:center;gap:15px}.boot strong{font-size:80px;letter-spacing:-6px}.boot strong span{color:var(--accent)}.boot p{font-size:13px;color:var(--muted)}.confetti{position:absolute;inset:0;pointer-events:none;overflow:hidden}.confetti i{position:absolute;width:6px;height:12px;top:-20px;left:var(--x);background:var(--color);animation:fall 2.8s var(--delay) ease-in both;transform:rotate(30deg)}.announcement{padding:14px 18px;background:#242d21;border:1px solid #4f6034;border-radius:13px;font-size:13px;margin:14px 0}.inline-error{color:var(--danger);font-size:13px;margin-top:13px}.rule-card{border:1px solid var(--line);border-radius:12px;padding:15px;background:var(--surface2)}.rule-card b{font-size:20px;color:var(--accent)}.badge-row{display:flex;gap:7px;flex-wrap:wrap;margin-top:20px}.no-margin{margin:0}.auto-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:14px}.saved-room{display:flex;align-items:center;justify-content:space-between;border-top:1px solid var(--line);padding:12px 0;gap:12px;font-size:13px}.tiny{font-size:11px}.round-summary{display:flex;justify-content:center;gap:25px;margin:20px 0}.round-summary b{display:block;font-size:32px;line-height:1.3}.round-summary small{font-size:11px}.mode-switch{display:flex;gap:8px;justify-content:center;flex-wrap:wrap}.sleep{padding:20px 0}.game-full{padding-bottom:35px}.loader:after{content:' …'}.stage.result-stage{min-height:360px}.current-group{animation:pop .3s both}.history-control{display:flex;gap:14px;align-items:center;justify-content:space-between}.history-control select{width:auto;min-width:125px}.subtle-button{border:0;background:none;color:var(--muted);font-size:12px;padding:5px;min-height:40px}.empty-large{font-size:55px;font-weight:900;letter-spacing:-.06em;color:#3a4659}.projection .container{max-width:1500px}.projection .stage{padding:40px}.projection .reveal-player .score{font-size:35px}.projection .reveal-player{font-size:20px}.projection .stage-sub{font-size:17px}.projection .game-layout{grid-template-columns:minmax(0,1fr) 300px}.projection .topbar{min-height:74px}
+@keyframes pop{from{opacity:0;transform:translateY(12px) scale(.97)}to{opacity:1;transform:none}}@keyframes rankMove{from{opacity:.5;transform:translateY(var(--shift,0))}to{opacity:1;transform:translateY(0)}}@keyframes fall{to{top:110%;transform:rotate(540deg)}}
+@media(min-width:1500px){.projection .reveal-number{font-size:200px}.projection .stage-title{font-size:46px}}
+@media(max-width:1000px){.game-layout,.projection .game-layout{grid-template-columns:minmax(0,1fr) 265px}.container{padding:0 22px}.stage{padding:24px}.players{grid-template-columns:repeat(3,minmax(0,1fr))}.hero{gap:20px}.hero-art{transform:scale(.88)}.brand-sub{display:none}}
+@media(max-width:760px){.container{padding:0 17px}.topbar{min-height:73px;gap:10px}.wordmark{font-size:27px}.top-actions{gap:6px}.top-actions .btn{font-size:11px;min-height:38px;padding:7px 10px}.top-actions .pill{font-size:10px}.hero{grid-template-columns:1fr;padding:34px 0 28px;gap:10px}.hero h1{font-size:39px;margin:12px 0 16px}.hero p{font-size:13px}.hero-art{height:233px;transform:scale(.85);margin:-5px 0 -4px}.hero-caption{bottom:-17px}.home-grid{grid-template-columns:1fr;gap:15px}.panel{padding:21px}.game-header{padding:20px 0 16px}.game-title{font-size:18px}.game-sub{font-size:10px}.counter{gap:15px}.counter-cell strong{font-size:23px}.counter-cell small{font-size:9px}.game-layout,.projection .game-layout{grid-template-columns:1fr;gap:16px}.side{grid-template-columns:1fr 1fr;gap:13px}.side .panel{padding:17px}.side .panel:last-child{grid-column:1/-1}.event-list{grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}.event-item{align-items:start;gap:7px;font-size:10px}.event-item small{display:none}.event-item b{min-width:24px;line-height:24px;font-size:10px}.event-list.long{grid-template-columns:repeat(2,minmax(0,1fr))}.side-title{font-size:11px}.room-code{font-size:25px}.tabs{margin-bottom:18px;gap:0}.tab{min-width:70px;padding:11px 12px;font-size:12px}.stage,.projection .stage{padding:22px 18px}.stage-title{font-size:26px}.stage-sub{font-size:12px}.event-banner{padding:11px 13px;margin-bottom:17px}.event-banner strong{font-size:13px}.event-banner span{font-size:10px}.event-banner .pill{display:none}.players{grid-template-columns:repeat(2,minmax(0,1fr))}.player-chip{padding:9px}.player-chip .name{font-size:12px}.submit-count{font-size:88px}.submit-count small{font-size:26px}.stage-controls .btn{font-size:13px;padding:11px 14px;min-height:48px}.stage-controls .btn.primary{width:100%}.stage-controls .btn.small{min-height:40px}.reveal-number{font-size:130px}.self-score{gap:13px}.self-score strong{font-size:23px}.self-name{font-size:18px}.hand-grid{gap:9px;margin:18px 0}.number-card{font-size:35px;border-radius:12px}.submit-dock{bottom:-1px;padding:13px 0 max(12px,env(safe-area-inset-bottom));gap:10px}.submit-dock .btn{font-size:14px}.self-panel{padding:20px 17px 4px}.self-panel .hand-grid{margin:17px 0}.self-panel .notice{font-size:11px}.battle-switch{padding:12px}.reveal-player{padding:12px 14px}.reveal-player .score{font-size:27px}.stats-grid{gap:7px}.stat-card{padding:10px 4px}.stat-card b{font-size:23px}.stat-card span{font-size:9px}.stat-card em{font-size:10px}.mini-hand{grid-template-columns:repeat(5,minmax(0,1fr));gap:7px}.mini-card{aspect-ratio:1.5;font-size:16px}.settings-grid{grid-template-columns:1fr}.setting-block.wide{grid-column:auto}.match-settings{grid-template-columns:repeat(2,minmax(0,1fr))}.hidden-choices{grid-template-columns:repeat(4,1fr)}dialog{padding:25px 19px;max-height:92dvh}.modal-actions .btn{flex:1;font-size:13px}.podium{gap:8px}.podium-col{padding:15px 7px;min-height:145px}.podium-col.first{min-height:190px}.podium-col.third{min-height:122px}.podium-name{font-size:12px}.podium-score{font-size:21px}.rank-row{padding:10px 13px;gap:10px}.rank-row .score{font-size:23px}.rank-name{font-size:13px}.rank-num{font-size:21px;min-width:27px}.log-result{gap:6px;grid-template-columns:minmax(0,1fr) 32px 40px 65px}.projection .reveal-player{font-size:15px}.event-list:empty{display:none}}
+@media(max-width:355px){.container{padding:0 12px}.stage{padding:19px 13px}.wordmark{font-size:24px}.hero h1{font-size:33px}.form-grid{grid-template-columns:1fr}.number-card{min-height:60px;font-size:29px}.number-card:before{font-size:6px;top:5px;left:5px}.hand-grid{gap:7px}.self-name{font-size:16px}.self-score{gap:8px}.self-score strong{font-size:20px}.top-actions .pill{display:none}}
+@media(prefers-reduced-motion:reduce){*,*:before,*:after{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
+
+.rank-switch{flex-wrap:wrap}.rank-switch select{max-width:170px;min-height:40px;font-size:13px;padding:8px}
+</style></head><body data-preview="true"><div id="app"></div><div id="toast" role="status" aria-live="polite"></div><dialog id="modal" aria-labelledby="modal-title"><div id="modal-body"></div></dialog><script>//---------------------------------------------------------------------
+//
+// QR Code Generator for JavaScript
+//
+// Copyright (c) 2009 Kazuhiko Arase
+//
+// URL: http://www.d-project.com/
+//
+// Licensed under the MIT license:
+//  http://www.opensource.org/licenses/mit-license.php
+//
+// The word 'QR Code' is registered trademark of
+// DENSO WAVE INCORPORATED
+//  http://www.denso-wave.com/qrcode/faqpatent-e.html
+//
+//---------------------------------------------------------------------
+
+var qrcode = function() {
+
+  //---------------------------------------------------------------------
+  // qrcode
+  //---------------------------------------------------------------------
+
+  /**
+   * qrcode
+   * @param typeNumber 1 to 40
+   * @param errorCorrectionLevel 'L','M','Q','H'
+   */
+  var qrcode = function(typeNumber, errorCorrectionLevel) {
+
+    var PAD0 = 0xEC;
+    var PAD1 = 0x11;
+
+    var _typeNumber = typeNumber;
+    var _errorCorrectionLevel = QRErrorCorrectionLevel[errorCorrectionLevel];
+    var _modules = null;
+    var _moduleCount = 0;
+    var _dataCache = null;
+    var _dataList = [];
+
+    var _this = {};
+
+    var makeImpl = function(test, maskPattern) {
+
+      _moduleCount = _typeNumber * 4 + 17;
+      _modules = function(moduleCount) {
+        var modules = new Array(moduleCount);
+        for (var row = 0; row < moduleCount; row += 1) {
+          modules[row] = new Array(moduleCount);
+          for (var col = 0; col < moduleCount; col += 1) {
+            modules[row][col] = null;
+          }
+        }
+        return modules;
+      }(_moduleCount);
+
+      setupPositionProbePattern(0, 0);
+      setupPositionProbePattern(_moduleCount - 7, 0);
+      setupPositionProbePattern(0, _moduleCount - 7);
+      setupPositionAdjustPattern();
+      setupTimingPattern();
+      setupTypeInfo(test, maskPattern);
+
+      if (_typeNumber >= 7) {
+        setupTypeNumber(test);
+      }
+
+      if (_dataCache == null) {
+        _dataCache = createData(_typeNumber, _errorCorrectionLevel, _dataList);
+      }
+
+      mapData(_dataCache, maskPattern);
+    };
+
+    var setupPositionProbePattern = function(row, col) {
+
+      for (var r = -1; r <= 7; r += 1) {
+
+        if (row + r <= -1 || _moduleCount <= row + r) continue;
+
+        for (var c = -1; c <= 7; c += 1) {
+
+          if (col + c <= -1 || _moduleCount <= col + c) continue;
+
+          if ( (0 <= r && r <= 6 && (c == 0 || c == 6) )
+              || (0 <= c && c <= 6 && (r == 0 || r == 6) )
+              || (2 <= r && r <= 4 && 2 <= c && c <= 4) ) {
+            _modules[row + r][col + c] = true;
+          } else {
+            _modules[row + r][col + c] = false;
+          }
+        }
+      }
+    };
+
+    var getBestMaskPattern = function() {
+
+      var minLostPoint = 0;
+      var pattern = 0;
+
+      for (var i = 0; i < 8; i += 1) {
+
+        makeImpl(true, i);
+
+        var lostPoint = QRUtil.getLostPoint(_this);
+
+        if (i == 0 || minLostPoint > lostPoint) {
+          minLostPoint = lostPoint;
+          pattern = i;
+        }
+      }
+
+      return pattern;
+    };
+
+    var setupTimingPattern = function() {
+
+      for (var r = 8; r < _moduleCount - 8; r += 1) {
+        if (_modules[r][6] != null) {
+          continue;
+        }
+        _modules[r][6] = (r % 2 == 0);
+      }
+
+      for (var c = 8; c < _moduleCount - 8; c += 1) {
+        if (_modules[6][c] != null) {
+          continue;
+        }
+        _modules[6][c] = (c % 2 == 0);
+      }
+    };
+
+    var setupPositionAdjustPattern = function() {
+
+      var pos = QRUtil.getPatternPosition(_typeNumber);
+
+      for (var i = 0; i < pos.length; i += 1) {
+
+        for (var j = 0; j < pos.length; j += 1) {
+
+          var row = pos[i];
+          var col = pos[j];
+
+          if (_modules[row][col] != null) {
+            continue;
+          }
+
+          for (var r = -2; r <= 2; r += 1) {
+
+            for (var c = -2; c <= 2; c += 1) {
+
+              if (r == -2 || r == 2 || c == -2 || c == 2
+                  || (r == 0 && c == 0) ) {
+                _modules[row + r][col + c] = true;
+              } else {
+                _modules[row + r][col + c] = false;
+              }
+            }
+          }
+        }
+      }
+    };
+
+    var setupTypeNumber = function(test) {
+
+      var bits = QRUtil.getBCHTypeNumber(_typeNumber);
+
+      for (var i = 0; i < 18; i += 1) {
+        var mod = (!test && ( (bits >> i) & 1) == 1);
+        _modules[Math.floor(i / 3)][i % 3 + _moduleCount - 8 - 3] = mod;
+      }
+
+      for (var i = 0; i < 18; i += 1) {
+        var mod = (!test && ( (bits >> i) & 1) == 1);
+        _modules[i % 3 + _moduleCount - 8 - 3][Math.floor(i / 3)] = mod;
+      }
+    };
+
+    var setupTypeInfo = function(test, maskPattern) {
+
+      var data = (_errorCorrectionLevel << 3) | maskPattern;
+      var bits = QRUtil.getBCHTypeInfo(data);
+
+      // vertical
+      for (var i = 0; i < 15; i += 1) {
+
+        var mod = (!test && ( (bits >> i) & 1) == 1);
+
+        if (i < 6) {
+          _modules[i][8] = mod;
+        } else if (i < 8) {
+          _modules[i + 1][8] = mod;
+        } else {
+          _modules[_moduleCount - 15 + i][8] = mod;
+        }
+      }
+
+      // horizontal
+      for (var i = 0; i < 15; i += 1) {
+
+        var mod = (!test && ( (bits >> i) & 1) == 1);
+
+        if (i < 8) {
+          _modules[8][_moduleCount - i - 1] = mod;
+        } else if (i < 9) {
+          _modules[8][15 - i - 1 + 1] = mod;
+        } else {
+          _modules[8][15 - i - 1] = mod;
+        }
+      }
+
+      // fixed module
+      _modules[_moduleCount - 8][8] = (!test);
+    };
+
+    var mapData = function(data, maskPattern) {
+
+      var inc = -1;
+      var row = _moduleCount - 1;
+      var bitIndex = 7;
+      var byteIndex = 0;
+      var maskFunc = QRUtil.getMaskFunction(maskPattern);
+
+      for (var col = _moduleCount - 1; col > 0; col -= 2) {
+
+        if (col == 6) col -= 1;
+
+        while (true) {
+
+          for (var c = 0; c < 2; c += 1) {
+
+            if (_modules[row][col - c] == null) {
+
+              var dark = false;
+
+              if (byteIndex < data.length) {
+                dark = ( ( (data[byteIndex] >>> bitIndex) & 1) == 1);
+              }
+
+              var mask = maskFunc(row, col - c);
+
+              if (mask) {
+                dark = !dark;
+              }
+
+              _modules[row][col - c] = dark;
+              bitIndex -= 1;
+
+              if (bitIndex == -1) {
+                byteIndex += 1;
+                bitIndex = 7;
+              }
+            }
+          }
+
+          row += inc;
+
+          if (row < 0 || _moduleCount <= row) {
+            row -= inc;
+            inc = -inc;
+            break;
+          }
+        }
+      }
+    };
+
+    var createBytes = function(buffer, rsBlocks) {
+
+      var offset = 0;
+
+      var maxDcCount = 0;
+      var maxEcCount = 0;
+
+      var dcdata = new Array(rsBlocks.length);
+      var ecdata = new Array(rsBlocks.length);
+
+      for (var r = 0; r < rsBlocks.length; r += 1) {
+
+        var dcCount = rsBlocks[r].dataCount;
+        var ecCount = rsBlocks[r].totalCount - dcCount;
+
+        maxDcCount = Math.max(maxDcCount, dcCount);
+        maxEcCount = Math.max(maxEcCount, ecCount);
+
+        dcdata[r] = new Array(dcCount);
+
+        for (var i = 0; i < dcdata[r].length; i += 1) {
+          dcdata[r][i] = 0xff & buffer.getBuffer()[i + offset];
+        }
+        offset += dcCount;
+
+        var rsPoly = QRUtil.getErrorCorrectPolynomial(ecCount);
+        var rawPoly = qrPolynomial(dcdata[r], rsPoly.getLength() - 1);
+
+        var modPoly = rawPoly.mod(rsPoly);
+        ecdata[r] = new Array(rsPoly.getLength() - 1);
+        for (var i = 0; i < ecdata[r].length; i += 1) {
+          var modIndex = i + modPoly.getLength() - ecdata[r].length;
+          ecdata[r][i] = (modIndex >= 0)? modPoly.getAt(modIndex) : 0;
+        }
+      }
+
+      var totalCodeCount = 0;
+      for (var i = 0; i < rsBlocks.length; i += 1) {
+        totalCodeCount += rsBlocks[i].totalCount;
+      }
+
+      var data = new Array(totalCodeCount);
+      var index = 0;
+
+      for (var i = 0; i < maxDcCount; i += 1) {
+        for (var r = 0; r < rsBlocks.length; r += 1) {
+          if (i < dcdata[r].length) {
+            data[index] = dcdata[r][i];
+            index += 1;
+          }
+        }
+      }
+
+      for (var i = 0; i < maxEcCount; i += 1) {
+        for (var r = 0; r < rsBlocks.length; r += 1) {
+          if (i < ecdata[r].length) {
+            data[index] = ecdata[r][i];
+            index += 1;
+          }
+        }
+      }
+
+      return data;
+    };
+
+    var createData = function(typeNumber, errorCorrectionLevel, dataList) {
+
+      var rsBlocks = QRRSBlock.getRSBlocks(typeNumber, errorCorrectionLevel);
+
+      var buffer = qrBitBuffer();
+
+      for (var i = 0; i < dataList.length; i += 1) {
+        var data = dataList[i];
+        buffer.put(data.getMode(), 4);
+        buffer.put(data.getLength(), QRUtil.getLengthInBits(data.getMode(), typeNumber) );
+        data.write(buffer);
+      }
+
+      // calc num max data.
+      var totalDataCount = 0;
+      for (var i = 0; i < rsBlocks.length; i += 1) {
+        totalDataCount += rsBlocks[i].dataCount;
+      }
+
+      if (buffer.getLengthInBits() > totalDataCount * 8) {
+        throw 'code length overflow. ('
+          + buffer.getLengthInBits()
+          + '>'
+          + totalDataCount * 8
+          + ')';
+      }
+
+      // end code
+      if (buffer.getLengthInBits() + 4 <= totalDataCount * 8) {
+        buffer.put(0, 4);
+      }
+
+      // padding
+      while (buffer.getLengthInBits() % 8 != 0) {
+        buffer.putBit(false);
+      }
+
+      // padding
+      while (true) {
+
+        if (buffer.getLengthInBits() >= totalDataCount * 8) {
+          break;
+        }
+        buffer.put(PAD0, 8);
+
+        if (buffer.getLengthInBits() >= totalDataCount * 8) {
+          break;
+        }
+        buffer.put(PAD1, 8);
+      }
+
+      return createBytes(buffer, rsBlocks);
+    };
+
+    _this.addData = function(data, mode) {
+
+      mode = mode || 'Byte';
+
+      var newData = null;
+
+      switch(mode) {
+      case 'Numeric' :
+        newData = qrNumber(data);
+        break;
+      case 'Alphanumeric' :
+        newData = qrAlphaNum(data);
+        break;
+      case 'Byte' :
+        newData = qr8BitByte(data);
+        break;
+      case 'Kanji' :
+        newData = qrKanji(data);
+        break;
+      default :
+        throw 'mode:' + mode;
+      }
+
+      _dataList.push(newData);
+      _dataCache = null;
+    };
+
+    _this.isDark = function(row, col) {
+      if (row < 0 || _moduleCount <= row || col < 0 || _moduleCount <= col) {
+        throw row + ',' + col;
+      }
+      return _modules[row][col];
+    };
+
+    _this.getModuleCount = function() {
+      return _moduleCount;
+    };
+
+    _this.make = function() {
+      if (_typeNumber < 1) {
+        var typeNumber = 1;
+
+        for (; typeNumber < 40; typeNumber++) {
+          var rsBlocks = QRRSBlock.getRSBlocks(typeNumber, _errorCorrectionLevel);
+          var buffer = qrBitBuffer();
+
+          for (var i = 0; i < _dataList.length; i++) {
+            var data = _dataList[i];
+            buffer.put(data.getMode(), 4);
+            buffer.put(data.getLength(), QRUtil.getLengthInBits(data.getMode(), typeNumber) );
+            data.write(buffer);
+          }
+
+          var totalDataCount = 0;
+          for (var i = 0; i < rsBlocks.length; i++) {
+            totalDataCount += rsBlocks[i].dataCount;
+          }
+
+          if (buffer.getLengthInBits() <= totalDataCount * 8) {
+            break;
+          }
+        }
+
+        _typeNumber = typeNumber;
+      }
+
+      makeImpl(false, getBestMaskPattern() );
+    };
+
+    _this.createTableTag = function(cellSize, margin) {
+
+      cellSize = cellSize || 2;
+      margin = (typeof margin == 'undefined')? cellSize * 4 : margin;
+
+      var qrHtml = '';
+
+      qrHtml += '<table style="';
+      qrHtml += ' border-width: 0px; border-style: none;';
+      qrHtml += ' border-collapse: collapse;';
+      qrHtml += ' padding: 0px; margin: ' + margin + 'px;';
+      qrHtml += '">';
+      qrHtml += '<tbody>';
+
+      for (var r = 0; r < _this.getModuleCount(); r += 1) {
+
+        qrHtml += '<tr>';
+
+        for (var c = 0; c < _this.getModuleCount(); c += 1) {
+          qrHtml += '<td style="';
+          qrHtml += ' border-width: 0px; border-style: none;';
+          qrHtml += ' border-collapse: collapse;';
+          qrHtml += ' padding: 0px; margin: 0px;';
+          qrHtml += ' width: ' + cellSize + 'px;';
+          qrHtml += ' height: ' + cellSize + 'px;';
+          qrHtml += ' background-color: ';
+          qrHtml += _this.isDark(r, c)? '#000000' : '#ffffff';
+          qrHtml += ';';
+          qrHtml += '"/>';
+        }
+
+        qrHtml += '</tr>';
+      }
+
+      qrHtml += '</tbody>';
+      qrHtml += '</table>';
+
+      return qrHtml;
+    };
+
+    _this.createSvgTag = function(cellSize, margin, alt, title) {
+
+      var opts = {};
+      if (typeof arguments[0] == 'object') {
+        // Called by options.
+        opts = arguments[0];
+        // overwrite cellSize and margin.
+        cellSize = opts.cellSize;
+        margin = opts.margin;
+        alt = opts.alt;
+        title = opts.title;
+      }
+
+      cellSize = cellSize || 2;
+      margin = (typeof margin == 'undefined')? cellSize * 4 : margin;
+
+      // Compose alt property surrogate
+      alt = (typeof alt === 'string') ? {text: alt} : alt || {};
+      alt.text = alt.text || null;
+      alt.id = (alt.text) ? alt.id || 'qrcode-description' : null;
+
+      // Compose title property surrogate
+      title = (typeof title === 'string') ? {text: title} : title || {};
+      title.text = title.text || null;
+      title.id = (title.text) ? title.id || 'qrcode-title' : null;
+
+      var size = _this.getModuleCount() * cellSize + margin * 2;
+      var c, mc, r, mr, qrSvg='', rect;
+
+      rect = 'l' + cellSize + ',0 0,' + cellSize +
+        ' -' + cellSize + ',0 0,-' + cellSize + 'z ';
+
+      qrSvg += '<svg version="1.1" xmlns="http://www.w3.org/2000/svg"';
+      qrSvg += !opts.scalable ? ' width="' + size + 'px" height="' + size + 'px"' : '';
+      qrSvg += ' viewBox="0 0 ' + size + ' ' + size + '" ';
+      qrSvg += ' preserveAspectRatio="xMinYMin meet"';
+      qrSvg += (title.text || alt.text) ? ' role="img" aria-labelledby="' +
+          escapeXml([title.id, alt.id].join(' ').trim() ) + '"' : '';
+      qrSvg += '>';
+      qrSvg += (title.text) ? '<title id="' + escapeXml(title.id) + '">' +
+          escapeXml(title.text) + '</title>' : '';
+      qrSvg += (alt.text) ? '<description id="' + escapeXml(alt.id) + '">' +
+          escapeXml(alt.text) + '</description>' : '';
+      qrSvg += '<rect width="100%" height="100%" fill="white" cx="0" cy="0"/>';
+      qrSvg += '<path d="';
+
+      for (r = 0; r < _this.getModuleCount(); r += 1) {
+        mr = r * cellSize + margin;
+        for (c = 0; c < _this.getModuleCount(); c += 1) {
+          if (_this.isDark(r, c) ) {
+            mc = c*cellSize+margin;
+            qrSvg += 'M' + mc + ',' + mr + rect;
+          }
+        }
+      }
+
+      qrSvg += '" stroke="transparent" fill="black"/>';
+      qrSvg += '</svg>';
+
+      return qrSvg;
+    };
+
+    _this.createDataURL = function(cellSize, margin) {
+
+      cellSize = cellSize || 2;
+      margin = (typeof margin == 'undefined')? cellSize * 4 : margin;
+
+      var size = _this.getModuleCount() * cellSize + margin * 2;
+      var min = margin;
+      var max = size - margin;
+
+      return createDataURL(size, size, function(x, y) {
+        if (min <= x && x < max && min <= y && y < max) {
+          var c = Math.floor( (x - min) / cellSize);
+          var r = Math.floor( (y - min) / cellSize);
+          return _this.isDark(r, c)? 0 : 1;
+        } else {
+          return 1;
+        }
+      } );
+    };
+
+    _this.createImgTag = function(cellSize, margin, alt) {
+
+      cellSize = cellSize || 2;
+      margin = (typeof margin == 'undefined')? cellSize * 4 : margin;
+
+      var size = _this.getModuleCount() * cellSize + margin * 2;
+
+      var img = '';
+      img += '<img';
+      img += '\u0020src="';
+      img += _this.createDataURL(cellSize, margin);
+      img += '"';
+      img += '\u0020width="';
+      img += size;
+      img += '"';
+      img += '\u0020height="';
+      img += size;
+      img += '"';
+      if (alt) {
+        img += '\u0020alt="';
+        img += escapeXml(alt);
+        img += '"';
+      }
+      img += '/>';
+
+      return img;
+    };
+
+    var escapeXml = function(s) {
+      var escaped = '';
+      for (var i = 0; i < s.length; i += 1) {
+        var c = s.charAt(i);
+        switch(c) {
+        case '<': escaped += '&lt;'; break;
+        case '>': escaped += '&gt;'; break;
+        case '&': escaped += '&amp;'; break;
+        case '"': escaped += '&quot;'; break;
+        default : escaped += c; break;
+        }
+      }
+      return escaped;
+    };
+
+    var _createHalfASCII = function(margin) {
+      var cellSize = 1;
+      margin = (typeof margin == 'undefined')? cellSize * 2 : margin;
+
+      var size = _this.getModuleCount() * cellSize + margin * 2;
+      var min = margin;
+      var max = size - margin;
+
+      var y, x, r1, r2, p;
+
+      var blocks = {
+        '██': '█',
+        '█ ': '▀',
+        ' █': '▄',
+        '  ': ' '
+      };
+
+      var blocksLastLineNoMargin = {
+        '██': '▀',
+        '█ ': '▀',
+        ' █': ' ',
+        '  ': ' '
+      };
+
+      var ascii = '';
+      for (y = 0; y < size; y += 2) {
+        r1 = Math.floor((y - min) / cellSize);
+        r2 = Math.floor((y + 1 - min) / cellSize);
+        for (x = 0; x < size; x += 1) {
+          p = '█';
+
+          if (min <= x && x < max && min <= y && y < max && _this.isDark(r1, Math.floor((x - min) / cellSize))) {
+            p = ' ';
+          }
+
+          if (min <= x && x < max && min <= y+1 && y+1 < max && _this.isDark(r2, Math.floor((x - min) / cellSize))) {
+            p += ' ';
+          }
+          else {
+            p += '█';
+          }
+
+          // Output 2 characters per pixel, to create full square. 1 character per pixels gives only half width of square.
+          ascii += (margin < 1 && y+1 >= max) ? blocksLastLineNoMargin[p] : blocks[p];
+        }
+
+        ascii += '\n';
+      }
+
+      if (size % 2 && margin > 0) {
+        return ascii.substring(0, ascii.length - size - 1) + Array(size+1).join('▀');
+      }
+
+      return ascii.substring(0, ascii.length-1);
+    };
+
+    _this.createASCII = function(cellSize, margin) {
+      cellSize = cellSize || 1;
+
+      if (cellSize < 2) {
+        return _createHalfASCII(margin);
+      }
+
+      cellSize -= 1;
+      margin = (typeof margin == 'undefined')? cellSize * 2 : margin;
+
+      var size = _this.getModuleCount() * cellSize + margin * 2;
+      var min = margin;
+      var max = size - margin;
+
+      var y, x, r, p;
+
+      var white = Array(cellSize+1).join('██');
+      var black = Array(cellSize+1).join('  ');
+
+      var ascii = '';
+      var line = '';
+      for (y = 0; y < size; y += 1) {
+        r = Math.floor( (y - min) / cellSize);
+        line = '';
+        for (x = 0; x < size; x += 1) {
+          p = 1;
+
+          if (min <= x && x < max && min <= y && y < max && _this.isDark(r, Math.floor((x - min) / cellSize))) {
+            p = 0;
+          }
+
+          // Output 2 characters per pixel, to create full square. 1 character per pixels gives only half width of square.
+          line += p ? white : black;
+        }
+
+        for (r = 0; r < cellSize; r += 1) {
+          ascii += line + '\n';
+        }
+      }
+
+      return ascii.substring(0, ascii.length-1);
+    };
+
+    _this.renderTo2dContext = function(context, cellSize) {
+      cellSize = cellSize || 2;
+      var length = _this.getModuleCount();
+      for (var row = 0; row < length; row++) {
+        for (var col = 0; col < length; col++) {
+          context.fillStyle = _this.isDark(row, col) ? 'black' : 'white';
+          context.fillRect(col * cellSize, row * cellSize, cellSize, cellSize);
+        }
+      }
+    }
+
+    return _this;
+  };
+
+  //---------------------------------------------------------------------
+  // qrcode.stringToBytes
+  //---------------------------------------------------------------------
+
+  qrcode.stringToBytesFuncs = {
+    'default' : function(s) {
+      var bytes = [];
+      for (var i = 0; i < s.length; i += 1) {
+        var c = s.charCodeAt(i);
+        bytes.push(c & 0xff);
+      }
+      return bytes;
+    }
+  };
+
+  qrcode.stringToBytes = qrcode.stringToBytesFuncs['default'];
+
+  //---------------------------------------------------------------------
+  // qrcode.createStringToBytes
+  //---------------------------------------------------------------------
+
+  /**
+   * @param unicodeData base64 string of byte array.
+   * [16bit Unicode],[16bit Bytes], ...
+   * @param numChars
+   */
+  qrcode.createStringToBytes = function(unicodeData, numChars) {
+
+    // create conversion map.
+
+    var unicodeMap = function() {
+
+      var bin = base64DecodeInputStream(unicodeData);
+      var read = function() {
+        var b = bin.read();
+        if (b == -1) throw 'eof';
+        return b;
+      };
+
+      var count = 0;
+      var unicodeMap = {};
+      while (true) {
+        var b0 = bin.read();
+        if (b0 == -1) break;
+        var b1 = read();
+        var b2 = read();
+        var b3 = read();
+        var k = String.fromCharCode( (b0 << 8) | b1);
+        var v = (b2 << 8) | b3;
+        unicodeMap[k] = v;
+        count += 1;
+      }
+      if (count != numChars) {
+        throw count + ' != ' + numChars;
+      }
+
+      return unicodeMap;
+    }();
+
+    var unknownChar = '?'.charCodeAt(0);
+
+    return function(s) {
+      var bytes = [];
+      for (var i = 0; i < s.length; i += 1) {
+        var c = s.charCodeAt(i);
+        if (c < 128) {
+          bytes.push(c);
+        } else {
+          var b = unicodeMap[s.charAt(i)];
+          if (typeof b == 'number') {
+            if ( (b & 0xff) == b) {
+              // 1byte
+              bytes.push(b);
+            } else {
+              // 2bytes
+              bytes.push(b >>> 8);
+              bytes.push(b & 0xff);
+            }
+          } else {
+            bytes.push(unknownChar);
+          }
+        }
+      }
+      return bytes;
+    };
+  };
+
+  //---------------------------------------------------------------------
+  // QRMode
+  //---------------------------------------------------------------------
+
+  var QRMode = {
+    MODE_NUMBER :    1 << 0,
+    MODE_ALPHA_NUM : 1 << 1,
+    MODE_8BIT_BYTE : 1 << 2,
+    MODE_KANJI :     1 << 3
+  };
+
+  //---------------------------------------------------------------------
+  // QRErrorCorrectionLevel
+  //---------------------------------------------------------------------
+
+  var QRErrorCorrectionLevel = {
+    L : 1,
+    M : 0,
+    Q : 3,
+    H : 2
+  };
+
+  //---------------------------------------------------------------------
+  // QRMaskPattern
+  //---------------------------------------------------------------------
+
+  var QRMaskPattern = {
+    PATTERN000 : 0,
+    PATTERN001 : 1,
+    PATTERN010 : 2,
+    PATTERN011 : 3,
+    PATTERN100 : 4,
+    PATTERN101 : 5,
+    PATTERN110 : 6,
+    PATTERN111 : 7
+  };
+
+  //---------------------------------------------------------------------
+  // QRUtil
+  //---------------------------------------------------------------------
+
+  var QRUtil = function() {
+
+    var PATTERN_POSITION_TABLE = [
+      [],
+      [6, 18],
+      [6, 22],
+      [6, 26],
+      [6, 30],
+      [6, 34],
+      [6, 22, 38],
+      [6, 24, 42],
+      [6, 26, 46],
+      [6, 28, 50],
+      [6, 30, 54],
+      [6, 32, 58],
+      [6, 34, 62],
+      [6, 26, 46, 66],
+      [6, 26, 48, 70],
+      [6, 26, 50, 74],
+      [6, 30, 54, 78],
+      [6, 30, 56, 82],
+      [6, 30, 58, 86],
+      [6, 34, 62, 90],
+      [6, 28, 50, 72, 94],
+      [6, 26, 50, 74, 98],
+      [6, 30, 54, 78, 102],
+      [6, 28, 54, 80, 106],
+      [6, 32, 58, 84, 110],
+      [6, 30, 58, 86, 114],
+      [6, 34, 62, 90, 118],
+      [6, 26, 50, 74, 98, 122],
+      [6, 30, 54, 78, 102, 126],
+      [6, 26, 52, 78, 104, 130],
+      [6, 30, 56, 82, 108, 134],
+      [6, 34, 60, 86, 112, 138],
+      [6, 30, 58, 86, 114, 142],
+      [6, 34, 62, 90, 118, 146],
+      [6, 30, 54, 78, 102, 126, 150],
+      [6, 24, 50, 76, 102, 128, 154],
+      [6, 28, 54, 80, 106, 132, 158],
+      [6, 32, 58, 84, 110, 136, 162],
+      [6, 26, 54, 82, 110, 138, 166],
+      [6, 30, 58, 86, 114, 142, 170]
+    ];
+    var G15 = (1 << 10) | (1 << 8) | (1 << 5) | (1 << 4) | (1 << 2) | (1 << 1) | (1 << 0);
+    var G18 = (1 << 12) | (1 << 11) | (1 << 10) | (1 << 9) | (1 << 8) | (1 << 5) | (1 << 2) | (1 << 0);
+    var G15_MASK = (1 << 14) | (1 << 12) | (1 << 10) | (1 << 4) | (1 << 1);
+
+    var _this = {};
+
+    var getBCHDigit = function(data) {
+      var digit = 0;
+      while (data != 0) {
+        digit += 1;
+        data >>>= 1;
+      }
+      return digit;
+    };
+
+    _this.getBCHTypeInfo = function(data) {
+      var d = data << 10;
+      while (getBCHDigit(d) - getBCHDigit(G15) >= 0) {
+        d ^= (G15 << (getBCHDigit(d) - getBCHDigit(G15) ) );
+      }
+      return ( (data << 10) | d) ^ G15_MASK;
+    };
+
+    _this.getBCHTypeNumber = function(data) {
+      var d = data << 12;
+      while (getBCHDigit(d) - getBCHDigit(G18) >= 0) {
+        d ^= (G18 << (getBCHDigit(d) - getBCHDigit(G18) ) );
+      }
+      return (data << 12) | d;
+    };
+
+    _this.getPatternPosition = function(typeNumber) {
+      return PATTERN_POSITION_TABLE[typeNumber - 1];
+    };
+
+    _this.getMaskFunction = function(maskPattern) {
+
+      switch (maskPattern) {
+
+      case QRMaskPattern.PATTERN000 :
+        return function(i, j) { return (i + j) % 2 == 0; };
+      case QRMaskPattern.PATTERN001 :
+        return function(i, j) { return i % 2 == 0; };
+      case QRMaskPattern.PATTERN010 :
+        return function(i, j) { return j % 3 == 0; };
+      case QRMaskPattern.PATTERN011 :
+        return function(i, j) { return (i + j) % 3 == 0; };
+      case QRMaskPattern.PATTERN100 :
+        return function(i, j) { return (Math.floor(i / 2) + Math.floor(j / 3) ) % 2 == 0; };
+      case QRMaskPattern.PATTERN101 :
+        return function(i, j) { return (i * j) % 2 + (i * j) % 3 == 0; };
+      case QRMaskPattern.PATTERN110 :
+        return function(i, j) { return ( (i * j) % 2 + (i * j) % 3) % 2 == 0; };
+      case QRMaskPattern.PATTERN111 :
+        return function(i, j) { return ( (i * j) % 3 + (i + j) % 2) % 2 == 0; };
+
+      default :
+        throw 'bad maskPattern:' + maskPattern;
+      }
+    };
+
+    _this.getErrorCorrectPolynomial = function(errorCorrectLength) {
+      var a = qrPolynomial([1], 0);
+      for (var i = 0; i < errorCorrectLength; i += 1) {
+        a = a.multiply(qrPolynomial([1, QRMath.gexp(i)], 0) );
+      }
+      return a;
+    };
+
+    _this.getLengthInBits = function(mode, type) {
+
+      if (1 <= type && type < 10) {
+
+        // 1 - 9
+
+        switch(mode) {
+        case QRMode.MODE_NUMBER    : return 10;
+        case QRMode.MODE_ALPHA_NUM : return 9;
+        case QRMode.MODE_8BIT_BYTE : return 8;
+        case QRMode.MODE_KANJI     : return 8;
+        default :
+          throw 'mode:' + mode;
+        }
+
+      } else if (type < 27) {
+
+        // 10 - 26
+
+        switch(mode) {
+        case QRMode.MODE_NUMBER    : return 12;
+        case QRMode.MODE_ALPHA_NUM : return 11;
+        case QRMode.MODE_8BIT_BYTE : return 16;
+        case QRMode.MODE_KANJI     : return 10;
+        default :
+          throw 'mode:' + mode;
+        }
+
+      } else if (type < 41) {
+
+        // 27 - 40
+
+        switch(mode) {
+        case QRMode.MODE_NUMBER    : return 14;
+        case QRMode.MODE_ALPHA_NUM : return 13;
+        case QRMode.MODE_8BIT_BYTE : return 16;
+        case QRMode.MODE_KANJI     : return 12;
+        default :
+          throw 'mode:' + mode;
+        }
+
+      } else {
+        throw 'type:' + type;
+      }
+    };
+
+    _this.getLostPoint = function(qrcode) {
+
+      var moduleCount = qrcode.getModuleCount();
+
+      var lostPoint = 0;
+
+      // LEVEL1
+
+      for (var row = 0; row < moduleCount; row += 1) {
+        for (var col = 0; col < moduleCount; col += 1) {
+
+          var sameCount = 0;
+          var dark = qrcode.isDark(row, col);
+
+          for (var r = -1; r <= 1; r += 1) {
+
+            if (row + r < 0 || moduleCount <= row + r) {
+              continue;
+            }
+
+            for (var c = -1; c <= 1; c += 1) {
+
+              if (col + c < 0 || moduleCount <= col + c) {
+                continue;
+              }
+
+              if (r == 0 && c == 0) {
+                continue;
+              }
+
+              if (dark == qrcode.isDark(row + r, col + c) ) {
+                sameCount += 1;
+              }
+            }
+          }
+
+          if (sameCount > 5) {
+            lostPoint += (3 + sameCount - 5);
+          }
+        }
+      };
+
+      // LEVEL2
+
+      for (var row = 0; row < moduleCount - 1; row += 1) {
+        for (var col = 0; col < moduleCount - 1; col += 1) {
+          var count = 0;
+          if (qrcode.isDark(row, col) ) count += 1;
+          if (qrcode.isDark(row + 1, col) ) count += 1;
+          if (qrcode.isDark(row, col + 1) ) count += 1;
+          if (qrcode.isDark(row + 1, col + 1) ) count += 1;
+          if (count == 0 || count == 4) {
+            lostPoint += 3;
+          }
+        }
+      }
+
+      // LEVEL3
+
+      for (var row = 0; row < moduleCount; row += 1) {
+        for (var col = 0; col < moduleCount - 6; col += 1) {
+          if (qrcode.isDark(row, col)
+              && !qrcode.isDark(row, col + 1)
+              &&  qrcode.isDark(row, col + 2)
+              &&  qrcode.isDark(row, col + 3)
+              &&  qrcode.isDark(row, col + 4)
+              && !qrcode.isDark(row, col + 5)
+              &&  qrcode.isDark(row, col + 6) ) {
+            lostPoint += 40;
+          }
+        }
+      }
+
+      for (var col = 0; col < moduleCount; col += 1) {
+        for (var row = 0; row < moduleCount - 6; row += 1) {
+          if (qrcode.isDark(row, col)
+              && !qrcode.isDark(row + 1, col)
+              &&  qrcode.isDark(row + 2, col)
+              &&  qrcode.isDark(row + 3, col)
+              &&  qrcode.isDark(row + 4, col)
+              && !qrcode.isDark(row + 5, col)
+              &&  qrcode.isDark(row + 6, col) ) {
+            lostPoint += 40;
+          }
+        }
+      }
+
+      // LEVEL4
+
+      var darkCount = 0;
+
+      for (var col = 0; col < moduleCount; col += 1) {
+        for (var row = 0; row < moduleCount; row += 1) {
+          if (qrcode.isDark(row, col) ) {
+            darkCount += 1;
+          }
+        }
+      }
+
+      var ratio = Math.abs(100 * darkCount / moduleCount / moduleCount - 50) / 5;
+      lostPoint += ratio * 10;
+
+      return lostPoint;
+    };
+
+    return _this;
+  }();
+
+  //---------------------------------------------------------------------
+  // QRMath
+  //---------------------------------------------------------------------
+
+  var QRMath = function() {
+
+    var EXP_TABLE = new Array(256);
+    var LOG_TABLE = new Array(256);
+
+    // initialize tables
+    for (var i = 0; i < 8; i += 1) {
+      EXP_TABLE[i] = 1 << i;
+    }
+    for (var i = 8; i < 256; i += 1) {
+      EXP_TABLE[i] = EXP_TABLE[i - 4]
+        ^ EXP_TABLE[i - 5]
+        ^ EXP_TABLE[i - 6]
+        ^ EXP_TABLE[i - 8];
+    }
+    for (var i = 0; i < 255; i += 1) {
+      LOG_TABLE[EXP_TABLE[i] ] = i;
+    }
+
+    var _this = {};
+
+    _this.glog = function(n) {
+
+      if (n < 1) {
+        throw 'glog(' + n + ')';
+      }
+
+      return LOG_TABLE[n];
+    };
+
+    _this.gexp = function(n) {
+
+      while (n < 0) {
+        n += 255;
+      }
+
+      while (n >= 256) {
+        n -= 255;
+      }
+
+      return EXP_TABLE[n];
+    };
+
+    return _this;
+  }();
+
+  //---------------------------------------------------------------------
+  // qrPolynomial
+  //---------------------------------------------------------------------
+
+  function qrPolynomial(num, shift) {
+
+    if (typeof num.length == 'undefined') {
+      throw num.length + '/' + shift;
+    }
+
+    var _num = function() {
+      var offset = 0;
+      while (offset < num.length && num[offset] == 0) {
+        offset += 1;
+      }
+      var _num = new Array(num.length - offset + shift);
+      for (var i = 0; i < num.length - offset; i += 1) {
+        _num[i] = num[i + offset];
+      }
+      return _num;
+    }();
+
+    var _this = {};
+
+    _this.getAt = function(index) {
+      return _num[index];
+    };
+
+    _this.getLength = function() {
+      return _num.length;
+    };
+
+    _this.multiply = function(e) {
+
+      var num = new Array(_this.getLength() + e.getLength() - 1);
+
+      for (var i = 0; i < _this.getLength(); i += 1) {
+        for (var j = 0; j < e.getLength(); j += 1) {
+          num[i + j] ^= QRMath.gexp(QRMath.glog(_this.getAt(i) ) + QRMath.glog(e.getAt(j) ) );
+        }
+      }
+
+      return qrPolynomial(num, 0);
+    };
+
+    _this.mod = function(e) {
+
+      if (_this.getLength() - e.getLength() < 0) {
+        return _this;
+      }
+
+      var ratio = QRMath.glog(_this.getAt(0) ) - QRMath.glog(e.getAt(0) );
+
+      var num = new Array(_this.getLength() );
+      for (var i = 0; i < _this.getLength(); i += 1) {
+        num[i] = _this.getAt(i);
+      }
+
+      for (var i = 0; i < e.getLength(); i += 1) {
+        num[i] ^= QRMath.gexp(QRMath.glog(e.getAt(i) ) + ratio);
+      }
+
+      // recursive call
+      return qrPolynomial(num, 0).mod(e);
+    };
+
+    return _this;
+  };
+
+  //---------------------------------------------------------------------
+  // QRRSBlock
+  //---------------------------------------------------------------------
+
+  var QRRSBlock = function() {
+
+    var RS_BLOCK_TABLE = [
+
+      // L
+      // M
+      // Q
+      // H
+
+      // 1
+      [1, 26, 19],
+      [1, 26, 16],
+      [1, 26, 13],
+      [1, 26, 9],
+
+      // 2
+      [1, 44, 34],
+      [1, 44, 28],
+      [1, 44, 22],
+      [1, 44, 16],
+
+      // 3
+      [1, 70, 55],
+      [1, 70, 44],
+      [2, 35, 17],
+      [2, 35, 13],
+
+      // 4
+      [1, 100, 80],
+      [2, 50, 32],
+      [2, 50, 24],
+      [4, 25, 9],
+
+      // 5
+      [1, 134, 108],
+      [2, 67, 43],
+      [2, 33, 15, 2, 34, 16],
+      [2, 33, 11, 2, 34, 12],
+
+      // 6
+      [2, 86, 68],
+      [4, 43, 27],
+      [4, 43, 19],
+      [4, 43, 15],
+
+      // 7
+      [2, 98, 78],
+      [4, 49, 31],
+      [2, 32, 14, 4, 33, 15],
+      [4, 39, 13, 1, 40, 14],
+
+      // 8
+      [2, 121, 97],
+      [2, 60, 38, 2, 61, 39],
+      [4, 40, 18, 2, 41, 19],
+      [4, 40, 14, 2, 41, 15],
+
+      // 9
+      [2, 146, 116],
+      [3, 58, 36, 2, 59, 37],
+      [4, 36, 16, 4, 37, 17],
+      [4, 36, 12, 4, 37, 13],
+
+      // 10
+      [2, 86, 68, 2, 87, 69],
+      [4, 69, 43, 1, 70, 44],
+      [6, 43, 19, 2, 44, 20],
+      [6, 43, 15, 2, 44, 16],
+
+      // 11
+      [4, 101, 81],
+      [1, 80, 50, 4, 81, 51],
+      [4, 50, 22, 4, 51, 23],
+      [3, 36, 12, 8, 37, 13],
+
+      // 12
+      [2, 116, 92, 2, 117, 93],
+      [6, 58, 36, 2, 59, 37],
+      [4, 46, 20, 6, 47, 21],
+      [7, 42, 14, 4, 43, 15],
+
+      // 13
+      [4, 133, 107],
+      [8, 59, 37, 1, 60, 38],
+      [8, 44, 20, 4, 45, 21],
+      [12, 33, 11, 4, 34, 12],
+
+      // 14
+      [3, 145, 115, 1, 146, 116],
+      [4, 64, 40, 5, 65, 41],
+      [11, 36, 16, 5, 37, 17],
+      [11, 36, 12, 5, 37, 13],
+
+      // 15
+      [5, 109, 87, 1, 110, 88],
+      [5, 65, 41, 5, 66, 42],
+      [5, 54, 24, 7, 55, 25],
+      [11, 36, 12, 7, 37, 13],
+
+      // 16
+      [5, 122, 98, 1, 123, 99],
+      [7, 73, 45, 3, 74, 46],
+      [15, 43, 19, 2, 44, 20],
+      [3, 45, 15, 13, 46, 16],
+
+      // 17
+      [1, 135, 107, 5, 136, 108],
+      [10, 74, 46, 1, 75, 47],
+      [1, 50, 22, 15, 51, 23],
+      [2, 42, 14, 17, 43, 15],
+
+      // 18
+      [5, 150, 120, 1, 151, 121],
+      [9, 69, 43, 4, 70, 44],
+      [17, 50, 22, 1, 51, 23],
+      [2, 42, 14, 19, 43, 15],
+
+      // 19
+      [3, 141, 113, 4, 142, 114],
+      [3, 70, 44, 11, 71, 45],
+      [17, 47, 21, 4, 48, 22],
+      [9, 39, 13, 16, 40, 14],
+
+      // 20
+      [3, 135, 107, 5, 136, 108],
+      [3, 67, 41, 13, 68, 42],
+      [15, 54, 24, 5, 55, 25],
+      [15, 43, 15, 10, 44, 16],
+
+      // 21
+      [4, 144, 116, 4, 145, 117],
+      [17, 68, 42],
+      [17, 50, 22, 6, 51, 23],
+      [19, 46, 16, 6, 47, 17],
+
+      // 22
+      [2, 139, 111, 7, 140, 112],
+      [17, 74, 46],
+      [7, 54, 24, 16, 55, 25],
+      [34, 37, 13],
+
+      // 23
+      [4, 151, 121, 5, 152, 122],
+      [4, 75, 47, 14, 76, 48],
+      [11, 54, 24, 14, 55, 25],
+      [16, 45, 15, 14, 46, 16],
+
+      // 24
+      [6, 147, 117, 4, 148, 118],
+      [6, 73, 45, 14, 74, 46],
+      [11, 54, 24, 16, 55, 25],
+      [30, 46, 16, 2, 47, 17],
+
+      // 25
+      [8, 132, 106, 4, 133, 107],
+      [8, 75, 47, 13, 76, 48],
+      [7, 54, 24, 22, 55, 25],
+      [22, 45, 15, 13, 46, 16],
+
+      // 26
+      [10, 142, 114, 2, 143, 115],
+      [19, 74, 46, 4, 75, 47],
+      [28, 50, 22, 6, 51, 23],
+      [33, 46, 16, 4, 47, 17],
+
+      // 27
+      [8, 152, 122, 4, 153, 123],
+      [22, 73, 45, 3, 74, 46],
+      [8, 53, 23, 26, 54, 24],
+      [12, 45, 15, 28, 46, 16],
+
+      // 28
+      [3, 147, 117, 10, 148, 118],
+      [3, 73, 45, 23, 74, 46],
+      [4, 54, 24, 31, 55, 25],
+      [11, 45, 15, 31, 46, 16],
+
+      // 29
+      [7, 146, 116, 7, 147, 117],
+      [21, 73, 45, 7, 74, 46],
+      [1, 53, 23, 37, 54, 24],
+      [19, 45, 15, 26, 46, 16],
+
+      // 30
+      [5, 145, 115, 10, 146, 116],
+      [19, 75, 47, 10, 76, 48],
+      [15, 54, 24, 25, 55, 25],
+      [23, 45, 15, 25, 46, 16],
+
+      // 31
+      [13, 145, 115, 3, 146, 116],
+      [2, 74, 46, 29, 75, 47],
+      [42, 54, 24, 1, 55, 25],
+      [23, 45, 15, 28, 46, 16],
+
+      // 32
+      [17, 145, 115],
+      [10, 74, 46, 23, 75, 47],
+      [10, 54, 24, 35, 55, 25],
+      [19, 45, 15, 35, 46, 16],
+
+      // 33
+      [17, 145, 115, 1, 146, 116],
+      [14, 74, 46, 21, 75, 47],
+      [29, 54, 24, 19, 55, 25],
+      [11, 45, 15, 46, 46, 16],
+
+      // 34
+      [13, 145, 115, 6, 146, 116],
+      [14, 74, 46, 23, 75, 47],
+      [44, 54, 24, 7, 55, 25],
+      [59, 46, 16, 1, 47, 17],
+
+      // 35
+      [12, 151, 121, 7, 152, 122],
+      [12, 75, 47, 26, 76, 48],
+      [39, 54, 24, 14, 55, 25],
+      [22, 45, 15, 41, 46, 16],
+
+      // 36
+      [6, 151, 121, 14, 152, 122],
+      [6, 75, 47, 34, 76, 48],
+      [46, 54, 24, 10, 55, 25],
+      [2, 45, 15, 64, 46, 16],
+
+      // 37
+      [17, 152, 122, 4, 153, 123],
+      [29, 74, 46, 14, 75, 47],
+      [49, 54, 24, 10, 55, 25],
+      [24, 45, 15, 46, 46, 16],
+
+      // 38
+      [4, 152, 122, 18, 153, 123],
+      [13, 74, 46, 32, 75, 47],
+      [48, 54, 24, 14, 55, 25],
+      [42, 45, 15, 32, 46, 16],
+
+      // 39
+      [20, 147, 117, 4, 148, 118],
+      [40, 75, 47, 7, 76, 48],
+      [43, 54, 24, 22, 55, 25],
+      [10, 45, 15, 67, 46, 16],
+
+      // 40
+      [19, 148, 118, 6, 149, 119],
+      [18, 75, 47, 31, 76, 48],
+      [34, 54, 24, 34, 55, 25],
+      [20, 45, 15, 61, 46, 16]
+    ];
+
+    var qrRSBlock = function(totalCount, dataCount) {
+      var _this = {};
+      _this.totalCount = totalCount;
+      _this.dataCount = dataCount;
+      return _this;
+    };
+
+    var _this = {};
+
+    var getRsBlockTable = function(typeNumber, errorCorrectionLevel) {
+
+      switch(errorCorrectionLevel) {
+      case QRErrorCorrectionLevel.L :
+        return RS_BLOCK_TABLE[(typeNumber - 1) * 4 + 0];
+      case QRErrorCorrectionLevel.M :
+        return RS_BLOCK_TABLE[(typeNumber - 1) * 4 + 1];
+      case QRErrorCorrectionLevel.Q :
+        return RS_BLOCK_TABLE[(typeNumber - 1) * 4 + 2];
+      case QRErrorCorrectionLevel.H :
+        return RS_BLOCK_TABLE[(typeNumber - 1) * 4 + 3];
+      default :
+        return undefined;
+      }
+    };
+
+    _this.getRSBlocks = function(typeNumber, errorCorrectionLevel) {
+
+      var rsBlock = getRsBlockTable(typeNumber, errorCorrectionLevel);
+
+      if (typeof rsBlock == 'undefined') {
+        throw 'bad rs block @ typeNumber:' + typeNumber +
+            '/errorCorrectionLevel:' + errorCorrectionLevel;
+      }
+
+      var length = rsBlock.length / 3;
+
+      var list = [];
+
+      for (var i = 0; i < length; i += 1) {
+
+        var count = rsBlock[i * 3 + 0];
+        var totalCount = rsBlock[i * 3 + 1];
+        var dataCount = rsBlock[i * 3 + 2];
+
+        for (var j = 0; j < count; j += 1) {
+          list.push(qrRSBlock(totalCount, dataCount) );
+        }
+      }
+
+      return list;
+    };
+
+    return _this;
+  }();
+
+  //---------------------------------------------------------------------
+  // qrBitBuffer
+  //---------------------------------------------------------------------
+
+  var qrBitBuffer = function() {
+
+    var _buffer = [];
+    var _length = 0;
+
+    var _this = {};
+
+    _this.getBuffer = function() {
+      return _buffer;
+    };
+
+    _this.getAt = function(index) {
+      var bufIndex = Math.floor(index / 8);
+      return ( (_buffer[bufIndex] >>> (7 - index % 8) ) & 1) == 1;
+    };
+
+    _this.put = function(num, length) {
+      for (var i = 0; i < length; i += 1) {
+        _this.putBit( ( (num >>> (length - i - 1) ) & 1) == 1);
+      }
+    };
+
+    _this.getLengthInBits = function() {
+      return _length;
+    };
+
+    _this.putBit = function(bit) {
+
+      var bufIndex = Math.floor(_length / 8);
+      if (_buffer.length <= bufIndex) {
+        _buffer.push(0);
+      }
+
+      if (bit) {
+        _buffer[bufIndex] |= (0x80 >>> (_length % 8) );
+      }
+
+      _length += 1;
+    };
+
+    return _this;
+  };
+
+  //---------------------------------------------------------------------
+  // qrNumber
+  //---------------------------------------------------------------------
+
+  var qrNumber = function(data) {
+
+    var _mode = QRMode.MODE_NUMBER;
+    var _data = data;
+
+    var _this = {};
+
+    _this.getMode = function() {
+      return _mode;
+    };
+
+    _this.getLength = function(buffer) {
+      return _data.length;
+    };
+
+    _this.write = function(buffer) {
+
+      var data = _data;
+
+      var i = 0;
+
+      while (i + 2 < data.length) {
+        buffer.put(strToNum(data.substring(i, i + 3) ), 10);
+        i += 3;
+      }
+
+      if (i < data.length) {
+        if (data.length - i == 1) {
+          buffer.put(strToNum(data.substring(i, i + 1) ), 4);
+        } else if (data.length - i == 2) {
+          buffer.put(strToNum(data.substring(i, i + 2) ), 7);
+        }
+      }
+    };
+
+    var strToNum = function(s) {
+      var num = 0;
+      for (var i = 0; i < s.length; i += 1) {
+        num = num * 10 + chatToNum(s.charAt(i) );
+      }
+      return num;
+    };
+
+    var chatToNum = function(c) {
+      if ('0' <= c && c <= '9') {
+        return c.charCodeAt(0) - '0'.charCodeAt(0);
+      }
+      throw 'illegal char :' + c;
+    };
+
+    return _this;
+  };
+
+  //---------------------------------------------------------------------
+  // qrAlphaNum
+  //---------------------------------------------------------------------
+
+  var qrAlphaNum = function(data) {
+
+    var _mode = QRMode.MODE_ALPHA_NUM;
+    var _data = data;
+
+    var _this = {};
+
+    _this.getMode = function() {
+      return _mode;
+    };
+
+    _this.getLength = function(buffer) {
+      return _data.length;
+    };
+
+    _this.write = function(buffer) {
+
+      var s = _data;
+
+      var i = 0;
+
+      while (i + 1 < s.length) {
+        buffer.put(
+          getCode(s.charAt(i) ) * 45 +
+          getCode(s.charAt(i + 1) ), 11);
+        i += 2;
+      }
+
+      if (i < s.length) {
+        buffer.put(getCode(s.charAt(i) ), 6);
+      }
+    };
+
+    var getCode = function(c) {
+
+      if ('0' <= c && c <= '9') {
+        return c.charCodeAt(0) - '0'.charCodeAt(0);
+      } else if ('A' <= c && c <= 'Z') {
+        return c.charCodeAt(0) - 'A'.charCodeAt(0) + 10;
+      } else {
+        switch (c) {
+        case ' ' : return 36;
+        case '$' : return 37;
+        case '%' : return 38;
+        case '*' : return 39;
+        case '+' : return 40;
+        case '-' : return 41;
+        case '.' : return 42;
+        case '/' : return 43;
+        case ':' : return 44;
+        default :
+          throw 'illegal char :' + c;
+        }
+      }
+    };
+
+    return _this;
+  };
+
+  //---------------------------------------------------------------------
+  // qr8BitByte
+  //---------------------------------------------------------------------
+
+  var qr8BitByte = function(data) {
+
+    var _mode = QRMode.MODE_8BIT_BYTE;
+    var _data = data;
+    var _bytes = qrcode.stringToBytes(data);
+
+    var _this = {};
+
+    _this.getMode = function() {
+      return _mode;
+    };
+
+    _this.getLength = function(buffer) {
+      return _bytes.length;
+    };
+
+    _this.write = function(buffer) {
+      for (var i = 0; i < _bytes.length; i += 1) {
+        buffer.put(_bytes[i], 8);
+      }
+    };
+
+    return _this;
+  };
+
+  //---------------------------------------------------------------------
+  // qrKanji
+  //---------------------------------------------------------------------
+
+  var qrKanji = function(data) {
+
+    var _mode = QRMode.MODE_KANJI;
+    var _data = data;
+
+    var stringToBytes = qrcode.stringToBytesFuncs['SJIS'];
+    if (!stringToBytes) {
+      throw 'sjis not supported.';
+    }
+    !function(c, code) {
+      // self test for sjis support.
+      var test = stringToBytes(c);
+      if (test.length != 2 || ( (test[0] << 8) | test[1]) != code) {
+        throw 'sjis not supported.';
+      }
+    }('\u53cb', 0x9746);
+
+    var _bytes = stringToBytes(data);
+
+    var _this = {};
+
+    _this.getMode = function() {
+      return _mode;
+    };
+
+    _this.getLength = function(buffer) {
+      return ~~(_bytes.length / 2);
+    };
+
+    _this.write = function(buffer) {
+
+      var data = _bytes;
+
+      var i = 0;
+
+      while (i + 1 < data.length) {
+
+        var c = ( (0xff & data[i]) << 8) | (0xff & data[i + 1]);
+
+        if (0x8140 <= c && c <= 0x9FFC) {
+          c -= 0x8140;
+        } else if (0xE040 <= c && c <= 0xEBBF) {
+          c -= 0xC140;
+        } else {
+          throw 'illegal char at ' + (i + 1) + '/' + c;
+        }
+
+        c = ( (c >>> 8) & 0xff) * 0xC0 + (c & 0xff);
+
+        buffer.put(c, 13);
+
+        i += 2;
+      }
+
+      if (i < data.length) {
+        throw 'illegal char at ' + (i + 1);
+      }
+    };
+
+    return _this;
+  };
+
+  //=====================================================================
+  // GIF Support etc.
+  //
+
+  //---------------------------------------------------------------------
+  // byteArrayOutputStream
+  //---------------------------------------------------------------------
+
+  var byteArrayOutputStream = function() {
+
+    var _bytes = [];
+
+    var _this = {};
+
+    _this.writeByte = function(b) {
+      _bytes.push(b & 0xff);
+    };
+
+    _this.writeShort = function(i) {
+      _this.writeByte(i);
+      _this.writeByte(i >>> 8);
+    };
+
+    _this.writeBytes = function(b, off, len) {
+      off = off || 0;
+      len = len || b.length;
+      for (var i = 0; i < len; i += 1) {
+        _this.writeByte(b[i + off]);
+      }
+    };
+
+    _this.writeString = function(s) {
+      for (var i = 0; i < s.length; i += 1) {
+        _this.writeByte(s.charCodeAt(i) );
+      }
+    };
+
+    _this.toByteArray = function() {
+      return _bytes;
+    };
+
+    _this.toString = function() {
+      var s = '';
+      s += '[';
+      for (var i = 0; i < _bytes.length; i += 1) {
+        if (i > 0) {
+          s += ',';
+        }
+        s += _bytes[i];
+      }
+      s += ']';
+      return s;
+    };
+
+    return _this;
+  };
+
+  //---------------------------------------------------------------------
+  // base64EncodeOutputStream
+  //---------------------------------------------------------------------
+
+  var base64EncodeOutputStream = function() {
+
+    var _buffer = 0;
+    var _buflen = 0;
+    var _length = 0;
+    var _base64 = '';
+
+    var _this = {};
+
+    var writeEncoded = function(b) {
+      _base64 += String.fromCharCode(encode(b & 0x3f) );
+    };
+
+    var encode = function(n) {
+      if (n < 0) {
+        // error.
+      } else if (n < 26) {
+        return 0x41 + n;
+      } else if (n < 52) {
+        return 0x61 + (n - 26);
+      } else if (n < 62) {
+        return 0x30 + (n - 52);
+      } else if (n == 62) {
+        return 0x2b;
+      } else if (n == 63) {
+        return 0x2f;
+      }
+      throw 'n:' + n;
+    };
+
+    _this.writeByte = function(n) {
+
+      _buffer = (_buffer << 8) | (n & 0xff);
+      _buflen += 8;
+      _length += 1;
+
+      while (_buflen >= 6) {
+        writeEncoded(_buffer >>> (_buflen - 6) );
+        _buflen -= 6;
+      }
+    };
+
+    _this.flush = function() {
+
+      if (_buflen > 0) {
+        writeEncoded(_buffer << (6 - _buflen) );
+        _buffer = 0;
+        _buflen = 0;
+      }
+
+      if (_length % 3 != 0) {
+        // padding
+        var padlen = 3 - _length % 3;
+        for (var i = 0; i < padlen; i += 1) {
+          _base64 += '=';
+        }
+      }
+    };
+
+    _this.toString = function() {
+      return _base64;
+    };
+
+    return _this;
+  };
+
+  //---------------------------------------------------------------------
+  // base64DecodeInputStream
+  //---------------------------------------------------------------------
+
+  var base64DecodeInputStream = function(str) {
+
+    var _str = str;
+    var _pos = 0;
+    var _buffer = 0;
+    var _buflen = 0;
+
+    var _this = {};
+
+    _this.read = function() {
+
+      while (_buflen < 8) {
+
+        if (_pos >= _str.length) {
+          if (_buflen == 0) {
+            return -1;
+          }
+          throw 'unexpected end of file./' + _buflen;
+        }
+
+        var c = _str.charAt(_pos);
+        _pos += 1;
+
+        if (c == '=') {
+          _buflen = 0;
+          return -1;
+        } else if (c.match(/^\s$/) ) {
+          // ignore if whitespace.
+          continue;
+        }
+
+        _buffer = (_buffer << 6) | decode(c.charCodeAt(0) );
+        _buflen += 6;
+      }
+
+      var n = (_buffer >>> (_buflen - 8) ) & 0xff;
+      _buflen -= 8;
+      return n;
+    };
+
+    var decode = function(c) {
+      if (0x41 <= c && c <= 0x5a) {
+        return c - 0x41;
+      } else if (0x61 <= c && c <= 0x7a) {
+        return c - 0x61 + 26;
+      } else if (0x30 <= c && c <= 0x39) {
+        return c - 0x30 + 52;
+      } else if (c == 0x2b) {
+        return 62;
+      } else if (c == 0x2f) {
+        return 63;
+      } else {
+        throw 'c:' + c;
+      }
+    };
+
+    return _this;
+  };
+
+  //---------------------------------------------------------------------
+  // gifImage (B/W)
+  //---------------------------------------------------------------------
+
+  var gifImage = function(width, height) {
+
+    var _width = width;
+    var _height = height;
+    var _data = new Array(width * height);
+
+    var _this = {};
+
+    _this.setPixel = function(x, y, pixel) {
+      _data[y * _width + x] = pixel;
+    };
+
+    _this.write = function(out) {
+
+      //---------------------------------
+      // GIF Signature
+
+      out.writeString('GIF87a');
+
+      //---------------------------------
+      // Screen Descriptor
+
+      out.writeShort(_width);
+      out.writeShort(_height);
+
+      out.writeByte(0x80); // 2bit
+      out.writeByte(0);
+      out.writeByte(0);
+
+      //---------------------------------
+      // Global Color Map
+
+      // black
+      out.writeByte(0x00);
+      out.writeByte(0x00);
+      out.writeByte(0x00);
+
+      // white
+      out.writeByte(0xff);
+      out.writeByte(0xff);
+      out.writeByte(0xff);
+
+      //---------------------------------
+      // Image Descriptor
+
+      out.writeString(',');
+      out.writeShort(0);
+      out.writeShort(0);
+      out.writeShort(_width);
+      out.writeShort(_height);
+      out.writeByte(0);
+
+      //---------------------------------
+      // Local Color Map
+
+      //---------------------------------
+      // Raster Data
+
+      var lzwMinCodeSize = 2;
+      var raster = getLZWRaster(lzwMinCodeSize);
+
+      out.writeByte(lzwMinCodeSize);
+
+      var offset = 0;
+
+      while (raster.length - offset > 255) {
+        out.writeByte(255);
+        out.writeBytes(raster, offset, 255);
+        offset += 255;
+      }
+
+      out.writeByte(raster.length - offset);
+      out.writeBytes(raster, offset, raster.length - offset);
+      out.writeByte(0x00);
+
+      //---------------------------------
+      // GIF Terminator
+      out.writeString(';');
+    };
+
+    var bitOutputStream = function(out) {
+
+      var _out = out;
+      var _bitLength = 0;
+      var _bitBuffer = 0;
+
+      var _this = {};
+
+      _this.write = function(data, length) {
+
+        if ( (data >>> length) != 0) {
+          throw 'length over';
+        }
+
+        while (_bitLength + length >= 8) {
+          _out.writeByte(0xff & ( (data << _bitLength) | _bitBuffer) );
+          length -= (8 - _bitLength);
+          data >>>= (8 - _bitLength);
+          _bitBuffer = 0;
+          _bitLength = 0;
+        }
+
+        _bitBuffer = (data << _bitLength) | _bitBuffer;
+        _bitLength = _bitLength + length;
+      };
+
+      _this.flush = function() {
+        if (_bitLength > 0) {
+          _out.writeByte(_bitBuffer);
+        }
+      };
+
+      return _this;
+    };
+
+    var getLZWRaster = function(lzwMinCodeSize) {
+
+      var clearCode = 1 << lzwMinCodeSize;
+      var endCode = (1 << lzwMinCodeSize) + 1;
+      var bitLength = lzwMinCodeSize + 1;
+
+      // Setup LZWTable
+      var table = lzwTable();
+
+      for (var i = 0; i < clearCode; i += 1) {
+        table.add(String.fromCharCode(i) );
+      }
+      table.add(String.fromCharCode(clearCode) );
+      table.add(String.fromCharCode(endCode) );
+
+      var byteOut = byteArrayOutputStream();
+      var bitOut = bitOutputStream(byteOut);
+
+      // clear code
+      bitOut.write(clearCode, bitLength);
+
+      var dataIndex = 0;
+
+      var s = String.fromCharCode(_data[dataIndex]);
+      dataIndex += 1;
+
+      while (dataIndex < _data.length) {
+
+        var c = String.fromCharCode(_data[dataIndex]);
+        dataIndex += 1;
+
+        if (table.contains(s + c) ) {
+
+          s = s + c;
+
+        } else {
+
+          bitOut.write(table.indexOf(s), bitLength);
+
+          if (table.size() < 0xfff) {
+
+            if (table.size() == (1 << bitLength) ) {
+              bitLength += 1;
+            }
+
+            table.add(s + c);
+          }
+
+          s = c;
+        }
+      }
+
+      bitOut.write(table.indexOf(s), bitLength);
+
+      // end code
+      bitOut.write(endCode, bitLength);
+
+      bitOut.flush();
+
+      return byteOut.toByteArray();
+    };
+
+    var lzwTable = function() {
+
+      var _map = {};
+      var _size = 0;
+
+      var _this = {};
+
+      _this.add = function(key) {
+        if (_this.contains(key) ) {
+          throw 'dup key:' + key;
+        }
+        _map[key] = _size;
+        _size += 1;
+      };
+
+      _this.size = function() {
+        return _size;
+      };
+
+      _this.indexOf = function(key) {
+        return _map[key];
+      };
+
+      _this.contains = function(key) {
+        return typeof _map[key] != 'undefined';
+      };
+
+      return _this;
+    };
+
+    return _this;
+  };
+
+  var createDataURL = function(width, height, getPixel) {
+    var gif = gifImage(width, height);
+    for (var y = 0; y < height; y += 1) {
+      for (var x = 0; x < width; x += 1) {
+        gif.setPixel(x, y, getPixel(x, y) );
+      }
+    }
+
+    var b = byteArrayOutputStream();
+    gif.write(b);
+
+    var base64 = base64EncodeOutputStream();
+    var bytes = b.toByteArray();
+    for (var i = 0; i < bytes.length; i += 1) {
+      base64.writeByte(bytes[i]);
+    }
+    base64.flush();
+
+    return 'data:image/gif;base64,' + base64;
+  };
+
+  //---------------------------------------------------------------------
+  // returns qrcode function.
+
+  return qrcode;
+}();
+
+// multibyte support
+!function() {
+
+  qrcode.stringToBytesFuncs['UTF-8'] = function(s) {
+    // http://stackoverflow.com/questions/18729405/how-to-convert-utf8-string-to-byte-array
+    function toUTF8Array(str) {
+      var utf8 = [];
+      for (var i=0; i < str.length; i++) {
+        var charcode = str.charCodeAt(i);
+        if (charcode < 0x80) utf8.push(charcode);
+        else if (charcode < 0x800) {
+          utf8.push(0xc0 | (charcode >> 6),
+              0x80 | (charcode & 0x3f));
+        }
+        else if (charcode < 0xd800 || charcode >= 0xe000) {
+          utf8.push(0xe0 | (charcode >> 12),
+              0x80 | ((charcode>>6) & 0x3f),
+              0x80 | (charcode & 0x3f));
+        }
+        // surrogate pair
+        else {
+          i++;
+          // UTF-16 encodes 0x10000-0x10FFFF by
+          // subtracting 0x10000 and splitting the
+          // 20 bits of 0x0-0xFFFFF into two halves
+          charcode = 0x10000 + (((charcode & 0x3ff)<<10)
+            | (str.charCodeAt(i) & 0x3ff));
+          utf8.push(0xf0 | (charcode >>18),
+              0x80 | ((charcode>>12) & 0x3f),
+              0x80 | ((charcode>>6) & 0x3f),
+              0x80 | (charcode & 0x3f));
+        }
+      }
+      return utf8;
+    }
+    return toUTF8Array(s);
+  };
+
+}();
+
+(function (factory) {
+  if (typeof define === 'function' && define.amd) {
+      define([], factory);
+  } else if (typeof exports === 'object') {
+      module.exports = factory();
+  }
+}(function () {
+    return qrcode;
+}));
+</script><script>/* NO.15 — deterministic game rules. No browser/Firebase dependency. */
+const VERSION = '1.0.0';
+const CARDS = Object.freeze(Array.from({length:15}, (_,i)=>i+1));
+const MATCHES = 12;
+const EVENTS = Object.freeze({
+  none:{name:'通常試合',short:'NORMAL',description:'数字 ÷ 被った人数（小数点以下切り捨て）'},
+  double:{name:'ダブルスコア',short:'DOUBLE',description:'通常点が2倍になる'},
+  low:{name:'ローナンバーボーナス',short:'LOW 1–7',description:'1〜7を出すと通常点が2倍になる'},
+  even:{name:'偶数ボーナス',short:'EVEN +3',description:'偶数カードの通常点に3点を加える'}
+});
+const clone = x => x == null ? x : JSON.parse(JSON.stringify(x));
+function nickname(value){
+  const name=String(value??'').normalize('NFKC').replace(/\s+/gu,' ').trim();
+  if(!name || [...name].length>12 || /[\u0000-\u001f\u007f]/u.test(name)) throw Error('ニックネームは1〜12文字で入力してください。');
+  return {name,key:name.toLocaleLowerCase('ja-JP')};
+}
+function defaultConfig(){
+  return {battle:true,events:true,eventMode:'manual',eventCount:3,eventMatches:[4,8,12],eventTypes:{4:'double',8:'low',12:'even'},hiddenAll:false,hiddenMatches:[],seconds:60,finalRound:false};
+}
+function validateConfig(c){
+  const cfg={...defaultConfig(),...clone(c)};
+  if(typeof cfg.battle!=='boolean'||typeof cfg.events!=='boolean'||typeof cfg.finalRound!=='boolean'||typeof cfg.hiddenAll!=='boolean')throw Error('設定値が正しくありません。');
+  if(!['manual','random'].includes(cfg.eventMode))throw Error('イベントの設定方法が正しくありません。');
+  if(!Number.isInteger(cfg.seconds)||cfg.seconds<0||cfg.seconds>600)throw Error('制限時間は0〜600秒で指定してください。0は時間無制限です。');
+  if(!Number.isInteger(cfg.eventCount)||cfg.eventCount<0||cfg.eventCount>12)throw Error('イベント回数は0〜12回で指定してください。');
+  for(const key of ['eventMatches','hiddenMatches']){
+    if(!Array.isArray(cfg[key])||cfg[key].some(n=>!Number.isInteger(n)||n<1||n>12))throw Error('試合番号は1〜12で指定してください。');
+    cfg[key]=[...new Set(cfg[key])].sort((a,b)=>a-b);
+  }
+  for(const n of cfg.eventMatches)if(!['double','low','even'].includes(cfg.eventTypes?.[n]))throw Error('イベントの種類を選択してください。');
+  return cfg;
+}
+function makeEventPlan(config,random=Math.random){
+  const c=validateConfig(config),plan={};
+  for(let i=1;i<=12;i++)plan[i]='none';
+  if(!c.events)return plan;
+  if(c.eventMode==='manual'){for(const n of c.eventMatches)plan[n]=c.eventTypes[n];}
+  else{
+    const order=Array.from({length:12},(_,i)=>i+1);
+    for(let i=11;i>0;i--){const j=Math.floor(random()*(i+1));[order[i],order[j]]=[order[j],order[i]];}
+    for(const n of order.slice(0,c.eventCount))plan[n]=['double','low','even'][Math.floor(random()*3)];
+  }
+  return plan;
+}
+function isHidden(state){return state?.phase!=='finished' && !!state?.hidden;}
+function ranking(roster,progress,scope='total'){
+  const rows=Object.entries(roster??{}).map(([id,p])=>({id,name:p.name,score:Number(progress?.[id]?.[scope]??0),joinedAt:p.joinedAt??0}));
+  rows.sort((a,b)=>b.score-a.score || a.joinedAt-b.joinedAt || a.id.localeCompare(b.id));
+  return rows.map((p,i,all)=>({...p,rank:i>0&&p.score===all[i-1].score?all.slice(0,i).findIndex(x=>x.score===p.score)+1:i+1}));
+}
+function eventScore(base,card,event){
+  if(!Object.hasOwn(EVENTS,event))throw Error('未対応のイベントです。');
+  if(event==='double'||event==='low'&&card<=7)return base*2;
+  if(event==='even'&&card%2===0)return base+3;
+  return base;
+}
+function scoreMatch(roster,progress,submissions,event='none',battleEnabled=true){
+  if(!Object.hasOwn(EVENTS,event))throw Error('未対応のイベントです。');
+  const count={};
+  for(const [pid,s] of Object.entries(submissions??{})){
+    if(!roster?.[pid])throw Error('参加者以外の提出が含まれています。');
+    if(!Number.isInteger(s.card)||s.card<1||s.card>15||typeof s.bet!=='boolean')throw Error('提出内容が正しくありません。');
+    if(progress?.[pid]?.used?.[s.card])throw Error('使用済みカードは再使用できません。');
+    if(s.bet&&(!battleEnabled||progress?.[pid]?.betUsed))throw Error('勝負カードは使用できません。');
+    count[s.card]=(count[s.card]??0)+1;
+  }
+  const results={};
+  for(const [id,p] of Object.entries(roster??{})){
+    const s=submissions?.[id];
+    if(!s){results[id]={id,name:p.name,card:0,bet:false,count:0,base:0,eventPoints:0,score:0,success:false,missed:true};continue;}
+    const base=Math.floor(s.card/count[s.card]);
+    const eventPoints=eventScore(base,s.card,event);
+    const success=s.bet&&count[s.card]===1;
+    const score=s.bet?(success?eventPoints*2:0):eventPoints;
+    results[id]={id,name:p.name,card:s.card,bet:s.bet,count:count[s.card],base,eventPoints,score,success,missed:false};
+  }
+  const groups=Object.keys(count).map(Number).sort((a,b)=>a-b).map(card=>({card,count:count[card],players:Object.values(results).filter(p=>p.card===card)}));
+  return {results,groups,count,missed:Object.values(results).filter(p=>p.missed)};
+}
+function freshProgress(roster,old={}){
+  return Object.fromEntries(Object.keys(roster??{}).map(id=>[id,{total:Number(old?.[id]?.total??0),roundTotal:0,used:{},betUsed:false}]));
+}
+function createRound(state,roster,config,plan){
+  if(!['lobby','roundEnd'].includes(state.phase))throw Error('ラウンドの開始前だけ設定できます。');
+  if(Object.keys(roster??{}).length<2)throw Error('開始には2人以上必要です。');
+  const cfg=validateConfig(config),round=Number(state.round??0)+1;
+  return {...state,phase:'ready',round,match:0,completed:0,config:cfg,plan:plan??makeEventPlan(cfg),hidden:cfg.hiddenAll||cfg.hiddenMatches.includes(1),progress:freshProgress(roster,state.progress),revealed:[],submittedCount:0,deadline:0,matchKey:'',event:'none',revision:(state.revision??0)+1};
+}
+function applyResult(state,roster,scored,now){
+  if(!['locked','reveal'].includes(state.phase))throw Error('この試合は確定できません。');
+  const history=clone(state.history??{}),key=`r${state.round}m${state.match}`;
+  if(history[key])throw Error('確定済みの試合です。');
+  const progress=clone(state.progress??{});
+  for(const [id,r] of Object.entries(scored.results)){
+    const p=progress[id]??{total:0,roundTotal:0,used:{},betUsed:false};
+    p.total+=r.score;p.roundTotal+=r.score;p.used??={};
+    if(!r.missed){p.used[r.card]=true;if(r.bet)p.betUsed=true;}
+    progress[id]=p;
+  }
+  history[key]={round:state.round,match:state.match,event:state.event,hidden:!!state.hidden,matchKey:state.matchKey,endedAt:now,results:scored.results,beforeRanks:ranking(roster,state.progress)};
+  return {...state,phase:state.match===12?'roundEnd':'result',completed:state.match,progress,history,revealed:scored.groups??[],missed:scored.missed??[],revision:(state.revision??0)+1};
+}
+function cardStats(roster,progress){
+  const size=Object.keys(roster??{}).length;
+  return CARDS.map(card=>{const used=Object.keys(roster??{}).filter(id=>progress?.[id]?.used?.[card]).length;return {card,used,available:size-used};});
+}
+function csvText(state,roster){
+  const head=['round','match','event','ranking_hidden','player_id','nickname','card','multiplicity','normal_points','event_points','battle_used','battle_success','missed','points','round_total','total','ended_at_utc'];
+  const totals={},roundTotals={},rows=[head];
+  const history=Object.values(state.history??{}).sort((a,b)=>a.round-b.round||a.match-b.match);
+  for(const h of history)for(const [id,r] of Object.entries(h.results)){
+    const rk=`${h.round}:${id}`;totals[id]=(totals[id]??0)+r.score;roundTotals[rk]=(roundTotals[rk]??0)+r.score;
+    // Leading formula markers are neutralized even when the CSV is opened in a spreadsheet.
+    let name=String(roster?.[id]?.name??r.name);if(/^[=+\-@\t\r]/u.test(name))name="'"+name;
+    rows.push([h.round,h.match,h.event,h.hidden,id,name,r.card||'',r.count,r.base,r.eventPoints,r.bet,r.success,r.missed,r.score,roundTotals[rk],totals[id],new Date(h.endedAt).toISOString()]);
+  }
+  return '\ufeff'+rows.map(row=>row.map(x=>'"'+String(x??'').replace(/"/g,'""')+'"').join(',')).join('\r\n')+'\r\n';
+}
+
+// Firebase コンソール → プロジェクトの設定 → マイアプリ → SDK の設定と構成。
+// 以下を自分のプロジェクトの Web 用設定に置き換えてください。
+// ここに秘密鍵・サービスアカウント・管理者パスワードは入力しません。
+const firebaseConfig = {
+  apiKey: 'YOUR_API_KEY',
+  authDomain: 'YOUR_PROJECT_ID.firebaseapp.com',
+  databaseURL: 'https://YOUR_DATABASE_URL',
+  projectId: 'YOUR_PROJECT_ID',
+  appId: 'YOUR_APP_ID'
+};
+
+
+
+const configured=()=>!!firebaseConfig.apiKey&&!Object.values(firebaseConfig).some(v=>String(v).includes('YOUR_'));
+const uidToken=()=>crypto.randomUUID().replaceAll('-','').slice(0,18);
+const alphabet='ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
+const codeToken=()=>Array.from(crypto.getRandomValues(new Uint8Array(6)),n=>alphabet[n%alphabet.length]).join('');
+const initialState=()=>({phase:'lobby',round:0,match:0,completed:0,revision:0,hidden:false,config:defaultConfig(),progress:{},history:{},revealed:[],submittedCount:0});
+class FirebaseBackend {
+  constructor(notify){this.notify=notify;this.online=false;this.offset=0;this.unsubs=[];this.globalUnsubs=[];this.code='';this.role='student';this.pid='';this.sending=false;this.processing=false;this.dirty=false;}
+  async init(){
+    if(this.sdk)return;
+    if(!configured())throw Error('Firebaseの初期設定が必要です。「設定ガイド」を開いてください。体験モードは設定なしで使えます。');
+    const [app,auth,db]=await Promise.all([
+      import('https://www.gstatic.com/firebasejs/12.4.0/firebase-app.js'),
+      import('https://www.gstatic.com/firebasejs/12.4.0/firebase-auth.js'),
+      import('https://www.gstatic.com/firebasejs/12.4.0/firebase-database.js')
+    ]);
+    this.sdk={...app,...auth,...db};
+    this.app=app.initializeApp(firebaseConfig);
+    this.auth=auth.getAuth(this.app);this.db=db.getDatabase(this.app);
+    await auth.setPersistence(this.auth,auth.browserLocalPersistence);
+    await new Promise((resolve,reject)=>{const off=auth.onAuthStateChanged(this.auth,()=>{off();resolve();},reject);});
+    this.globalUnsubs.push(db.onValue(db.ref(this.db,'.info/connected'),snap=>{this.online=snap.val()===true;if(!this.online)this.presenceRef=null;this.notify();if(this.online)this.setPresence();}));
+    this.globalUnsubs.push(db.onValue(db.ref(this.db,'.info/serverTimeOffset'),snap=>{this.offset=snap.val()??0;}));
+  }
+  now(){return Date.now()+this.offset;}
+  async signTeacher(){await this.init();if(this.auth.currentUser?.providerData?.some(p=>p.providerId==='google.com'))return;const provider=new this.sdk.GoogleAuthProvider();provider.setCustomParameters({prompt:'select_account'});await this.sdk.signInWithPopup(this.auth,provider);}
+  async ensureUser(){await this.init();if(!this.auth.currentUser)await this.sdk.signInAnonymously(this.auth);return this.auth.currentUser.uid;}
+  path(suffix=''){return this.sdk.ref(this.db,`games/${this.code}${suffix?'/'+suffix:''}`);}
+  async create(capacity,title){
+    await this.signTeacher();
+    if(!Number.isInteger(capacity)||capacity<2||capacity>16)throw Error('参加人数は2〜16人で設定してください。');
+    const owner=this.auth.currentUser.uid;
+    for(let tries=0;tries<5;tries++){
+      const code=codeToken(),room={meta:{owner,capacity,title:String(title||'NO.15').slice(0,40),createdAt:this.now(),closed:false,version:VERSION},public:initialState()};
+      try{
+        const result=await this.sdk.runTransaction(this.sdk.ref(this.db,`games/${code}`),s=>s?undefined:room,{applyLocally:false});
+        if(!result.committed)continue;
+        await this.sdk.set(this.sdk.ref(this.db,`teacherRooms/${owner}/${code}`),{title:room.meta.title,at:room.meta.createdAt});
+        await this.open(code);return code;
+      }catch(e){if(e.code==='PERMISSION_DENIED'&&tries<4)continue;throw e;}
+    }
+    throw Error('ルームを作成できませんでした。もう一度お試しください。');
+  }
+  async savedRooms(){await this.signTeacher();return (await this.sdk.get(this.sdk.ref(this.db,`teacherRooms/${this.auth.currentUser.uid}`))).val()??{};}
+  clearRoom(){for(const f of this.unsubs)f();this.unsubs=[];if(this.secretUnsub)this.secretUnsub();if(this.ownUnsub)this.ownUnsub();if(this.presenceRef)this.sdk.remove(this.presenceRef).catch(()=>{});this.presenceRef=null;this.secretUnsub=null;this.ownUnsub=null;this.watchedKey='';this.state=null;this.roster={};this.requests={};this.privateSubmissions={};this.ownSubmission=null;this.pid='';}
+  async open(raw){
+    await this.ensureUser();this.clearRoom();this.code=String(raw).toUpperCase().replace(/\s/g,'');
+    if(!/^[A-Z2-9]{6}$/.test(this.code))throw Error('6文字のルームコードを入力してください。');
+    const meta=(await this.sdk.get(this.path('meta'))).val();if(!meta)throw Error('ルームが見つかりません。コードをご確認ください。');
+    this.meta=meta;this.role=meta.owner===this.auth.currentUser.uid?'teacher':'student';
+    const uid=this.auth.currentUser.uid;
+    this.unsubs.push(this.sdk.onValue(this.path('meta'),s=>{this.meta=s.val();this.notify();}));
+    this.unsubs.push(this.sdk.onValue(this.path('roster'),s=>{this.roster=s.val()??{};this.notify();}));
+    if(this.role==='teacher'){
+      this.watchPublic();
+      this.unsubs.push(this.sdk.onValue(this.path('joinRequests'),s=>{this.requests=s.val()??{};this.processRequests();this.notify();}));
+      this.unsubs.push(this.sdk.onValue(this.path('joinReplies'),s=>{this.replies=s.val()??{};this.notify();}));
+      this.unsubs.push(this.sdk.onValue(this.path('presence'),s=>{this.presence=s.val()??{};this.notify();}));
+    }else{
+      this.unsubs.push(this.sdk.onValue(this.path(`members/${uid}`),s=>{const pid=s.val();if(pid&&pid!==this.pid){this.pid=pid;this.watchPublic();this.setPresence();}else if(!pid&&this.pid){this.pid='';this.state=null;this.notify();}}));
+      this.unsubs.push(this.sdk.onValue(this.path(`joinReplies/${uid}`),s=>{const previous=this.reply;this.reply=s.val();if(previous?.status==='rejected'&&!this.reply)this.requestReset=true;this.notify();}));
+    }
+    this.notify();
+  }
+  watchPublic(){
+    if(this.publicUnsub)this.publicUnsub();
+    this.publicUnsub=this.sdk.onValue(this.path('public'),s=>{this.state=s.val();this.watchSubmissions();this.notify();},e=>{this.error=e;this.notify();});
+    this.unsubs.push(()=>{this.publicUnsub?.();this.publicUnsub=null;});
+  }
+  watchSubmissions(){
+    const key=this.state?.matchKey??'',watch=`${this.pid}:${key}:${this.role}`;
+    if(watch===this.watchedKey)return;this.watchedKey=watch;
+    this.secretUnsub?.();this.ownUnsub?.();this.ownSubmission=null;this.privateSubmissions={};
+    if(!key)return;
+    if(this.role==='teacher')this.secretUnsub=this.sdk.onValue(this.path(`secrets/${key}`),snap=>{
+      this.privateSubmissions=snap.val()??{};const count=Object.keys(this.privateSubmissions).length;
+      if(this.state?.phase==='collecting'&&this.state.matchKey===key&&this.state.submittedCount!==count){
+        this.sdk.runTransaction(this.path('public'),s=>s?.phase==='collecting'&&s.matchKey===key?{...s,submittedCount:count}:undefined,{applyLocally:false}).catch(e=>{this.error=e;this.notify();});
+      }
+      this.notify();
+    });
+    else if(this.pid)this.ownUnsub=this.sdk.onValue(this.path(`secrets/${key}/${this.pid}`),s=>{this.ownSubmission=s.val();this.notify();},e=>{this.error=e;this.notify();});
+  }
+  async setPresence(){
+    if(!this.sdk||!this.online||!this.pid||!this.code||this.presenceRef)return;
+    this.presenceRef=this.path(`presence/${this.pid}/${uidToken()}`);
+    try{await this.sdk.onDisconnect(this.presenceRef).remove();await this.sdk.set(this.presenceRef,this.sdk.serverTimestamp());}catch{this.presenceRef=null;}
+  }
+  async join(name,kind='join'){
+    const n=nickname(name),uid=this.auth.currentUser.uid;
+    if(!this.online)throw Error('接続を確認してから参加してください。');
+    const existing=(await this.sdk.get(this.path(`joinRequests/${uid}`))).val();
+    if(existing){if(this.reply?.status==='rejected')throw Error(this.reply.message+' 別の名前で参加する場合は教員に申請のリセットを依頼してください。');return;}
+    await this.sdk.set(this.path(`joinRequests/${uid}`),{name:n.name,kind,at:this.sdk.serverTimestamp()});
+    this.notify();
+  }
+  async processRequests(){
+    if(this.role!=='teacher')return;this.dirty=true;if(this.processing)return;this.processing=true;
+    try{do{
+      this.dirty=false;
+      await this.sdk.runTransaction(this.path(),room=>{
+        if(!room)return room;
+        room=clone(room);room.roster??={};room.members??={};room.joinReplies??={};
+        for(const [uid,r] of Object.entries(room.joinRequests??{}).sort((a,b)=>a[1].at-b[1].at)){
+          if(r.kind!=='join'||room.joinReplies[uid])continue;
+          let n;try{n=nickname(r.name);}catch(e){room.joinReplies[uid]={status:'rejected',message:e.message};continue;}
+          const existing=Object.entries(room.roster).find(([,p])=>p.authUid===uid);
+          if(existing){room.joinReplies[uid]={status:'accepted',pid:existing[0]};continue;}
+          let error='';
+          if(room.public.phase!=='lobby')error='ゲーム開始後の新規参加はできません。';
+          else if(Object.keys(room.roster).length>=room.meta.capacity)error='ルームが満員です。';
+          else if(Object.values(room.roster).some(p=>p.nameKey===n.key))error='同じニックネームが使われています。';
+          if(error){room.joinReplies[uid]={status:'rejected',message:error};continue;}
+          room.roster[uid]={name:n.name,nameKey:n.key,authUid:uid,joinedAt:r.at};room.members[uid]=uid;room.joinReplies[uid]={status:'accepted',pid:uid};
+        }
+        return room;
+      },{applyLocally:false});
+    }while(this.dirty);}catch(e){this.error=e;this.notify();}finally{this.processing=false;}
+  }
+  async resetRequest(uid){await this.sdk.update(this.path(),{[`joinRequests/${uid}`]:null,[`joinReplies/${uid}`]:null});}
+  async recover(uid,pid){
+    await this.sdk.runTransaction(this.path(),room=>{
+      if(!room)return room;room=clone(room);const target=room.roster?.[pid],r=room.joinRequests?.[uid];
+      if(!target||r?.kind!=='recover')return;
+      if(room.members?.[uid]&&room.members[uid]!==pid)throw Error('この端末は既に別の参加者として登録されています。');
+      delete room.members[target.authUid];room.members[uid]=pid;target.authUid=uid;
+      room.joinReplies??={};room.joinReplies[uid]={status:'accepted',pid};delete room.joinRequests[uid];
+      return room;
+    },{applyLocally:false});
+  }
+  async removePlayer(pid){
+    await this.sdk.runTransaction(this.path(),room=>{
+      if(!room)return room;if(room.public.phase!=='lobby')throw Error('参加者の削除は開始前だけできます。');
+      room=clone(room);const p=room.roster?.[pid];if(!p)return;
+      delete room.roster[pid];delete room.members[p.authUid];room.bans??={};room.bans[p.authUid]=true;room.joinReplies??={};room.joinReplies[p.authUid]={status:'rejected',message:'教員が参加登録を取り消しました。'};return room;
+    },{applyLocally:false});
+  }
+  async mutate(fn){
+    if(!this.online)throw Error('接続が戻るまでお待ちください。');
+    const r=await this.sdk.runTransaction(this.path('public'),s=>s?fn(clone(s)):s,{applyLocally:false});
+    if(!r.committed)throw Error('別の画面で進行状況が更新されました。画面を確認してもう一度操作してください。');return r.snapshot.val();
+  }
+  async beginRound(config){const plan=makeEventPlan(config),roster=clone(this.roster);await this.mutate(s=>createRound(s,roster,config,plan));}
+  async startMatch(){
+    const token=uidToken(),now=this.now();await this.mutate(s=>{
+      if(!['ready','result'].includes(s.phase)||s.completed>=12)return;
+      const match=(s.completed??0)+1;
+      return {...s,phase:'collecting',match,matchKey:`r${s.round}m${match}_${token}`,event:s.plan?.[match]??'none',hidden:s.config.hiddenAll||!!s.config.hiddenMatches?.includes(match),deadline:s.config.seconds?now+s.config.seconds*1000:0,startedAt:now,lockedAt:0,submittedCount:0,revealed:[],missed:[],revision:s.revision+1};
+    });
+  }
+  async submit(card,bet){
+    if(!this.online)throw Error('オフラインです。接続が戻ってから提出してください。');
+    if(this.sending)throw Error('提出を確認しています。');
+    if(!this.pid)throw Error('参加登録が必要です。');
+    this.sending=true;this.notify();
+    try{await this.sdk.set(this.path(`secrets/${this.state.matchKey}/${this.pid}`),{card,bet,at:this.sdk.serverTimestamp()});}
+    finally{this.sending=false;this.notify();}
+  }
+  async closeMatch(){const now=this.now();await this.mutate(s=>s.phase==='collecting'?{...s,phase:'locked',lockedAt:now,revision:s.revision+1}:undefined);}
+  async extendTime(seconds=60){const now=this.now();await this.mutate(s=>['collecting','locked'].includes(s.phase)?{...s,phase:'collecting',deadline:now+seconds*1000,lockedAt:0,revision:s.revision+1}:undefined);}
+  async cancelMatch(){await this.mutate(s=>{
+    if(!['collecting','locked'].includes(s.phase))return;
+    return {...s,phase:'ready',match:s.completed,matchKey:'',revealed:[],submittedCount:0,deadline:0,event:'none',revision:s.revision+1};
+  });}
+  async getPlan(){
+    const s=clone(this.state);if(!['locked','reveal'].includes(s?.phase))throw Error('提出を締め切ってください。');
+    const stored=(await this.sdk.get(this.path(`host/${s.matchKey}`))).val();
+    if(stored?.lockedAt===s.lockedAt)return {...stored,groups:stored.groups??[],missed:stored.missed??[]};
+    const submissions=(await this.sdk.get(this.path(`secrets/${s.matchKey}`))).val()??{};
+    const plan={...scoreMatch(this.roster,s.progress,submissions,s.event,s.config.battle),lockedAt:s.lockedAt};
+    await this.sdk.set(this.path(`host/${s.matchKey}`),plan);return plan;
+  }
+  async beginReveal(){const plan=await this.getPlan();await this.mutate(s=>s.phase==='locked'?{...s,phase:'reveal',revealed:[],revealDone:plan.groups.length===0,revision:s.revision+1}:undefined);}
+  async reveal(all=false){
+    const plan=await this.getPlan(),key=this.state.matchKey,step=(this.state.revealed??[]).length,now=this.now();
+    await this.mutate(s=>{
+      if(s.phase!=='reveal'||s.matchKey!==key||(s.revealed??[]).length!==step||s.lockedAt!==plan.lockedAt)return;
+      const groups=plan.groups??[];
+      if(all||step>=groups.length)return applyResult(s,this.roster,plan,now);
+      return {...s,revealed:groups.slice(0,step+1),revealDone:step+1>=groups.length,revision:s.revision+1};
+    });
+  }
+  async finish(){await this.mutate(s=>s.phase==='roundEnd'?{...s,phase:'finished',hidden:false,revision:s.revision+1}:undefined);await this.sdk.update(this.path('meta'),{closed:true});}
+  async deleteRoom(){const code=this.code,owner=this.auth.currentUser.uid;this.clearRoom();await this.sdk.remove(this.sdk.ref(this.db,`games/${code}`));await this.sdk.remove(this.sdk.ref(this.db,`teacherRooms/${owner}/${code}`));}
+  destroy(){this.clearRoom();for(const f of this.globalUnsubs)f();this.globalUnsubs=[];}
+}
+
+class DemoBackend {
+  constructor(notify){this.notify=notify;this.demo=true;this.online=true;this.role='teacher';this.code='DEMO15';this.pid='p1';this.meta={capacity:16,title:'NO.15 体験ルーム'};this.roster={};this.submissions={};this.ownSubmission=null;this.state=initialState();this.presence={};
+    ['ゆうすけ','あおい','はると','さくら','れん','ひなた','みお','そうた','ゆい','りく','あかり','こうき','なな','かいと','しおり','つばさ'].forEach((name,i)=>{this.roster['p'+(i+1)]={name,joinedAt:i,authUid:'p'+(i+1)};});
+  }
+  now(){return Date.now();}
+  emit(){this.ownSubmission=this.submissions?.[this.pid]??null;this.notify();}
+  async beginRound(config){this.state=createRound(this.state,this.roster,config);this.emit();}
+  async startMatch(){
+    const s=this.state,match=s.completed+1;if(!['ready','result'].includes(s.phase))throw Error('次の試合はまだ開始できません。');
+    this.state={...s,phase:'collecting',match,matchKey:uidToken(),event:s.plan[match],hidden:s.config.hiddenAll||s.config.hiddenMatches.includes(match),deadline:s.config.seconds?Date.now()+s.config.seconds*1000:0,submittedCount:0,revealed:[],missed:[],lockedAt:0};this.submissions={};
+    for(const id of Object.keys(this.roster).filter(id=>id!==this.pid))this.botSubmit(id);
+    this.emit();
+  }
+  botSubmit(id){const p=this.state.progress[id],cards=Array.from({length:15},(_,i)=>i+1).filter(n=>!p.used?.[n]);if(!cards.length)return;const card=cards[Math.floor(Math.random()*cards.length)],bet=!!this.state.config.battle&&!p.betUsed&&Math.random()<1/(13-this.state.match);this.submissions[id]={card,bet};this.state.submittedCount=Object.keys(this.submissions).length;}
+  async fill(){for(const id of Object.keys(this.roster))if(!this.submissions[id])this.botSubmit(id);this.emit();}
+  async submit(card,bet){if(this.state.phase!=='collecting'||this.state.deadline&&Date.now()>this.state.deadline)throw Error('提出は締め切られました。');if(this.submissions[this.pid])throw Error('提出済みです。');scoreMatch(this.roster,this.state.progress,{[this.pid]:{card,bet}},this.state.event,this.state.config.battle);this.submissions[this.pid]={card,bet};this.state.submittedCount=Object.keys(this.submissions).length;this.emit();}
+  async closeMatch(){this.state.phase='locked';this.state.lockedAt=Date.now();this.emit();}
+  async extendTime(seconds=60){this.state.phase='collecting';this.state.deadline=Date.now()+seconds*1000;this.emit();}
+  async cancelMatch(){this.state={...this.state,phase:'ready',match:this.state.completed,matchKey:'',submittedCount:0,revealed:[]};this.submissions={};this.emit();}
+  async beginReveal(){this.plan=scoreMatch(this.roster,this.state.progress,this.submissions,this.state.event,this.state.config.battle);this.state.phase='reveal';this.state.revealDone=this.plan.groups.length===0;this.emit();}
+  async reveal(all=false){const n=(this.state.revealed??[]).length;if(all||n>=this.plan.groups.length)this.state=applyResult(this.state,this.roster,this.plan,Date.now());else{this.state.revealed=this.plan.groups.slice(0,n+1);this.state.revealDone=n+1>=this.plan.groups.length;}this.emit();}
+  async finish(){this.state.phase='finished';this.state.hidden=false;this.emit();}
+  async removePlayer(id){if(this.state.phase!=='lobby')throw Error('開始前だけ削除できます。');delete this.roster[id];this.emit();}
+  destroy(){}
+}
+
+
+const esc=x=>String(x??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const btn=(text,act,classes='',attrs='')=>`<button type="button" class="btn ${classes}" data-act="${act}" ${attrs}>${text}</button>`;
+const disabled=x=>x?'disabled':'';
+const checked=x=>x?'checked':'';
+const sel=(a,b)=>a===b?'selected':'';
+const entries=x=>Object.entries(x??{});
+function hiddenFor(ctx){return isHidden(ctx.backend?.state)&&!(ctx.role==='teacher'&&ctx.privateView&&!ctx.projection);}
+function brand(){return '<button class="brand" data-act="home" aria-label="NO.15 ホーム"><span class="wordmark">NO.<span>15</span></span><span class="brand-sub">ナンバー・バトル15<br>NUMBER BATTLE</span></button>';}
+function topbar(ctx){
+  const b=ctx.backend;
+  return `<header class="topbar">${brand()}<div class="top-actions">${b?.state?`<span class="pill ${b.online?'live':''}"><i class="dot"></i>${b.online?'接続中':'接続待ち'}</span>${btn(ctx.sound?'音 ON':'音 OFF','sound','ghost small')}${ctx.role==='teacher'?btn(ctx.projection?'投影を戻す':'投影モード','projection','ghost small'):''}`:btn('遊び方','rules','ghost small')}${btn('ガイド','guide','ghost small')}</div></header>`;
+}
+function renderApp(ctx){
+  const b=ctx.backend,game=b?.state;
+  return `${b?.demo?`<div class="demo-bar">体験モード · この画面だけで動作します（別端末とは同期しません） ${btn(ctx.role==='teacher'?'生徒画面へ':'教員画面へ','demo-role','small ghost')}</div>`:''}${b&&!b.online?'<div class="offline-bar" role="alert">接続が切れています。送信の完了を確認できるまで画面を閉じず、再接続をお待ちください。</div>':''}<div class="container">${topbar(ctx)}${game?gamePage(ctx):ctx.joining?joinPage(ctx):homePage(ctx)}<footer class="footer"><span>NO.15 <span class="muted">/</span> NUMBER BATTLE · v1.0.0</span><span>${btn('ルールを確認','rules','ghost small')} ${btn('設定・操作ガイド ↗','guide','ghost small')}</span></footer></div>`;
+}
+function homePage(ctx){
+  const d=ctx.draft??{};
+  return `<section class="hero"><div><div class="hero-kicker">15 CARDS. ONE SMART MOVE.</div><h1>その数字に、<br><span class="accent">勝ち筋</span>はあるか。</h1><p>大きな数字ほど、高得点。<br>でも、誰かと被れば山分けに。<br>15枚のカードで、みんなの「次」を読み切ろう。</p><div class="badge-row"><span class="pill">2〜16人</span><span class="pill">1ラウンド12試合</span><span class="pill">スマートフォンで参加</span></div></div><div class="hero-art" aria-hidden="true"><div class="hero-card">7</div><div class="hero-card c2">12</div><div class="hero-card c3">15</div><div class="hero-caption">大きく狙うか、小さく抜けるか。</div></div></section><div class="home-grid"><section class="panel"><div class="caps">FOR PLAYERS</div><h2 class="panel-heading">ルームに参加</h2><p class="description">先生に教えてもらったコードと、ニックネームを入力。</p><form id="join-form" class="stack"><div class="form-grid"><label for="room-code">ルームコード<input id="room-code" name="code" data-draft="code" value="${esc(d.code)}" placeholder="ABC123" maxlength="6" autocomplete="off" autocapitalize="characters" spellcheck="false" required></label><label for="nickname">ニックネーム<input id="nickname" name="name" data-draft="name" value="${esc(d.name)}" placeholder="12文字以内" maxlength="24" autocomplete="nickname" required></label></div><button class="btn primary wide big" type="submit" ${disabled(ctx.busy)}>参加する <span aria-hidden="true">→</span></button></form><p class="help-text">生徒のアカウント登録は不要です。同じブラウザーなら再読み込み後も復帰できます。</p></section><section class="panel"><div class="caps">FOR TEACHERS</div><h2 class="panel-heading">教員用コントロール</h2><p class="description">ルームを作って、QRコードで一斉に招待。<br>結果発表は、先生のタイミングで。</p>${ctx.homeTeacher?`<form id="create-form" class="stack"><div class="form-grid"><label>参加上限<select name="capacity">${Array.from({length:15},(_,i)=>i+2).map(n=>`<option value="${n}" ${sel(n,16)}>${n}人</option>`).join('')}</select></label><label>ルーム名<input name="title" value="NO.15 クラス対戦" maxlength="40"></label></div><button type="submit" class="btn primary wide" ${disabled(ctx.busy)}>ルームを作成</button></form>${entries(ctx.savedRooms).sort((a,b)=>b[1].at-a[1].at).slice(0,8).map(([code,r])=>`<div class="saved-room"><span>${esc(r.title)}<br><small>${esc(code)}</small></span>${btn('再開','open-room','small',`data-code="${esc(code)}"`)}</div>`).join('')}`:btn('Googleでログインして作成','teacher-login','wide',disabled(ctx.busy))}<div class="row space-top">${btn('設定なしで体験する','demo','ghost wide')}${btn('端末を変えた・登録を復帰する','recover-home','ghost wide small')}</div><p class="help-text">オンライン対戦の初回のみ、Firebaseの設定が必要です。</p></section></div>`;
+}
+function joinPage(ctx){
+  const b=ctx.backend;
+  return `<main class="sleep"><section class="panel" style="max-width:620px;margin:30px auto"><div class="caps">JOIN ROOM</div><h1 class="panel-heading">${esc(b?.meta?.title??'ルームに接続')}</h1><div class="room-code space-top">${esc(b?.code??ctx.draft.code)}</div>${b?.reply?.status==='rejected'?`<div class="notice warning">${esc(b.reply.message)}</div><p class="help-text">修正して再申請するときは、先生に「申請をリセット」してもらってください。</p>`:ctx.joinSent?`<div class="empty-state"><div class="empty-icon">◌</div>${ctx.recovering?'先生に復帰申請を送りました。本人確認が済むまでお待ちください。':'参加を確認しています。先生の画面がオンラインになっているかご確認ください。'}</div>`:`<form id="room-join-form" class="stack space-top"><label for="join-name">ニックネーム<input id="join-name" name="name" data-draft="name" value="${esc(ctx.draft.name)}" maxlength="24" placeholder="12文字以内" required></label><button class="btn primary" type="submit" ${disabled(ctx.busy)}>${ctx.recovering?'先生に復帰を申請する':'このルームに参加する'}</button></form>`}<div class="space-top">${btn('ホームへ','home','ghost')}</div></section></main>`;
+}
+function gamePage(ctx){
+  const b=ctx.backend,s=b.state,host=ctx.role==='teacher',count=entries(b.roster).length;
+  return `<div class="game-header"><div><div class="game-title">${esc(b.meta?.title??'NO.15')}</div><div class="game-sub">${host?'TEACHER CONTROL':'PLAYER'} · ${count}人参加${b.demo?' · 体験データ':''}</div></div><div class="counter"><div class="counter-cell"><small>ROUND</small><strong>${String(s.round||1).padStart(2,'0')}</strong></div><div class="counter-cell"><small>MATCH</small><strong>${String(s.phase==='ready'?s.completed+1:s.match||1).padStart(2,'0')}<small> / 12</small></strong></div></div></div>${s.phase!=='lobby'?`<div class="round-track" aria-label="12試合中${s.completed??0}試合終了">${Array.from({length:12},(_,i)=>`<span class="${i<(s.completed??0)?'done':i===s.match-1?'current':''}"></span>`).join('')}</div>`:''}<nav class="tabs" aria-label="ゲーム内メニュー">${[['game','対戦'],['history','カード履歴'],['ranking','ランキング'],['logs','試合ログ'],...(host?[['admin','管理']]:[])].map(([key,label])=>`<button class="tab" data-act="tab" data-tab="${key}" aria-selected="${ctx.tab===key}">${label}</button>`).join('')}</nav>${ctx.tab==='game'?`<main class="game-layout"><div>${gameStage(ctx)}</div>${sidebar(ctx)}</main>`:ctx.tab==='history'?historyPage(ctx):ctx.tab==='ranking'?`<main class="game-full"><section class="panel">${rankingView(ctx)}</section></main>`:ctx.tab==='logs'?logsPage(ctx):adminPage(ctx)}`;
+}
+function eventBanner(s){const e=EVENTS[s.event]??EVENTS.none;return `<div class="event-banner ${s.event==='none'||!s.event?'normal':''}"><div><strong>${e.name}</strong><span>${e.description}</span></div><span class="pill">${e.short}</span></div>`;}
+function stageControls(ctx,phase){
+  if(ctx.role!=='teacher')return '';
+  const s=ctx.backend.state,all=s.submittedCount>=entries(ctx.backend.roster).length;
+  let html='';
+  if(phase==='lobby')html=btn('ルールを設定して開始','settings','primary big');
+  if(phase==='ready')html=btn(`第${s.completed+1}試合を始める`,'start-match','primary big');
+  if(phase==='collecting')html=btn(all?'提出を締め切る':'未提出を0点で締め切る','close-match','primary big')+btn('60秒延長','extend','ghost small')+btn('この試合を取り消す','cancel-match','ghost small');
+  if(phase==='locked')html=btn('結果発表をスタート','begin-reveal','primary big')+btn('受付を60秒再開','extend','ghost small')+btn('この試合を取り消す','cancel-match','ghost small');
+  if(phase==='reveal')html=btn(s.revealDone?'結果を確定して順位へ':'次の数字を発表','reveal-next','primary big')+btn('一括公開','reveal-all','ghost')+btn('発表をスキップ','reveal-all','ghost small');
+  if(phase==='result')html=btn(`第${s.completed+1}試合へ`,'start-match','primary big');
+  if(phase==='roundEnd')html=s.config.finalRound?btn('最終結果を発表','finish','primary big'):btn('次ラウンドを設定','settings','primary big')+btn('ここで終了して最終結果','finish','ghost');
+  return `<div class="stage-controls">${html}</div>`;
+}
+function gameStage(ctx){
+  const b=ctx.backend,s=b.state,host=ctx.role==='teacher',phase=s.phase;
+  if(phase==='lobby')return `<section class="stage"><div class="kicker">READY TO PLAY</div><h1 class="stage-title">全員そろったら、開幕。</h1><p class="stage-sub">${host?'参加者とルールを確認して、ゲームを開始してください。':'先生がゲームを開始するまでお待ちください。'}</p><div class="submit-count center">${entries(b.roster).length}<small> / ${b.meta.capacity}</small></div><p class="stage-sub">PLAYERS JOINED</p>${stageControls(ctx,phase)}<div class="players">${entries(b.roster).map(([id,p])=>`<div class="player-chip"><span class="avatar">${esc([...p.name][0])}</span><span class="name">${esc(p.name)}</span>${host?`<button class="remove" data-act="remove-player" data-id="${esc(id)}" aria-label="${esc(p.name)}を参加者から削除">×</button>`:''}</div>`).join('')}</div>${!host?'<div class="notice">同じラウンドでは、同じ数字を2度使えません。残りカードは「カード履歴」で確認できます。</div>':''}</section>`;
+  if(phase==='collecting'&&!host)return playerHand(ctx);
+  if(phase==='ready')return `<section class="stage"><div class="kicker">ROUND ${String(s.round).padStart(2,'0')} · READY</div><h1 class="stage-title">${s.completed?'もう一度、読み合おう。':'12手先まで、考えよう。'}</h1><p class="stage-sub">次は第${s.completed+1}試合。イベント予定は全員に公開されています。</p><div class="round-summary"><div><b>15</b><small>数字カード</small></div><div><b>12</b><small>1ラウンドの試合数</small></div><div><b>${s.config.battle?'1':'0'}</b><small>勝負カード / 人</small></div></div>${s.config.finalRound?'<div class="notice center">このラウンドが最終ラウンドです。</div>':''}${hiddenFor(ctx)?'<div class="notice warning center">ランキングは非公開です。試合の獲得点とカード履歴は公開されます。</div>':''}${stageControls(ctx,phase)}${!host?'<p class="stage-sub space-top">先生が試合を開始するまでお待ちください。</p>':''}<div class="space-top">${planView(s)}</div></section>`;
+  if(phase==='collecting')return `<section class="stage">${eventBanner(s)}<div class="row between"><span class="caps">SUBMISSIONS</span><span class="timer" data-timer></span></div><h1 class="stage-title">その一手を、待っている。</h1><div class="submit-count center">${s.submittedCount??0}<small> / ${entries(b.roster).length}</small></div><p class="stage-sub">提出済み · 確定後の変更はできません</p><div class="progress-line"><i style="width:${Math.min(100,(s.submittedCount??0)/Math.max(1,entries(b.roster).length)*100)}%"></i></div>${stageControls(ctx,phase)}${b.demo?`<div class="stage-controls">${btn('全員の提出を体験','demo-fill','ghost small')}${btn('自分のカードを選ぶ','demo-role','ghost small')}</div>`:''}<p class="table-note center">提出中は人数のみ表示します。カード・個別の提出状況は公開しません。</p></section>`;
+  if(phase==='locked')return `<section class="stage">${eventBanner(s)}<div class="kicker">ALL EYES ON THE CARDS</div><div class="empty-state"><div class="empty-large">?</div><h1 class="stage-title">運命の数字、まもなく。</h1><p class="stage-sub">提出を締め切りました。小さな数字から順に発表します。</p></div>${stageControls(ctx,phase)}</section>`;
+  if(phase==='reveal'){
+    const groups=s.revealed??[],g=groups.at(-1);
+    return `<section class="stage">${eventBanner(s)}<div class="kicker">MATCH ${String(s.match).padStart(2,'0')} · REVEAL</div>${g?`<div class="current-group" data-group="${g.card}"><div class="center">${g.count===1?'<span class="solo-badge">SOLO! 単独獲得</span>':`<span class="pill">${g.count}人で山分け</span>`}<div class="reveal-number ${g.count>1?'collision':''}">${g.card}</div><p class="stage-sub">${g.count===1?'読み切った、その一枚。':`${g.card} ÷ ${g.count} ＝ 通常 ${Math.floor(g.card/g.count)}点`}</p></div><div class="reveal-players">${g.players.map(p=>`<div class="reveal-player ${g.count>1?'collision':''}"><span><strong>${esc(p.name)}</strong>${p.bet?`<span class="bet-tag ${p.success?'':'fail'}">${p.success?'⚡ 勝負カード成功 ×2':'⚡ 勝負カード失敗 → 0点'}</span>`:''}</span><span class="score">${p.score}<small> pt</small></span></div>`).join('')}</div></div>`:`<div class="empty-state"><div class="reveal-number collision">?</div><h1 class="stage-title">最初の数字は…</h1><p class="stage-sub">${host?'「次の数字を発表」で進めます。':'先生の発表をお待ちください。'}</p></div>`}${stageControls(ctx,phase)}<p class="table-note center">${groups.length}種類の数字を発表済み · 空の数字はスキップ</p></section>`;
+  }
+  const last=s.history?.[`r${s.round}m${s.match}`],own=last?.results?.[b.pid];
+  if(phase==='finished')return `<section class="stage result-stage">${confetti()}<div class="kicker">THE FINAL RESULTS</div><h1 class="stage-title">読みの頂点へ。</h1><p class="stage-sub">${s.round}ラウンド・${entries(s.history).length}試合の総合結果</p>${podium(ctx)}${rankingView({...ctx,rankScope:'total'},true)}${host?`<div class="stage-controls">${btn('全結果をCSV保存','csv','primary')}${btn('ルーム情報','qr','ghost')}</div>`:''}</section>`;
+  return `<section class="stage result-stage"><div class="kicker">${phase==='roundEnd'?`ROUND ${String(s.round).padStart(2,'0')} · COMPLETE`:`MATCH ${String(s.match).padStart(2,'0')} · RESULTS`}</div><h1 class="stage-title">${phase==='roundEnd'?'12試合、おつかれさま。':'読み合いの結果。'}</h1>${own?`<div class="notice center">あなたの今回の結果：${own.missed?'未提出':`${own.card} を提出${own.bet?' ＋ 勝負カード':''}`} → <strong>${own.score}点</strong></div>`:''}${rankingView({...ctx,rankScope:phase==='roundEnd'?'roundTotal':ctx.rankScope,rankRound:s.round},true,6)}${stageControls(ctx,phase)}${!host?'<p class="stage-sub space-top">先生の進行をお待ちください。</p>':''}<div class="stage-controls">${btn('全員の試合結果を見る','show-result','ghost small')}${btn('全ランキングへ','rank-tab','ghost small')}</div></section>`;
+}
+function playerHand(ctx){
+  const b=ctx.backend,s=b.state,p=s.progress?.[b.pid]??{},own=b.ownSubmission,expired=s.deadline&&b.now()>s.deadline;
+  return `<section class="panel self-panel">${eventBanner(s)}<div class="self-header"><div><div class="caps">YOUR HAND</div><div class="self-name">${esc(b.roster?.[b.pid]?.name??'プレイヤー')}</div></div>${hiddenFor(ctx)?'<span class="pill">順位・合計点は非公開</span>':`<div class="self-score"><div><strong>${p.total??0}<small> pt</small></strong><small>合計得点</small></div><div><strong>${ranking(b.roster,s.progress).find(x=>x.id===b.pid)?.rank??'–'}<small> 位</small></strong><small>現在順位</small></div></div>`}</div><div class="row between"><small>残り ${15-entries(p.used).length}枚 / 使用済み ${entries(p.used).length}枚</small><span class="timer" data-timer></span></div>${own||b.sending?`<div class="empty-state"><div class="waiting-card">${own?.card??ctx.selected??'?'}</div><h1 class="panel-heading">${b.sending?'送信を確認しています…':'提出完了。発表を待とう。'}</h1><p class="stage-sub">${own?.bet||ctx.bet?'⚡ 勝負カードを使用':''}</p><p class="stage-sub">${s.submittedCount??0} / ${entries(b.roster).length}人が提出済み</p>${b.demo?`<div class="space-top">${btn('教員画面で発表する','demo-role','primary')}</div>`:''}</div>`:`<div class="hand-grid" role="group" aria-label="提出する数字カード">${CARDS.map(n=>`<button type="button" class="number-card ${p.used?.[n]?'used':''} ${ctx.selected===n?'selected':''}" data-act="card" data-card="${n}" aria-label="${n}${p.used?.[n]?' 使用済み':''}" aria-pressed="${ctx.selected===n}" ${disabled(p.used?.[n]||expired||!b.online)}>${n}</button>`).join('')}</div>${s.config.battle?`<button type="button" class="battle-switch ${ctx.bet?'active':''}" data-act="bet" aria-pressed="${ctx.bet}" ${disabled(p.betUsed||expired||!b.online)}><span><strong>⚡ 勝負カード ${p.betUsed?'使用済み':'残り1回'}</strong><small>単独なら得点2倍。被ったら0点。</small></span><span class="switch-light" aria-hidden="true"></span></button>`:'<div class="notice">このラウンドでは勝負カードを使用しません。</div>'}${expired?'<div class="notice warning" role="status">制限時間が終了しました。先生の進行をお待ちください。</div>':''}<div class="submit-dock"><span class="selection">選択中<b>${ctx.selected??'–'}</b></span><button type="button" class="btn primary big" data-act="submit" ${disabled(!ctx.selected||expired||!b.online||b.sending||ctx.busy)}>${ctx.selected?`${ctx.selected}${ctx.bet?' ＋ ⚡':''} を提出`:'カードを選んでください'}</button></div>`}</section>`;
+}
+function sidebar(ctx){
+  const b=ctx.backend,s=b.state,host=ctx.role==='teacher';
+  return `<aside class="side"><section class="panel"><div class="side-title">ROOM CODE</div><div class="room-code">${esc(b.code)}</div><small>${b.demo?'体験専用・端末間同期なし':`${entries(b.roster).length} / ${b.meta.capacity}人参加`}</small>${host?`<div class="space-top">${btn('QRコードを表示','qr','small wide ghost')}</div>`:''}</section><section class="panel"><div class="side-title">${host?'ROUND SETTINGS':'YOUR STATUS'}</div>${host?`<p class="tiny">勝負カード：<strong>${s.config?.battle?'有効':'無効'}</strong><br>制限時間：<strong>${s.config?.seconds?`${s.config.seconds}秒`:'無制限'}</strong><br>ランキング：<strong>${isHidden(s)?'非公開':'公開'}</strong></p>${s.config?.finalRound?'<div class="pill space-top">最終ラウンド</div>':''}`:`<strong>${esc(b.roster?.[b.pid]?.name??'')}</strong>${hiddenFor(ctx)?'<p class="tiny space-top">順位・ラウンド得点・合計得点は非公開中です。</p>':`<p class="tiny space-top">合計 <strong>${s.progress?.[b.pid]?.total??0}点</strong><br>ラウンド <strong>${s.progress?.[b.pid]?.roundTotal??0}点</strong></p>`}<p class="tiny space-top">勝負カード：${!s.config?.battle?'無効':s.progress?.[b.pid]?.betUsed?'使用済み':'残り1回'}</p>`}</section><section class="panel"><div class="side-title">EVENT SCHEDULE · 事前公開</div>${s.round?planView(s):'<p class="tiny muted">ラウンド開始前に教員が設定します。</p>'}</section></aside>`;
+}
+function planView(s){const planned=entries(s.plan).filter(([,e])=>e!=='none');return planned.length?`<div class="event-list ${planned.length>3?'long':''}">${planned.map(([n,e])=>`<div class="event-item ${Number(n)===s.match?'current':''}"><b>${n}</b><span>${EVENTS[e]?.name??''}</span><small>${Number(n)<=s.completed?'終了':''}</small></div>`).join('')}</div>`:'<p class="tiny muted center">このラウンドは全試合が通常ルールです。</p>';}
+function rankingView(ctx,compact=false,limit=99){
+  const b=ctx.backend,s=b.state;
+  if(hiddenFor(ctx))return `<div class="empty-state"><div class="empty-icon">◇</div><h2 class="panel-heading">ランキングは非公開</h2><p class="stage-sub">順位・ラウンド得点・合計得点の発表はおあずけ。<br>カード履歴と、各試合の獲得点は確認できます。</p></div>`;
+  const scope=ctx.rankScope??'total',round=Number(ctx.rankRound??s.round)||1;
+  let progress=s.progress;
+  if(scope==='roundTotal'&&round!==s.round){progress={};for(const h of Object.values(s.history??{}).filter(h=>h.round===round))for(const [id,r]of entries(h.results)){progress[id]??={roundTotal:0};progress[id].roundTotal+=r.score;}}
+  const rows=ranking(b.roster,progress,scope),prev=s.history?.[`r${s.round}m${s.match}`]?.beforeRanks??[],heading=scope==='roundTotal'?`第${round}ラウンド順位`:'総合ランキング';
+  return `<div data-ranking><div class="row between"><h2 class="panel-heading">${heading}</h2>${ctx.privateView&&isHidden(s)?'<span class="pill">教員の管理表示</span>':''}</div>${!compact?`<div class="rank-switch">${btn('総合','scope-total',scope==='total'?'primary small':'ghost small')}${btn('ラウンド別','scope-round',scope==='roundTotal'?'primary small':'ghost small')}${scope==='roundTotal'?`<select data-select="rank-round" aria-label="順位を表示するラウンド">${Array.from({length:s.round||1},(_,i)=>i+1).map(n=>`<option value="${n}" ${sel(n,round)}>第${n}ラウンド</option>`).join('')}</select>`:''}</div>`:''}<div class="rank-list">${rows.slice(0,limit).map((p,i)=>{const old=prev.find(q=>q.id===p.id),diff=scope==='total'&&old?old.rank-p.rank:0;return `<div class="rank-row ${p.id===b.pid&&ctx.role!=='teacher'?'me':''}" style="--shift:${Math.max(-120,Math.min(120,(diff??0)*15))}px"><span class="rank-num">${p.rank}</span><span class="rank-name">${esc(p.name)}</span><span class="rank-delta ${diff<0?'down':''}">${diff>0?'↑'+diff:diff<0?'↓'+(-diff):'–'}</span><span class="score">${p.score}<small>pt</small></span></div>`;}).join('')}</div>${rows.length>limit?'<p class="help-text center">続きは「ランキング」で確認できます。</p>':''}</div>`;
+}
+function podium(ctx){const b=ctx.backend,rows=ranking(b.roster,b.state.progress);return `<div class="podium">${[2,1,3].map(rank=>`<div class="podium-col ${rank===1?'first':rank===3?'third':''}"><div class="podium-medal">${rank===1?'♛ ':''}${rank}<small>位</small></div>${rows.filter(p=>p.rank===rank).map(p=>`<div class="podium-name">${esc(p.name)}</div><div class="podium-score">${p.score}<small> pt</small></div>`).join('')||'<small>該当なし</small>'}</div>`).join('')}</div>`;}
+function confetti(){return `<div class="confetti" aria-hidden="true">${Array.from({length:25},(_,i)=>`<i style="--x:${i*4}%;--delay:${(i%6)*.13}s;--color:${['#d4f76b','#ffbf6a','#81d5ee'][i%3]}"></i>`).join('')}</div>`;}
+function roundProgress(ctx,round){const b=ctx.backend;if(round===b.state.round)return b.state.progress??{};const progress={};for(const h of Object.values(b.state.history??{}).filter(h=>h.round===round))for(const [id,r]of entries(h.results)){progress[id]??={used:{},betUsed:false};if(r.card)progress[id].used[r.card]=true;if(r.bet)progress[id].betUsed=true;}return progress;}
+function historyPage(ctx){
+  const b=ctx.backend,s=b.state,r=Number(ctx.historyRound??s.round)||1,p=roundProgress(ctx,r),stats=cardStats(b.roster,p);
+  return `<main class="game-full"><section class="panel"><div class="history-control"><div><h1 class="panel-heading">公開カード履歴</h1><p class="help-text">使用済みはグレー。現在の試合は全数字の発表後に反映します。</p></div><select data-select="history-round" aria-label="表示するラウンド">${Array.from({length:s.round||1},(_,i)=>i+1).map(n=>`<option value="${n}" ${sel(n,r)}>第${n}ラウンド</option>`).join('')}</select></div><div class="stats-grid">${stats.map(x=>`<div class="stat-card"><b>${x.card}</b><span>使用済 ${x.used}人</span><em>残り ${x.available}人</em></div>`).join('')}</div>${entries(b.roster).map(([id,player])=>`<details class="history-player" ${id===b.pid&&ctx.role!=='teacher'?'open':''}><summary>${esc(player.name)}${id===b.pid&&ctx.role!=='teacher'?'<span class="pill">自分</span>':''}<small>残り${15-entries(p[id]?.used).length}枚 · ⚡ ${s.config?.battle===false&&r===s.round?'無効':p[id]?.betUsed?'使用済み':'未使用'}</small></summary><div class="mini-hand" aria-label="${esc(player.name)}の残りカード">${CARDS.map(n=>`<span class="mini-card ${p[id]?.used?.[n]?'used':''}" aria-label="${n} ${p[id]?.used?.[n]?'使用済み':'未使用'}">${n}</span>`).join('')}</div></details>`).join('')}</section></main>`;
+}
+function resultRows(h){return entries(h?.results).sort((a,b)=>(a[1].card||99)-(b[1].card||99)).map(([,r])=>`<div class="log-result"><span class="log-name">${esc(r.name)}</span><span>${r.card||'未提出'}</span><small>${r.card?`${r.count}人`:''}</small><b>${r.score}点${r.bet?`<small class="${r.success?'gold':''}"> ⚡${r.success?'成功':'失敗'}</small>`:''}</b></div>`).join('');}
+function logsPage(ctx){const history=Object.values(ctx.backend.state.history??{}).sort((a,b)=>b.round-a.round||b.match-a.match);return `<main class="game-full"><section class="panel"><div class="row between"><h1 class="panel-heading">試合ログ</h1>${ctx.role==='teacher'?btn('CSVで保存','csv','small primary'):''}</div><p class="help-text">カード・人数・勝負カード・獲得点を、確定した試合ごとに記録します。</p>${history.length?history.map(h=>`<details class="log-match"><summary>R${h.round} · 第${h.match}試合 <span class="pill">${EVENTS[h.event]?.name??''}</span></summary><div class="log-results">${resultRows(h)}</div></details>`).join(''):'<div class="empty-state">確定した試合はまだありません。</div>'}</section></main>`;}
+function adminPage(ctx){const b=ctx.backend,s=b.state;return `<main class="game-full"><section class="panel"><h1 class="panel-heading">教員の管理</h1><p class="help-text">教員PCは集計・提出人数の同期を担当します。オンラインで画面を開いたままご利用ください。</p><div class="auto-grid space-top"><div class="rule-card"><h3 class="panel-heading">データ</h3><p class="help-text">確定済みの全試合をCSVに保存します。ルームは削除するまで保持されます。</p><div class="space-top">${btn('CSVで保存','csv','primary wide')}</div></div><div class="rule-card"><h3 class="panel-heading">非公開情報</h3><p class="help-text">投影を止めてから管理表示を開いてください。投影モードへ切り替えると非表示に戻ります。</p><div class="space-top">${btn(ctx.privateView?'管理表示を閉じる':'教員だけの順位確認','private-view','ghost wide')}</div></div></div>${ctx.privateView?`<div class="space-top">${rankingView(ctx)}</div>`:''}<h2 class="panel-heading space-top">参加・復帰申請</h2>${b.demo?'<p class="help-text">実際のルームでは、端末を変更した生徒の復帰申請をここで承認できます。</p>':entries(b.requests).filter(([uid,r])=>r.kind==='recover'||b.replies?.[uid]?.status==='rejected').map(([uid,r])=>`<div class="request"><div class="row between"><span><strong>${esc(r.name)}</strong> · ${r.kind==='recover'?'端末変更・復帰申請':'参加を受け付けられませんでした'}</span>${r.kind==='recover'?btn('本人を確認して復帰','recover-approve','small',`data-id="${esc(uid)}"`):btn('申請をリセット','reset-request','small',`data-id="${esc(uid)}"`)}</div>${b.replies?.[uid]?.message?`<small>${esc(b.replies[uid].message)}</small>`:''}</div>`).join('')||'<p class="help-text">対応が必要な申請はありません。</p>'}<div class="notice">現在進行中の試合のカードと、個別の提出状況は管理画面にも表示しません。</div><div class="row space-top">${btn('ルームを削除する','delete-room','danger small',disabled(b.demo))}${btn('ホームへ','home','ghost small')}</div>${s.phase==='finished'?'<p class="help-text">削除前にCSVを保存してください。削除すると全端末からこのルームへ接続できなくなります。</p>':''}</section></main>`;}
+function settingsHTML(config){
+  const c={...defaultConfig(),...config};
+  return `<h2 id="modal-title">次のラウンドを設定</h2><p>開始後は、このラウンドの得点ルールを固定します。イベント予定は全員に公開されます。</p><form id="settings-form"><div class="settings-grid"><div class="setting-block"><label class="check-label"><input type="checkbox" name="battle" ${checked(c.battle)}>勝負カードを有効にする</label><p class="description">1人1回。単独なら2倍、被ったら0点。</p></div><div class="setting-block"><label class="check-label"><input type="checkbox" name="finalRound" ${checked(c.finalRound)}>このラウンドが最終</label><p class="description">12試合終了後に最終結果を発表します。</p></div><div class="setting-block"><label>提出制限時間（秒）<input type="number" name="seconds" value="${c.seconds}" min="0" max="600" required></label><p class="description">0＝時間無制限。初期値は60秒。</p></div><div class="setting-block"><label class="check-label"><input type="checkbox" name="hiddenAll" ${checked(c.hiddenAll)}>全12試合のランキングを非公開</label><p class="description">自分の合計点・ラウンド得点も非表示。最終結果で公開。</p></div><div class="setting-block wide"><strong>試合ごとのランキング非公開</strong><p class="description">全12試合が非公開の場合は、そちらを優先します。第12試合を隠すとラウンド順位発表も保留します。</p><div class="hidden-choices">${Array.from({length:12},(_,i)=>i+1).map(n=>`<label><input name="hiddenMatches" type="checkbox" value="${n}" ${checked(c.hiddenMatches?.includes(n))}>${n}</label>`).join('')}</div></div><div class="setting-block wide"><label class="check-label"><input name="events" type="checkbox" ${checked(c.events)}>イベント試合を有効にする</label><div class="form-grid space-top"><label>選択方法<select name="eventMode"><option value="manual" ${sel(c.eventMode,'manual')}>試合・種類を手動指定</option><option value="random" ${sel(c.eventMode,'random')}>おまかせ抽選</option></select></label><label>抽選の場合の回数<select name="eventCount">${Array.from({length:13},(_,i)=>`<option value="${i}" ${sel(c.eventCount,i)}>${i}回</option>`).join('')}</select></label></div><p class="description">手動指定の場合は、対象の試合にチェックして種類を選択してください。1試合に1種類。抽選も開始時に確定・公開します。</p><div class="match-settings">${Array.from({length:12},(_,i)=>i+1).map(n=>`<div class="match-setting"><label><input name="eventMatches" type="checkbox" value="${n}" ${checked(c.eventMatches?.includes(n))}>第${n}試合</label><select name="event-${n}" aria-label="第${n}試合のイベント">${['double','low','even'].map(e=>`<option value="${e}" ${sel(c.eventTypes?.[n]??'double',e)}>${EVENTS[e].name}</option>`).join('')}</select></div>`).join('')}</div></div></div><div class="notice">得点は「通常点を切り捨て → イベント → 勝負カード」の順。勝負カード失敗は、ボーナスも含めて0点です。</div><div class="modal-actions">${btn('戻る','modal-close','ghost')}<button type="submit" class="btn primary">この設定でラウンド開始</button></div></form>`;
+}
+function rulesHTML(){return `<h2 id="modal-title">NO.15 の遊び方</h2><ol class="rules-list"><li>全員が<strong>1〜15の数字カード</strong>を各1枚持ちます。</li><li>同時に1枚を選んで提出。確定後の変更はできません。</li><li><strong>数字 ÷ 同じ数字を出した人数</strong>が通常点。小数点以下は切り捨てます。15を2人なら、各7点です。</li><li>使用した数字は、同じラウンドでは使えません。<strong>1ラウンド12試合</strong>なので、通常は3枚を使わずに終えます。</li><li>勝負カードは有効なラウンドに<strong>1回</strong>。単独ならイベント適用後の得点を2倍、被ったら0点です。</li><li>イベントは1試合ごとに適用。予定はラウンド開始時に全員に公開されます。</li><li>ラウンドが変わるとカードと勝負カードが復活。<strong>合計点は持ち越し</strong>ます。</li><li>ランキング非公開中は、自分を含む順位・ラウンド得点・合計点を隠します。各試合の得点と履歴は公開します。</li><li>未提出は0点で、カードは消費しません。締切後の送信は受け付けません。</li><li>最終結果の最高点が優勝。同点は同順位（1位・1位・3位）、同点優勝もあります。</li></ol><div class="modal-actions">${btn('わかりました','modal-close','primary')}</div>`;}
+
+
+
+
+const root=document.getElementById('app'),modal=document.getElementById('modal'),modalBody=document.getElementById('modal-body'),toastEl=document.getElementById('toast');
+const ctx={backend:null,role:'student',tab:'game',selected:null,bet:false,busy:false,projection:false,sound:false,privateView:false,rankScope:'total',rankRound:null,historyRound:null,homeTeacher:false,savedRooms:{},joining:false,joinSent:false,recovering:false,draft:{code:'',name:''}};
+let renderPending=false,lastKey='',lastRound=0,toastTimer,modalResolve,lastGroup='',audio;
+function toast(message,error=false){clearTimeout(toastTimer);toastEl.textContent=message;toastEl.className='show'+(error?' error':'');toastTimer=setTimeout(()=>toastEl.className='',error?10000:4500);}
+function message(error){const code=String(error?.code??'').toLowerCase();if(code.includes('popup-closed'))return 'ログイン画面が閉じられました。もう一度お試しください。';if(code.includes('popup-blocked'))return 'ポップアップがブロックされました。このサイトのポップアップを許可してから再試行してください。';if(code.includes('unauthorized-domain'))return 'Firebase Authenticationの「承認済みドメイン」にGitHub Pagesのドメインを追加してください。';if(code.includes('operation-not-allowed'))return 'Firebase AuthenticationでGoogleログイン・匿名ログインを有効にしてください。';if(code.includes('permission')||String(error?.message).toLowerCase().includes('permission_denied'))return '操作が許可されませんでした。締切・提出済み・カード使用済み・参加資格をご確認ください。初回設定中の場合はデータベースルールも確認してください。';return error?.message??String(error);}
+function notify(){
+  const b=ctx.backend;
+  if(b?.requestReset){b.requestReset=false;ctx.joinSent=false;}
+  if(b?.state){
+    if(ctx.joining){ctx.joining=false;ctx.joinSent=false;}
+    if(!b.demo)ctx.role=b.role;
+    if(b.state.matchKey!==lastKey){ctx.selected=null;ctx.bet=false;lastKey=b.state.matchKey;}
+    if(b.state.round!==lastRound){ctx.historyRound=null;ctx.rankRound=null;lastRound=b.state.round;}
+    if(!b.demo)try{localStorage.setItem('no15-room',b.code);}catch{}
+    const group=b.state.phase==='reveal'?b.state.revealed?.at(-1):null,gid=group?`${b.state.matchKey}:${group.card}`:'';
+    if(gid&&gid!==lastGroup){lastGroup=gid;if(ctx.sound)play(group.count===1);}
+  }
+  if(b?.error){const e=b.error;b.error=null;toast(message(e),true);}
+  if(!renderPending){renderPending=true;requestAnimationFrame(()=>{renderPending=false;render();});}
+}
+function render(){
+  const id=document.activeElement?.id,start=document.activeElement?.selectionStart,end=document.activeElement?.selectionEnd;
+  document.body.classList.toggle('projection',ctx.projection);root.innerHTML=renderApp(ctx);
+  if(ctx.busy)root.querySelectorAll('button[data-act]').forEach(el=>{if(!['sound','rules','guide','tab'].includes(el.dataset.act))el.disabled=true;});
+  if(id){const el=document.getElementById(id);if(el){el.focus({preventScroll:true});try{el.setSelectionRange(start,end);}catch{}}}
+  tick();
+}
+function tick(){
+  const b=ctx.backend,s=b?.state;if(!s)return;
+  const left=s.deadline?Math.max(0,Math.ceil((s.deadline-b.now())/1000)):0;
+  document.querySelectorAll('[data-timer]').forEach(el=>{el.textContent=s.deadline?(left?`残り ${String(Math.floor(left/60)).padStart(2,'0')}:${String(left%60).padStart(2,'0')}`:'受付時間終了'):'時間無制限';el.classList.toggle('urgent',!!s.deadline&&left<=10);});
+  if(s.phase==='collecting'&&s.deadline&&left===0){root.querySelectorAll('[data-act="submit"],[data-act="card"],[data-act="bet"]').forEach(el=>el.disabled=true);}
+}
+setInterval(tick,300);
+async function run(fn){if(ctx.busy)return;ctx.busy=true;notify();const warning=setTimeout(()=>toast('通信の完了を確認しています。接続が戻るまでお待ちください。'),12000);try{return await fn();}catch(e){toast(message(e),true);}finally{clearTimeout(warning);ctx.busy=false;notify();}}
+function showModal(html){modalBody.innerHTML=html;modal.showModal();modal.scrollTop=0;}
+function closeModal(answer=false){modal.close();if(modalResolve){modalResolve(answer);modalResolve=null;}}
+function confirmAction(title,text,label='実行する',danger=false){return new Promise(resolve=>{modalResolve=resolve;showModal(`<h2 id="modal-title">${esc(title)}</h2><p>${esc(text)}</p><div class="modal-actions"><button class="btn ghost" data-act="modal-close">戻る</button><button class="btn ${danger?'danger':'primary'}" data-act="confirm-yes">${esc(label)}</button></div>`);});}
+modal.addEventListener('cancel',e=>{e.preventDefault();closeModal(false);});
+modal.addEventListener('click',e=>{if(e.target===modal&&e.clientX&&(e.clientX<modal.getBoundingClientRect().left||e.clientX>modal.getBoundingClientRect().right))closeModal(false);});
+function newFirebase(){if(ctx.backend&&!ctx.backend.demo)return ctx.backend;ctx.backend?.destroy();ctx.backend=new FirebaseBackend(notify);return ctx.backend;}
+function startDemo(){ctx.backend?.destroy();ctx.backend=new DemoBackend(notify);ctx.role='teacher';ctx.tab='game';ctx.joining=false;ctx.privateView=false;ctx.selected=null;ctx.bet=false;lastKey='';notify();}
+async function openRoom(code){const b=newFirebase();ctx.joining=true;ctx.draft.code=code;await b.open(code);if(b.role==='teacher'){ctx.joining=false;ctx.role='teacher';}else ctx.role='student';ctx.tab='game';notify();}
+function roomURL(){const u=new URL('./',location.href);u.search='';u.hash=`join=${ctx.backend.code}`;return u.href;}
+function qrModal(){const b=ctx.backend,url=b.demo?'':roomURL();showModal(`<button class="dialog-close" data-act="modal-close" aria-label="閉じる">×</button><h2 id="modal-title">${b.demo?'体験モードのルーム':'スマートフォンで参加'}</h2><div class="qr-layout">${b.demo?'<div class="notice warning">体験モードのコードでは別端末と対戦できません。実際のルームはFirebase設定後に作成してください。</div>':'<div class="qr" id="room-qr"></div>'}<div class="room-code">${esc(b.code)}</div>${!b.demo?`<p class="copy-url">${esc(url)}</p><button class="btn primary" data-act="copy-url">参加URLをコピー</button>`:''}<button class="btn ghost" data-act="modal-close">閉じる</button></div>`);if(!b.demo&&window.qrcode){const q=window.qrcode(0,'M');q.addData(url);q.make();document.getElementById('room-qr').innerHTML=q.createSvgTag({cellSize:5,margin:2,scalable:true});}}
+function play(success){try{audio??=new (window.AudioContext||window.webkitAudioContext)();audio.resume();[0,.13,.26].forEach((delay,i)=>{const osc=audio.createOscillator(),gain=audio.createGain();osc.type='sine';osc.frequency.value=(success?[523,659,784]:[330,392,440])[i];gain.gain.setValueAtTime(0,audio.currentTime+delay);gain.gain.linearRampToValueAtTime(.09,audio.currentTime+delay+.015);gain.gain.exponentialRampToValueAtTime(.001,audio.currentTime+delay+.28);osc.connect(gain);gain.connect(audio.destination);osc.start(audio.currentTime+delay);osc.stop(audio.currentTime+delay+.3);});}catch{}}
+function exportCSV(){const b=ctx.backend,blob=new Blob([csvText(b.state,b.roster)],{type:'text/csv;charset=utf-8'}),a=document.createElement('a'),url=URL.createObjectURL(blob);a.href=url;a.download=`NO15_${b.code}_${new Date().toISOString().slice(0,10)}.csv`;a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);toast('確定済みの試合をCSVで保存しました。');}
+async function action(act,el){
+  const b=ctx.backend,s=b?.state;
+  if(act==='modal-close')return closeModal(false);
+  if(act==='confirm-yes')return closeModal(true);
+  if(act==='rules')return showModal(rulesHTML());
+  if(act==='guide'){if(document.body.dataset.preview==='true')return showModal('<h2 id="modal-title">本番用の設定・操作ガイド</h2><p>GitHub Pages用ZIPの中にある「README.html」を開いてください。Firebaseの初期設定、公開手順、教員・生徒の操作、詳しいルールをまとめています。</p><div class="modal-actions"><button class="btn primary" data-act="modal-close">閉じる</button></div>');return window.open('README.html','_blank','noopener');}
+  if(act==='sound'){ctx.sound=!ctx.sound;if(ctx.sound)play(true);return notify();}
+  if(act==='home'){
+    if(s&&!await confirmAction('ホームへ戻りますか？','オンラインのルームデータは保持されます。教員が画面を離れている間は、集計・発表と提出人数の同期が止まります。','ホームへ戻る'))return;
+    b?.destroy();ctx.backend=null;ctx.joining=false;ctx.homeTeacher=false;ctx.tab='game';ctx.privateView=false;ctx.projection=false;try{localStorage.removeItem('no15-room');}catch{}return notify();
+  }
+  if(act==='demo'){startDemo();return;}
+  if(act==='demo-role'){ctx.role=ctx.role==='teacher'?'student':'teacher';ctx.privateView=false;ctx.tab='game';return notify();}
+  if(act==='demo-fill')return run(()=>b.fill());
+  if(act==='teacher-login')return run(async()=>{const backend=newFirebase();ctx.savedRooms=await backend.savedRooms();ctx.homeTeacher=true;ctx.joining=false;notify();});
+  if(act==='open-room')return run(()=>openRoom(el.dataset.code));
+  if(act==='recover-home'){
+    ctx.recovering=true;showModal(`<h2 id="modal-title">別の端末から復帰する</h2><p>元のプレイヤーへ引き継ぐため、先生の本人確認が必要です。新規登録せず、復帰を申請してください。</p><form id="recover-form" class="stack space-top"><label>ルームコード<input name="code" maxlength="6" required value="${esc(ctx.draft.code)}"></label><label>元のニックネーム<input name="name" maxlength="24" required value="${esc(ctx.draft.name)}"></label><div class="modal-actions"><button type="button" class="btn ghost" data-act="modal-close">戻る</button><button type="submit" class="btn primary">復帰を申請する</button></div></form>`);return;
+  }
+  if(act==='tab'){ctx.tab=el.dataset.tab;ctx.privateView=false;return notify();}
+  if(act==='rank-tab'){ctx.tab='ranking';return notify();}
+  if(act==='scope-total'){ctx.rankScope='total';return notify();}
+  if(act==='scope-round'){ctx.rankScope='roundTotal';return notify();}
+  if(act==='card'){ctx.selected=Number(el.dataset.card);return notify();}
+  if(act==='bet'){ctx.bet=!ctx.bet;return notify();}
+  if(act==='submit')return run(async()=>{await b.submit(ctx.selected,ctx.bet);toast('提出が確定しました。発表をお待ちください。');});
+  if(act==='projection'){ctx.projection=!ctx.projection;ctx.privateView=false;return notify();}
+  if(act==='settings')return showModal(settingsHTML({...defaultConfig(),...s.config}));
+  if(act==='start-match')return run(()=>b.startMatch());
+  if(act==='close-match'){
+    const missing=Object.keys(b.roster).length-(s.submittedCount??0);
+    if(missing>0&&!await confirmAction('未提出者がいます',`未提出の${missing}人を0点として締め切ります。カードと勝負カードは消費しません。`,'締め切る'))return;
+    return run(()=>b.closeMatch());
+  }
+  if(act==='extend'){
+    if(await confirmAction('提出時間を延長しますか？','今から60秒間、提出を受け付けます。既に確定した提出は変更できません。','60秒受け付ける'))return run(()=>b.extendTime());return;
+  }
+  if(act==='cancel-match'){
+    if(await confirmAction('この試合を取り消しますか？','提出されたカードは公開せず、得点にもカード使用にも反映しません。同じ試合番号で再開できます。','試合を取り消す',true))return run(()=>b.cancelMatch());return;
+  }
+  if(act==='begin-reveal')return run(()=>b.beginReveal());
+  if(act==='reveal-next')return run(()=>b.reveal());
+  if(act==='reveal-all')return run(()=>b.reveal(true));
+  if(act==='finish'){
+    if(await confirmAction('最終結果を発表しますか？','全ラウンドの合計得点で順位を確定し、非公開のランキングも全員に公開します。','最終結果を発表'))return run(()=>b.finish());return;
+  }
+  if(act==='csv')return exportCSV();
+  if(act==='qr')return qrModal();
+  if(act==='copy-url'){try{await navigator.clipboard.writeText(roomURL());toast('参加URLをコピーしました。');}catch{toast('コピーできませんでした。表示中の参加URLを選択してコピーしてください。',true);}return;}
+  if(act==='show-result'){const h=s.history?.[`r${s.round}m${s.match}`];return showModal(`<h2 id="modal-title">R${s.round} · 第${s.match}試合の結果</h2><p>${EVENTS[h?.event]?.name??''}</p><div class="log-results space-top">${resultRows(h)}</div><div class="modal-actions"><button class="btn primary" data-act="modal-close">閉じる</button></div>`);}
+  if(act==='private-view'){
+    if(ctx.privateView){ctx.privateView=false;return notify();}
+    if(await confirmAction('投影を止めてから開いてください','この管理表示では、非公開期間中の順位と得点も表示します。生徒に見えない状態で開いてください。','管理表示を開く')){ctx.privateView=true;ctx.projection=false;notify();}return;
+  }
+  if(act==='remove-player'){
+    if(await confirmAction('参加登録を取り消しますか？',`${b.roster[el.dataset.id]?.name}さんを参加者から外します。この端末からは、このルームへ再登録できなくなります。`,'登録を取り消す',true))return run(()=>b.removePlayer(el.dataset.id));return;
+  }
+  if(act==='reset-request')return run(async()=>{await b.resetRequest(el.dataset.id);toast('申請をリセットしました。生徒は修正した名前で再申請できます。');});
+  if(act==='recover-approve'){
+    const uid=el.dataset.id;showModal(`<h2 id="modal-title">本人確認後にプレイヤーを復帰</h2><p>申請名：${esc(b.requests?.[uid]?.name)}<br>目の前の生徒本人と確認し、引き継ぐプレイヤーを選択してください。元の端末は提出できなくなります。</p><form id="recover-approve-form" class="stack space-top"><input type="hidden" name="uid" value="${esc(uid)}"><label>引き継ぐプレイヤー<select name="pid">${Object.entries(b.roster).map(([id,p])=>`<option value="${esc(id)}">${esc(p.name)}</option>`).join('')}</select></label><div class="modal-actions"><button type="button" class="btn ghost" data-act="modal-close">戻る</button><button type="submit" class="btn primary">本人確認済み・引き継ぐ</button></div></form>`);return;
+  }
+  if(act==='delete-room'){
+    if(await confirmAction('ルームを完全に削除しますか？','履歴・得点・参加者を削除します。元に戻せません。必要なCSVを先に保存してください。','完全に削除する',true))return run(async()=>{await b.deleteRoom();ctx.backend=null;ctx.privateView=false;ctx.joining=false;try{localStorage.removeItem('no15-room');}catch{}notify();});return;
+  }
+}
+document.addEventListener('click',e=>{const el=e.target.closest('[data-act]');if(!el||el.disabled)return;e.preventDefault();action(el.dataset.act,el).catch(err=>toast(message(err),true));});
+document.addEventListener('input',e=>{const key=e.target.dataset.draft;if(key)ctx.draft[key]=e.target.value;});
+document.addEventListener('change',e=>{if(e.target.dataset.select==='history-round'){ctx.historyRound=Number(e.target.value);notify();}if(e.target.dataset.select==='rank-round'){ctx.rankRound=Number(e.target.value);notify();}});
+document.addEventListener('submit',e=>{
+  const form=e.target,fd=new FormData(form);e.preventDefault();
+  if(form.id==='join-form')return run(async()=>{ctx.recovering=false;ctx.joinSent=false;ctx.draft={code:String(fd.get('code')).trim().toUpperCase(),name:String(fd.get('name'))};await openRoom(ctx.draft.code);if(ctx.backend.role!=='teacher'){await ctx.backend.join(ctx.draft.name);ctx.joinSent=true;}notify();});
+  if(form.id==='room-join-form')return run(async()=>{await ctx.backend.join(fd.get('name'),ctx.recovering?'recover':'join');ctx.joinSent=true;notify();});
+  if(form.id==='create-form')return run(async()=>{await ctx.backend.create(Number(fd.get('capacity')),fd.get('title'));ctx.joining=false;ctx.role='teacher';ctx.tab='game';notify();});
+  if(form.id==='settings-form'){
+    const c={battle:fd.has('battle'),events:fd.has('events'),eventMode:fd.get('eventMode'),eventCount:Number(fd.get('eventCount')),eventMatches:fd.getAll('eventMatches').map(Number),eventTypes:Object.fromEntries(Array.from({length:12},(_,i)=>[i+1,fd.get(`event-${i+1}`)])),hiddenAll:fd.has('hiddenAll'),hiddenMatches:fd.getAll('hiddenMatches').map(Number),seconds:Number(fd.get('seconds')),finalRound:fd.has('finalRound')};
+    return run(async()=>{validateConfig(c);await ctx.backend.beginRound(c);closeModal();ctx.tab='game';ctx.rankScope='total';ctx.privateView=false;notify();});
+  }
+  if(form.id==='recover-form')return run(async()=>{ctx.draft={code:String(fd.get('code')).trim().toUpperCase(),name:String(fd.get('name'))};ctx.recovering=true;ctx.joinSent=false;await openRoom(ctx.draft.code);await ctx.backend.join(ctx.draft.name,'recover');ctx.joinSent=true;closeModal();notify();});
+  if(form.id==='recover-approve-form')return run(async()=>{await ctx.backend.recover(fd.get('uid'),fd.get('pid'));closeModal();toast('元の得点とカード履歴を引き継ぎました。');});
+});
+async function boot(){render();if(document.body.dataset.preview==='true'||new URLSearchParams(location.search).has('demo')){startDemo();return;}const join=location.hash.match(/join=([A-Z2-9]{6})/i);if(join){ctx.draft.code=join[1].toUpperCase();return run(()=>openRoom(ctx.draft.code));}let code;try{code=localStorage.getItem('no15-room');}catch{}if(code)return run(()=>openRoom(code));}
+boot();
+
+</script></body></html>

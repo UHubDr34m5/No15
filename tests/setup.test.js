@@ -1,0 +1,9 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import {readFile} from 'node:fs/promises';
+import {JSDOM} from 'jsdom';
+const html=await readFile(new URL('../README.html',import.meta.url),'utf8');
+function page(){return new JSDOM(html,{url:'https://example.test/README.html',runScripts:'dangerously',beforeParse(w){w.URL.createObjectURL=()=> 'blob:test';w.URL.revokeObjectURL=()=>{};w.HTMLAnchorElement.prototype.click=()=>{};}});}
+const config="const firebaseConfig = { apiKey:'test-api-key', authDomain:'test-project.firebaseapp.com', projectId:'test-project', appId:'1:123:web:456' };";
+test('設定補助：コンソールのコード＋DB URLからコピー可能なconfig.jsを作る',()=>{const dom=page();try{const d=dom.window.document;d.getElementById('config-raw').value=config;d.getElementById('database-url').value='https://test-project-default-rtdb.asia-southeast1.firebasedatabase.app/';d.getElementById('make-config').click();const out=d.getElementById('config-output').value;assert.ok(out.includes('export const firebaseConfig ='));assert.ok(out.includes('"databaseURL": "https://test-project-default-rtdb.asia-southeast1.firebasedatabase.app"'));assert.ok(d.getElementById('config-result').textContent.includes('生成しました'));}finally{dom.window.close();}});
+test('設定補助：不足した設定と誤った接続先を拒否する',()=>{const dom=page();try{const d=dom.window.document;d.getElementById('make-config').click();assert.ok(d.getElementById('config-result').classList.contains('error'));d.getElementById('config-raw').value=config;for(const url of ['https://firebasedatabase.app.example.test','http://test.firebaseio.com','https://test.firebaseio.com/path','https://test.firebaseio.com/?secret=x']){d.getElementById('database-url').value=url;d.getElementById('make-config').click();assert.ok(d.getElementById('config-result').classList.contains('error'));}}finally{dom.window.close();}});

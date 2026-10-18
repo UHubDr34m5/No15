@@ -1,0 +1,19 @@
+{
+  "name": "no15-number-battle",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "engines": { "node": ">=24" },
+  "description": "GitHub Pages + Firebase realtime classroom card game",
+  "scripts": {
+    "test": "node --test tests/core.test.js tests/ui.test.js tests/flow.test.js tests/setup.test.js",
+    "test:rules": "firebase emulators:exec --only database,auth --project demo-no15 \"node --no-use-env-proxy --test --test-isolation=none --test-concurrency=1 tests/security.test.js\"",
+    "test:all": "npm test && npm run test:rules"
+  },
+  "devDependencies": {
+    "@firebase/rules-unit-testing": "5.0.0",
+    "firebase": "12.4.0",
+    "firebase-tools": "14.19.0",
+    "jsdom": "27.0.0"
+  }
+}

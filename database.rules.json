@@ -1,0 +1,90 @@
+{
+  "rules": {
+    ".read": false,
+    ".write": false,
+    "teacherRooms": {
+      "$uid": {
+        ".read": "auth != null && auth.uid == $uid",
+        ".write": "auth != null && auth.uid == $uid && auth.token.firebase.sign_in_provider == 'google.com'"
+      }
+    },
+    "games": {
+      "$code": {
+        ".read": "auth != null && data.child('meta/owner').val() == auth.uid || (auth != null && !data.exists() && auth.token.firebase.sign_in_provider == 'google.com')",
+        ".write": "auth != null && data.child('meta/owner').val() == auth.uid || (auth != null && !data.exists() && newData.child('meta/owner').val() == auth.uid && auth.token.firebase.sign_in_provider == 'google.com')",
+        ".validate": "newData.hasChildren(['meta','public']) && newData.child('meta/owner').isString() && newData.child('meta/capacity').isNumber() && newData.child('meta/capacity').val() >= 2 && newData.child('meta/capacity').val() <= 16",
+        "meta": {
+          ".read": "auth != null"
+        },
+        "roster": {
+          ".read": "auth != null"
+        },
+        "members": {
+          "$uid": {
+            ".read": "auth != null && (auth.uid == $uid || auth != null && root.child('games').child($code).child('meta/owner').val() == auth.uid)"
+          }
+        },
+        "public": {
+          ".read": "(auth != null && root.child('games').child($code).child('members').child(auth.uid).exists()) || (auth != null && root.child('games').child($code).child('meta/owner').val() == auth.uid)"
+        },
+        "joinRequests": {
+          "$uid": {
+            ".read": "auth != null && (auth.uid == $uid || auth != null && root.child('games').child($code).child('meta/owner').val() == auth.uid)",
+            ".write": "auth != null && auth.uid == $uid && auth.uid != root.child('games').child($code).child('meta/owner').val() && !data.exists() && newData.exists() && root.child('games').child($code).child('meta').exists() && root.child('games').child($code).child('meta/closed').val() == false && !root.child('games').child($code).child('bans').child(auth.uid).exists() && (newData.child('kind').val() == 'recover' || root.child('games').child($code).child('public/phase').val() == 'lobby')",
+            ".validate": "newData.hasChildren(['kind','name','at'])",
+            "kind": {
+              ".validate": "newData.val() == 'join' || newData.val() == 'recover'"
+            },
+            "name": {
+              ".validate": "newData.isString() && newData.val().length >= 1 && newData.val().length <= 24"
+            },
+            "at": {
+              ".validate": "newData.isNumber() && (newData.val() == now || newData.val() == data.val())"
+            },
+            "$other": {
+              ".validate": false
+            }
+          }
+        },
+        "joinReplies": {
+          "$uid": {
+            ".read": "auth != null && (auth.uid == $uid || auth != null && root.child('games').child($code).child('meta/owner').val() == auth.uid)"
+          }
+        },
+        "secrets": {
+          "$match": {
+            "$pid": {
+              ".read": "(auth != null && root.child('games').child($code).child('meta/owner').val() == auth.uid) || (auth != null && root.child('games').child($code).child('roster').child($pid).child('authUid').val() == auth.uid)",
+              ".write": "auth != null && root.child('games').child($code).child('roster').child($pid).child('authUid').val() == auth.uid && !data.exists() && newData.exists() && root.child('games').child($code).child('meta/closed').val() == false && root.child('games').child($code).child('public/phase').val() == 'collecting' && root.child('games').child($code).child('public/matchKey').val() == $match && (root.child('games').child($code).child('public/deadline').val() == 0 || now <= root.child('games').child($code).child('public/deadline').val()) && !root.child('games').child($code).child('public/progress').child($pid).child('used').child(newData.child('card').val() + '').exists() && (newData.child('bet').val() == false || (root.child('games').child($code).child('public/config/battle').val() == true && root.child('games').child($code).child('public/progress').child($pid).child('betUsed').val() != true))",
+              ".validate": "newData.hasChildren(['card','bet','at'])",
+              "card": {
+                ".validate": "newData.isNumber() && newData.val() >= 1 && newData.val() <= 15 && newData.val() % 1 == 0"
+              },
+              "bet": {
+                ".validate": "newData.isBoolean()"
+              },
+              "at": {
+                ".validate": "newData.isNumber() && (newData.val() == now || newData.val() == data.val())"
+              },
+              "$other": {
+                ".validate": false
+              }
+            }
+          }
+        },
+        "presence": {
+          ".read": "(auth != null && root.child('games').child($code).child('members').child(auth.uid).exists()) || (auth != null && root.child('games').child($code).child('meta/owner').val() == auth.uid)",
+          "$pid": {
+            "$connection": {
+              ".write": "auth != null && root.child('games').child($code).child('roster').child($pid).child('authUid').val() == auth.uid",
+              ".validate": "newData.isNumber() && (newData.val() == now || newData.val() == data.val())"
+            }
+          }
+        },
+        "host": {
+          ".read": "auth != null && root.child('games').child($code).child('meta/owner').val() == auth.uid"
+        }
+      }
+    }
+  }
+}
