@@ -13,14 +13,14 @@ for(const key of ['HTTP_PROXY','http_proxy','HTTPS_PROXY','https_proxy'])delete 
 const {ref,set,get,update,serverTimestamp,runTransaction,goOffline,goOnline,onValue}=dbSDK;
 let env;
 const code='TEST15',roomPath=`games/${code}`;
-const actor=(uid,teacher=false)=>env.authenticatedContext(uid,{firebase:{sign_in_provider:teacher?'google.com':'anonymous'}}).database();
+const actor=(uid,teacher=false)=>env.authenticatedContext(uid,{firebase:{sign_in_provider:teacher?'password':'anonymous'}}).database();
 const p=(db,path='')=>ref(db,`${roomPath}${path?'/'+path:''}`);
 const waitConnected=db=>new Promise((resolve,reject)=>{let stop;const timeout=setTimeout(()=>{stop?.();reject(Error('reconnect timed out'));},10000);stop=onValue(ref(db,'.info/connected'),s=>{if(s.val()){clearTimeout(timeout);stop?.();resolve();}});});
 function seed(n=16,phase='collecting'){
   const roster=Object.fromEntries(Array.from({length:n},(_,i)=>['p'+(i+1),{name:'生徒'+(i+1),nameKey:'生徒'+(i+1),authUid:'p'+(i+1),joinedAt:i}]));
   return {meta:{owner:'teacher',capacity:16,createdAt:1,closed:false,title:'test'},roster,members:Object.fromEntries(Object.keys(roster).map(id=>[id,id])),public:{phase,round:1,match:1,completed:0,matchKey:'match1',lockedAt:0,event:'none',config:defaultConfig(),progress:freshProgress(roster),history:{},revealed:[],submittedCount:0,deadline:0,revision:0}};
 }
-async function reset(n=16,phase='collecting'){await env.clearDatabase();await env.withSecurityRulesDisabled(async c=>set(ref(c.database(),roomPath),seed(n,phase)));}
+async function reset(n=16,phase='collecting'){await env.clearDatabase();await env.withSecurityRulesDisabled(async c=>set(ref(c.database()),{games:{[code]:seed(n,phase)},teachers:{teacher:true,newteacher:true}}));}
 async function hostBackend(){const db=actor('teacher',true),b=new FirebaseBackend(()=>{});b.sdk=dbSDK;b.db=db;b.auth={currentUser:{uid:'teacher'}};b.online=true;b.role='teacher';b.code=code;b.roster=(await get(p(db,'roster'))).val();b.state=(await get(p(db,'public'))).val();return b;}
 async function sync(b){b.state=(await get(p(b.db,'public'))).val();b.roster=(await get(p(b.db,'roster'))).val();}
 before(async()=>{env=await initializeTestEnvironment({projectId:'demo-no15',database:{host:'127.0.0.1',port:9000,rules:await readFile(new URL('../database.rules.json',import.meta.url),'utf8')}});});
@@ -43,7 +43,7 @@ test('生徒による進行・得点・参加者・権限・教員用計算結�
   await assertFails(get(p(a,'host')));
   await assertFails(set(ref(a,'teacherRooms/teacher/TEST15'),{at:1}));
 });
-test('匿名生徒は教員ルームを作成できず、Google認証の教員は作成できる',async()=>{
+test('匿名生徒は教員ルームを作成できず、許可済みパスワード認証の教員は作成できる',async()=>{
   const room=seed(2,'lobby');room.meta.owner='newteacher';
   await assertFails(set(ref(actor('p1'),'games/NEW234'),room));
   await assertSucceeds(set(ref(actor('newteacher',true),'games/NEW234'),room));
@@ -167,4 +167,18 @@ test('実アプリの購読経路：ルーム作成→参加→人数同期→�
     await host.reveal();await until(()=>a.state.phase==='result');assert.equal(a.state.progress.reala.total,30);assert.equal(b.state.progress.realb.total,10);
     a.destroy();const reload=backend('reala');await reload.open(newcode);await until(()=>reload.state?.phase==='result');assert.equal(reload.state.progress.reala.total,30);assert.equal(reload.pid,'reala');assert.equal(reload.ownSubmission.card,15);
   }finally{for(const b of backends)b.destroy();}
+});
+
+test('未登録のパスワードユーザー・Googleユーザーは教員権限を取得できない',async()=>{
+  for(const provider of ['password','google.com','anonymous']){
+    const db=env.authenticatedContext('outsider',{firebase:{sign_in_provider:provider}}).database();
+    const room=seed(2,'lobby');room.meta.owner='outsider';
+    await assertFails(set(ref(db,'teachers/outsider'),true));
+    await assertFails(set(ref(db,'teacherRooms/outsider/NEW234'),{title:'test',at:1}));
+    await assertFails(set(ref(db,'games/NEW234'),room));
+  }
+  const host=actor('teacher',true);
+  await assertSucceeds(get(ref(host,'teachers/teacher')));
+  await assertFails(set(ref(host,'teachers/teacher'),false));
+  await assertSucceeds(set(ref(host,'teacherRooms/teacher/NEW234'),{title:'test',at:1}));
 });

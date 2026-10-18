@@ -5,13 +5,13 @@
     "teacherRooms": {
       "$uid": {
         ".read": "auth != null && auth.uid == $uid",
-        ".write": "auth != null && auth.uid == $uid && auth.token.firebase.sign_in_provider == 'google.com'"
+        ".write": "auth != null && auth.uid == $uid && auth.token.firebase.sign_in_provider == 'password' && root.child('teachers').child(auth.uid).val() == true"
       }
     },
     "games": {
       "$code": {
-        ".read": "auth != null && data.child('meta/owner').val() == auth.uid || (auth != null && !data.exists() && auth.token.firebase.sign_in_provider == 'google.com')",
-        ".write": "auth != null && data.child('meta/owner').val() == auth.uid || (auth != null && !data.exists() && newData.child('meta/owner').val() == auth.uid && auth.token.firebase.sign_in_provider == 'google.com')",
+        ".read": "auth != null && data.child('meta/owner').val() == auth.uid || (auth != null && !data.exists() && auth.token.firebase.sign_in_provider == 'password' && root.child('teachers').child(auth.uid).val() == true)",
+        ".write": "auth != null && data.child('meta/owner').val() == auth.uid || (auth != null && !data.exists() && newData.child('meta/owner').val() == auth.uid && auth.token.firebase.sign_in_provider == 'password' && root.child('teachers').child(auth.uid).val() == true)",
         ".validate": "newData.hasChildren(['meta','public']) && newData.child('meta/owner').isString() && newData.child('meta/capacity').isNumber() && newData.child('meta/capacity').val() >= 2 && newData.child('meta/capacity').val() <= 16",
         "meta": {
           ".read": "auth != null"
@@ -84,6 +84,12 @@
         "host": {
           ".read": "auth != null && root.child('games').child($code).child('meta/owner').val() == auth.uid"
         }
+      }
+    },
+    "teachers": {
+      "$uid": {
+        ".read": "auth != null && auth.uid == $uid",
+        ".write": false
       }
     }
   }

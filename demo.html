@@ -2443,6 +2443,12 @@ const uidToken=()=>crypto.randomUUID().replaceAll('-','').slice(0,18);
 const alphabet='ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
 const codeToken=()=>Array.from(crypto.getRandomValues(new Uint8Array(6)),n=>alphabet[n%alphabet.length]).join('');
 const initialState=()=>({phase:'lobby',round:0,match:0,completed:0,revision:0,hidden:false,config:defaultConfig(),progress:{},history:{},revealed:[],submittedCount:0});
+// Internal Firebase account identifier; the password is never stored in site code.
+function teacherEmail(id){
+  const normalized=String(id??'').trim().toLowerCase();
+  if(!/^[a-z0-9][a-z0-9_-]{2,31}$/.test(normalized))throw Error('教員IDは3〜32文字の半角英数字・ハイフン・アンダースコアで入力してください（先頭は英数字）。');
+  return `${normalized}@teacher.no15.invalid`;
+}
 class FirebaseBackend {
   constructor(notify){this.notify=notify;this.online=false;this.offset=0;this.unsubs=[];this.globalUnsubs=[];this.code='';this.role='student';this.pid='';this.sending=false;this.processing=false;this.dirty=false;}
   async init(){
@@ -2462,7 +2468,19 @@ class FirebaseBackend {
     this.globalUnsubs.push(db.onValue(db.ref(this.db,'.info/serverTimeOffset'),snap=>{this.offset=snap.val()??0;}));
   }
   now(){return Date.now()+this.offset;}
-  async signTeacher(){await this.init();if(this.auth.currentUser?.providerData?.some(p=>p.providerId==='google.com'))return;const provider=new this.sdk.GoogleAuthProvider();provider.setCustomParameters({prompt:'select_account'});await this.sdk.signInWithPopup(this.auth,provider);}
+  async signTeacher(id,password){
+    const email=id===undefined?null:teacherEmail(id);
+    await this.init();
+    if(email){
+      if(!password)throw Error('パスワードを入力してください。');
+      await this.sdk.signInWithEmailAndPassword(this.auth,email,password);
+    }
+    const user=this.auth.currentUser;
+    if(!user?.providerData?.some(p=>p.providerId==='password'))throw Error('教員IDとパスワードでログインしてください。');
+    const allowed=(await this.sdk.get(this.sdk.ref(this.db,`teachers/${user.uid}`))).val();
+    if(allowed!==true){await this.sdk.signOut(this.auth);throw Error('このアカウントには教員の利用許可がありません。設定ガイドの教員登録を確認してください。');}
+  }
+  async signOut(){this.clearRoom();await this.sdk.signOut(this.auth);this.code='';}
   async ensureUser(){await this.init();if(!this.auth.currentUser)await this.sdk.signInAnonymously(this.auth);return this.auth.currentUser.uid;}
   path(suffix=''){return this.sdk.ref(this.db,`games/${this.code}${suffix?'/'+suffix:''}`);}
   async create(capacity,title){
@@ -2669,7 +2687,7 @@ function renderApp(ctx){
 }
 function homePage(ctx){
   const d=ctx.draft??{};
-  return `<section class="hero"><div><div class="hero-kicker">15 CARDS. ONE SMART MOVE.</div><h1>その数字に、<br><span class="accent">勝ち筋</span>はあるか。</h1><p>大きな数字ほど、高得点。<br>でも、誰かと被れば山分けに。<br>15枚のカードで、みんなの「次」を読み切ろう。</p><div class="badge-row"><span class="pill">2〜16人</span><span class="pill">1ラウンド12試合</span><span class="pill">スマートフォンで参加</span></div></div><div class="hero-art" aria-hidden="true"><div class="hero-card">7</div><div class="hero-card c2">12</div><div class="hero-card c3">15</div><div class="hero-caption">大きく狙うか、小さく抜けるか。</div></div></section><div class="home-grid"><section class="panel"><div class="caps">FOR PLAYERS</div><h2 class="panel-heading">ルームに参加</h2><p class="description">先生に教えてもらったコードと、ニックネームを入力。</p><form id="join-form" class="stack"><div class="form-grid"><label for="room-code">ルームコード<input id="room-code" name="code" data-draft="code" value="${esc(d.code)}" placeholder="ABC123" maxlength="6" autocomplete="off" autocapitalize="characters" spellcheck="false" required></label><label for="nickname">ニックネーム<input id="nickname" name="name" data-draft="name" value="${esc(d.name)}" placeholder="12文字以内" maxlength="24" autocomplete="nickname" required></label></div><button class="btn primary wide big" type="submit" ${disabled(ctx.busy)}>参加する <span aria-hidden="true">→</span></button></form><p class="help-text">生徒のアカウント登録は不要です。同じブラウザーなら再読み込み後も復帰できます。</p></section><section class="panel"><div class="caps">FOR TEACHERS</div><h2 class="panel-heading">教員用コントロール</h2><p class="description">ルームを作って、QRコードで一斉に招待。<br>結果発表は、先生のタイミングで。</p>${ctx.homeTeacher?`<form id="create-form" class="stack"><div class="form-grid"><label>参加上限<select name="capacity">${Array.from({length:15},(_,i)=>i+2).map(n=>`<option value="${n}" ${sel(n,16)}>${n}人</option>`).join('')}</select></label><label>ルーム名<input name="title" value="NO.15 クラス対戦" maxlength="40"></label></div><button type="submit" class="btn primary wide" ${disabled(ctx.busy)}>ルームを作成</button></form>${entries(ctx.savedRooms).sort((a,b)=>b[1].at-a[1].at).slice(0,8).map(([code,r])=>`<div class="saved-room"><span>${esc(r.title)}<br><small>${esc(code)}</small></span>${btn('再開','open-room','small',`data-code="${esc(code)}"`)}</div>`).join('')}`:btn('Googleでログインして作成','teacher-login','wide',disabled(ctx.busy))}<div class="row space-top">${btn('設定なしで体験する','demo','ghost wide')}${btn('端末を変えた・登録を復帰する','recover-home','ghost wide small')}</div><p class="help-text">オンライン対戦の初回のみ、Firebaseの設定が必要です。</p></section></div>`;
+  return `<section class="hero"><div><div class="hero-kicker">15 CARDS. ONE SMART MOVE.</div><h1>その数字に、<br><span class="accent">勝ち筋</span>はあるか。</h1><p>大きな数字ほど、高得点。<br>でも、誰かと被れば山分けに。<br>15枚のカードで、みんなの「次」を読み切ろう。</p><div class="badge-row"><span class="pill">2〜16人</span><span class="pill">1ラウンド12試合</span><span class="pill">スマートフォンで参加</span></div></div><div class="hero-art" aria-hidden="true"><div class="hero-card">7</div><div class="hero-card c2">12</div><div class="hero-card c3">15</div><div class="hero-caption">大きく狙うか、小さく抜けるか。</div></div></section><div class="home-grid"><section class="panel"><div class="caps">FOR PLAYERS</div><h2 class="panel-heading">ルームに参加</h2><p class="description">先生に教えてもらったコードと、ニックネームを入力。</p><form id="join-form" class="stack"><div class="form-grid"><label for="room-code">ルームコード<input id="room-code" name="code" data-draft="code" value="${esc(d.code)}" placeholder="ABC123" maxlength="6" autocomplete="off" autocapitalize="characters" spellcheck="false" required></label><label for="nickname">ニックネーム<input id="nickname" name="name" data-draft="name" value="${esc(d.name)}" placeholder="12文字以内" maxlength="24" autocomplete="nickname" required></label></div><button class="btn primary wide big" type="submit" ${disabled(ctx.busy)}>参加する <span aria-hidden="true">→</span></button></form><p class="help-text">生徒のアカウント登録は不要です。同じブラウザーなら再読み込み後も復帰できます。</p></section><section class="panel"><div class="caps">FOR TEACHERS</div><h2 class="panel-heading">教員用コントロール</h2><p class="description">ルームを作って、QRコードで一斉に招待。<br>結果発表は、先生のタイミングで。</p>${ctx.homeTeacher?`${btn('ログアウト','teacher-logout','ghost small')}<form id="create-form" class="stack"><div class="form-grid"><label>参加上限<select name="capacity">${Array.from({length:15},(_,i)=>i+2).map(n=>`<option value="${n}" ${sel(n,16)}>${n}人</option>`).join('')}</select></label><label>ルーム名<input name="title" value="NO.15 クラス対戦" maxlength="40"></label></div><button type="submit" class="btn primary wide" ${disabled(ctx.busy)}>ルームを作成</button></form>${entries(ctx.savedRooms).sort((a,b)=>b[1].at-a[1].at).slice(0,8).map(([code,r])=>`<div class="saved-room"><span>${esc(r.title)}<br><small>${esc(code)}</small></span>${btn('再開','open-room','small',`data-code="${esc(code)}"`)}</div>`).join('')}`:btn('教員IDでログイン','teacher-login','wide',disabled(ctx.busy))}<div class="row space-top">${btn('設定なしで体験する','demo','ghost wide')}${btn('端末を変えた・登録を復帰する','recover-home','ghost wide small')}</div><p class="help-text">教員共通のID・パスワードでログインできます。<br>初回のみ、設定ガイドに沿ってFirebaseと教員アカウントを登録してください。</p></section></div>`;
 }
 function joinPage(ctx){
   const b=ctx.backend;
@@ -2749,7 +2767,7 @@ const root=document.getElementById('app'),modal=document.getElementById('modal')
 const ctx={backend:null,role:'student',tab:'game',selected:null,bet:false,busy:false,projection:false,sound:false,privateView:false,rankScope:'total',rankRound:null,historyRound:null,homeTeacher:false,savedRooms:{},joining:false,joinSent:false,recovering:false,draft:{code:'',name:''}};
 let renderPending=false,lastKey='',lastRound=0,toastTimer,modalResolve,lastGroup='',audio;
 function toast(message,error=false){clearTimeout(toastTimer);toastEl.textContent=message;toastEl.className='show'+(error?' error':'');toastTimer=setTimeout(()=>toastEl.className='',error?10000:4500);}
-function message(error){const code=String(error?.code??'').toLowerCase();if(code.includes('popup-closed'))return 'ログイン画面が閉じられました。もう一度お試しください。';if(code.includes('popup-blocked'))return 'ポップアップがブロックされました。このサイトのポップアップを許可してから再試行してください。';if(code.includes('unauthorized-domain'))return 'Firebase Authenticationの「承認済みドメイン」にGitHub Pagesのドメインを追加してください。';if(code.includes('operation-not-allowed'))return 'Firebase AuthenticationでGoogleログイン・匿名ログインを有効にしてください。';if(code.includes('permission')||String(error?.message).toLowerCase().includes('permission_denied'))return '操作が許可されませんでした。締切・提出済み・カード使用済み・参加資格をご確認ください。初回設定中の場合はデータベースルールも確認してください。';return error?.message??String(error);}
+function message(error){const code=String(error?.code??'').toLowerCase();if(['auth/invalid-credential','auth/wrong-password','auth/user-not-found','auth/invalid-login-credentials'].includes(code))return '教員IDまたはパスワードが違います。入力内容を確認してください。';if(code==='auth/too-many-requests')return 'ログインを繰り返したため、一時的に制限されています。時間をおいて再試行してください。';if(code==='auth/network-request-failed')return '通信できませんでした。ネットワーク接続を確認してください。';if(code==='auth/user-disabled')return 'この教員アカウントは無効になっています。管理者に確認してください。';if(code.includes('popup-closed'))return 'ログイン画面が閉じられました。もう一度お試しください。';if(code.includes('popup-blocked'))return 'ポップアップがブロックされました。このサイトのポップアップを許可してから再試行してください。';if(code.includes('unauthorized-domain'))return 'Firebase Authenticationの「承認済みドメイン」にGitHub Pagesのドメインを追加してください。';if(code.includes('operation-not-allowed'))return 'Firebase Authenticationでメール／パスワード認証・匿名認証を有効にしてください。';if(code.includes('permission')||String(error?.message).toLowerCase().includes('permission_denied'))return '操作が許可されませんでした。締切・提出済み・カード使用済み・参加資格をご確認ください。初回設定中の場合はデータベースルールも確認してください。';return error?.message??String(error);}
 function notify(){
   const b=ctx.backend;
   if(b?.requestReset){b.requestReset=false;ctx.joinSent=false;}
@@ -2806,7 +2824,11 @@ async function action(act,el){
   if(act==='demo'){startDemo();return;}
   if(act==='demo-role'){ctx.role=ctx.role==='teacher'?'student':'teacher';ctx.privateView=false;ctx.tab='game';return notify();}
   if(act==='demo-fill')return run(()=>b.fill());
-  if(act==='teacher-login')return run(async()=>{const backend=newFirebase();ctx.savedRooms=await backend.savedRooms();ctx.homeTeacher=true;ctx.joining=false;notify();});
+  if(act==='teacher-login'){
+    showModal(`<h2 id="modal-title">教員ログイン</h2><p>教員共通のIDとパスワードを入力してください。</p><form id="teacher-login-form" class="stack space-top"><label for="teacher-id">教員ID<input id="teacher-id" name="teacherId" autocomplete="username" autocapitalize="none" spellcheck="false" minlength="3" maxlength="32" pattern="[A-Za-z0-9][A-Za-z0-9_-]{2,31}" placeholder="例：teacher" required aria-describedby="teacher-id-help"></label><p id="teacher-id-help" class="help-text">半角英数字・ハイフン・アンダースコア（3〜32文字）。</p><label for="teacher-password">パスワード<input id="teacher-password" type="password" name="password" autocomplete="current-password" required></label><p id="teacher-login-error" class="help-text" role="alert"></p><div class="modal-actions"><button type="button" class="btn ghost" data-act="modal-close">戻る</button><button type="submit" class="btn primary">ログイン</button></div></form>`);
+    document.getElementById('teacher-id').focus();return;
+  }
+  if(act==='teacher-logout')return run(async()=>{await b.signOut();b.destroy();ctx.backend=null;ctx.homeTeacher=false;ctx.savedRooms={};ctx.joining=false;try{localStorage.removeItem('no15-room');}catch{}notify();});
   if(act==='open-room')return run(()=>openRoom(el.dataset.code));
   if(act==='recover-home'){
     ctx.recovering=true;showModal(`<h2 id="modal-title">別の端末から復帰する</h2><p>元のプレイヤーへ引き継ぐため、先生の本人確認が必要です。新規登録せず、復帰を申請してください。</p><form id="recover-form" class="stack space-top"><label>ルームコード<input name="code" maxlength="6" required value="${esc(ctx.draft.code)}"></label><label>元のニックネーム<input name="name" maxlength="24" required value="${esc(ctx.draft.name)}"></label><div class="modal-actions"><button type="button" class="btn ghost" data-act="modal-close">戻る</button><button type="submit" class="btn primary">復帰を申請する</button></div></form>`);return;
@@ -2862,6 +2884,13 @@ document.addEventListener('input',e=>{const key=e.target.dataset.draft;if(key)ct
 document.addEventListener('change',e=>{if(e.target.dataset.select==='history-round'){ctx.historyRound=Number(e.target.value);notify();}if(e.target.dataset.select==='rank-round'){ctx.rankRound=Number(e.target.value);notify();}});
 document.addEventListener('submit',e=>{
   const form=e.target,fd=new FormData(form);e.preventDefault();
+  if(form.id==='teacher-login-form')return run(async()=>{
+    const submit=form.querySelector('[type="submit"]'),error=form.querySelector('[role="alert"]');
+    submit.disabled=true;submit.textContent='ログイン中…';error.textContent='';
+    try{const backend=newFirebase();await backend.signTeacher(fd.get('teacherId'),fd.get('password'));ctx.savedRooms=await backend.savedRooms();ctx.homeTeacher=true;ctx.joining=false;form.reset();closeModal();notify();}
+    catch(e){form.elements.password.value='';error.textContent=message(e);form.elements.password.focus();}
+    finally{submit.disabled=false;submit.textContent='ログイン';}
+  });
   if(form.id==='join-form')return run(async()=>{ctx.recovering=false;ctx.joinSent=false;ctx.draft={code:String(fd.get('code')).trim().toUpperCase(),name:String(fd.get('name'))};await openRoom(ctx.draft.code);if(ctx.backend.role!=='teacher'){await ctx.backend.join(ctx.draft.name);ctx.joinSent=true;}notify();});
   if(form.id==='room-join-form')return run(async()=>{await ctx.backend.join(fd.get('name'),ctx.recovering?'recover':'join');ctx.joinSent=true;notify();});
   if(form.id==='create-form')return run(async()=>{await ctx.backend.create(Number(fd.get('capacity')),fd.get('title'));ctx.joining=false;ctx.role='teacher';ctx.tab='game';notify();});

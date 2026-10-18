@@ -3,10 +3,12 @@
   "version": "1.0.0",
   "private": true,
   "type": "module",
-  "engines": { "node": ">=24" },
+  "engines": {
+    "node": ">=24"
+  },
   "description": "GitHub Pages + Firebase realtime classroom card game",
   "scripts": {
-    "test": "node --test tests/core.test.js tests/ui.test.js tests/flow.test.js tests/setup.test.js",
+    "test": "node --test tests/core.test.js tests/ui.test.js tests/flow.test.js tests/setup.test.js tests/auth.test.js",
     "test:rules": "firebase emulators:exec --only database,auth --project demo-no15 \"node --no-use-env-proxy --test --test-isolation=none --test-concurrency=1 tests/security.test.js\"",
     "test:all": "npm test && npm run test:rules"
   },

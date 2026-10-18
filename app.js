@@ -1,12 +1,12 @@
-import {defaultConfig,validateConfig,csvText,EVENTS} from './core.js';
-import {FirebaseBackend,DemoBackend} from './backend.js';
-import {renderApp,settingsHTML,rulesHTML,esc,resultRows} from './view.js';
+import {defaultConfig,validateConfig,csvText,EVENTS} from './core.js?v=20261018-id1';
+import {FirebaseBackend,DemoBackend} from './backend.js?v=20261018-id1';
+import {renderApp,settingsHTML,rulesHTML,esc,resultRows} from './view.js?v=20261018-id1';
 
 const root=document.getElementById('app'),modal=document.getElementById('modal'),modalBody=document.getElementById('modal-body'),toastEl=document.getElementById('toast');
 const ctx={backend:null,role:'student',tab:'game',selected:null,bet:false,busy:false,projection:false,sound:false,privateView:false,rankScope:'total',rankRound:null,historyRound:null,homeTeacher:false,savedRooms:{},joining:false,joinSent:false,recovering:false,draft:{code:'',name:''}};
 let renderPending=false,lastKey='',lastRound=0,toastTimer,modalResolve,lastGroup='',audio;
 function toast(message,error=false){clearTimeout(toastTimer);toastEl.textContent=message;toastEl.className='show'+(error?' error':'');toastTimer=setTimeout(()=>toastEl.className='',error?10000:4500);}
-function message(error){const code=String(error?.code??'').toLowerCase();if(code.includes('popup-closed'))return 'ログイン画面が閉じられました。もう一度お試しください。';if(code.includes('popup-blocked'))return 'ポップアップがブロックされました。このサイトのポップアップを許可してから再試行してください。';if(code.includes('unauthorized-domain'))return 'Firebase Authenticationの「承認済みドメイン」にGitHub Pagesのドメインを追加してください。';if(code.includes('operation-not-allowed'))return 'Firebase AuthenticationでGoogleログイン・匿名ログインを有効にしてください。';if(code.includes('permission')||String(error?.message).toLowerCase().includes('permission_denied'))return '操作が許可されませんでした。締切・提出済み・カード使用済み・参加資格をご確認ください。初回設定中の場合はデータベースルールも確認してください。';return error?.message??String(error);}
+function message(error){const code=String(error?.code??'').toLowerCase();if(['auth/invalid-credential','auth/wrong-password','auth/user-not-found','auth/invalid-login-credentials'].includes(code))return '教員IDまたはパスワードが違います。入力内容を確認してください。';if(code==='auth/too-many-requests')return 'ログインを繰り返したため、一時的に制限されています。時間をおいて再試行してください。';if(code==='auth/network-request-failed')return '通信できませんでした。ネットワーク接続を確認してください。';if(code==='auth/user-disabled')return 'この教員アカウントは無効になっています。管理者に確認してください。';if(code.includes('popup-closed'))return 'ログイン画面が閉じられました。もう一度お試しください。';if(code.includes('popup-blocked'))return 'ポップアップがブロックされました。このサイトのポップアップを許可してから再試行してください。';if(code.includes('unauthorized-domain'))return 'Firebase Authenticationの「承認済みドメイン」にGitHub Pagesのドメインを追加してください。';if(code.includes('operation-not-allowed'))return 'Firebase Authenticationでメール／パスワード認証・匿名認証を有効にしてください。';if(code.includes('permission')||String(error?.message).toLowerCase().includes('permission_denied'))return '操作が許可されませんでした。締切・提出済み・カード使用済み・参加資格をご確認ください。初回設定中の場合はデータベースルールも確認してください。';return error?.message??String(error);}
 function notify(){
   const b=ctx.backend;
   if(b?.requestReset){b.requestReset=false;ctx.joinSent=false;}
@@ -63,7 +63,11 @@ async function action(act,el){
   if(act==='demo'){startDemo();return;}
   if(act==='demo-role'){ctx.role=ctx.role==='teacher'?'student':'teacher';ctx.privateView=false;ctx.tab='game';return notify();}
   if(act==='demo-fill')return run(()=>b.fill());
-  if(act==='teacher-login')return run(async()=>{const backend=newFirebase();ctx.savedRooms=await backend.savedRooms();ctx.homeTeacher=true;ctx.joining=false;notify();});
+  if(act==='teacher-login'){
+    showModal(`<h2 id="modal-title">教員ログイン</h2><p>教員共通のIDとパスワードを入力してください。</p><form id="teacher-login-form" class="stack space-top"><label for="teacher-id">教員ID<input id="teacher-id" name="teacherId" autocomplete="username" autocapitalize="none" spellcheck="false" minlength="3" maxlength="32" pattern="[A-Za-z0-9][A-Za-z0-9_-]{2,31}" placeholder="例：teacher" required aria-describedby="teacher-id-help"></label><p id="teacher-id-help" class="help-text">半角英数字・ハイフン・アンダースコア（3〜32文字）。</p><label for="teacher-password">パスワード<input id="teacher-password" type="password" name="password" autocomplete="current-password" required></label><p id="teacher-login-error" class="help-text" role="alert"></p><div class="modal-actions"><button type="button" class="btn ghost" data-act="modal-close">戻る</button><button type="submit" class="btn primary">ログイン</button></div></form>`);
+    document.getElementById('teacher-id').focus();return;
+  }
+  if(act==='teacher-logout')return run(async()=>{await b.signOut();b.destroy();ctx.backend=null;ctx.homeTeacher=false;ctx.savedRooms={};ctx.joining=false;try{localStorage.removeItem('no15-room');}catch{}notify();});
   if(act==='open-room')return run(()=>openRoom(el.dataset.code));
   if(act==='recover-home'){
     ctx.recovering=true;showModal(`<h2 id="modal-title">別の端末から復帰する</h2><p>元のプレイヤーへ引き継ぐため、先生の本人確認が必要です。新規登録せず、復帰を申請してください。</p><form id="recover-form" class="stack space-top"><label>ルームコード<input name="code" maxlength="6" required value="${esc(ctx.draft.code)}"></label><label>元のニックネーム<input name="name" maxlength="24" required value="${esc(ctx.draft.name)}"></label><div class="modal-actions"><button type="button" class="btn ghost" data-act="modal-close">戻る</button><button type="submit" class="btn primary">復帰を申請する</button></div></form>`);return;
@@ -119,6 +123,13 @@ document.addEventListener('input',e=>{const key=e.target.dataset.draft;if(key)ct
 document.addEventListener('change',e=>{if(e.target.dataset.select==='history-round'){ctx.historyRound=Number(e.target.value);notify();}if(e.target.dataset.select==='rank-round'){ctx.rankRound=Number(e.target.value);notify();}});
 document.addEventListener('submit',e=>{
   const form=e.target,fd=new FormData(form);e.preventDefault();
+  if(form.id==='teacher-login-form')return run(async()=>{
+    const submit=form.querySelector('[type="submit"]'),error=form.querySelector('[role="alert"]');
+    submit.disabled=true;submit.textContent='ログイン中…';error.textContent='';
+    try{const backend=newFirebase();await backend.signTeacher(fd.get('teacherId'),fd.get('password'));ctx.savedRooms=await backend.savedRooms();ctx.homeTeacher=true;ctx.joining=false;form.reset();closeModal();notify();}
+    catch(e){form.elements.password.value='';error.textContent=message(e);form.elements.password.focus();}
+    finally{submit.disabled=false;submit.textContent='ログイン';}
+  });
   if(form.id==='join-form')return run(async()=>{ctx.recovering=false;ctx.joinSent=false;ctx.draft={code:String(fd.get('code')).trim().toUpperCase(),name:String(fd.get('name'))};await openRoom(ctx.draft.code);if(ctx.backend.role!=='teacher'){await ctx.backend.join(ctx.draft.name);ctx.joinSent=true;}notify();});
   if(form.id==='room-join-form')return run(async()=>{await ctx.backend.join(fd.get('name'),ctx.recovering?'recover':'join');ctx.joinSent=true;notify();});
   if(form.id==='create-form')return run(async()=>{await ctx.backend.create(Number(fd.get('capacity')),fd.get('title'));ctx.joining=false;ctx.role='teacher';ctx.tab='game';notify();});

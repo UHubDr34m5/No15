@@ -1,11 +1,17 @@
-import {VERSION,clone,nickname,createRound,makeEventPlan,scoreMatch,applyResult,defaultConfig} from './core.js';
-import {firebaseConfig} from './config.js';
+import {VERSION,clone,nickname,createRound,makeEventPlan,scoreMatch,applyResult,defaultConfig} from './core.js?v=20261018-id1';
+import {firebaseConfig} from './config.js?v=20261018-id1';
 
 export const configured=()=>!!firebaseConfig.apiKey&&!Object.values(firebaseConfig).some(v=>String(v).includes('YOUR_'));
 const uidToken=()=>crypto.randomUUID().replaceAll('-','').slice(0,18);
 const alphabet='ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
 const codeToken=()=>Array.from(crypto.getRandomValues(new Uint8Array(6)),n=>alphabet[n%alphabet.length]).join('');
 const initialState=()=>({phase:'lobby',round:0,match:0,completed:0,revision:0,hidden:false,config:defaultConfig(),progress:{},history:{},revealed:[],submittedCount:0});
+// Internal Firebase account identifier; the password is never stored in site code.
+export function teacherEmail(id){
+  const normalized=String(id??'').trim().toLowerCase();
+  if(!/^[a-z0-9][a-z0-9_-]{2,31}$/.test(normalized))throw Error('教員IDは3〜32文字の半角英数字・ハイフン・アンダースコアで入力してください（先頭は英数字）。');
+  return `${normalized}@teacher.no15.invalid`;
+}
 export class FirebaseBackend {
   constructor(notify){this.notify=notify;this.online=false;this.offset=0;this.unsubs=[];this.globalUnsubs=[];this.code='';this.role='student';this.pid='';this.sending=false;this.processing=false;this.dirty=false;}
   async init(){
@@ -25,7 +31,19 @@ export class FirebaseBackend {
     this.globalUnsubs.push(db.onValue(db.ref(this.db,'.info/serverTimeOffset'),snap=>{this.offset=snap.val()??0;}));
   }
   now(){return Date.now()+this.offset;}
-  async signTeacher(){await this.init();if(this.auth.currentUser?.providerData?.some(p=>p.providerId==='google.com'))return;const provider=new this.sdk.GoogleAuthProvider();provider.setCustomParameters({prompt:'select_account'});await this.sdk.signInWithPopup(this.auth,provider);}
+  async signTeacher(id,password){
+    const email=id===undefined?null:teacherEmail(id);
+    await this.init();
+    if(email){
+      if(!password)throw Error('パスワードを入力してください。');
+      await this.sdk.signInWithEmailAndPassword(this.auth,email,password);
+    }
+    const user=this.auth.currentUser;
+    if(!user?.providerData?.some(p=>p.providerId==='password'))throw Error('教員IDとパスワードでログインしてください。');
+    const allowed=(await this.sdk.get(this.sdk.ref(this.db,`teachers/${user.uid}`))).val();
+    if(allowed!==true){await this.sdk.signOut(this.auth);throw Error('このアカウントには教員の利用許可がありません。設定ガイドの教員登録を確認してください。');}
+  }
+  async signOut(){this.clearRoom();await this.sdk.signOut(this.auth);this.code='';}
   async ensureUser(){await this.init();if(!this.auth.currentUser)await this.sdk.signInAnonymously(this.auth);return this.auth.currentUser.uid;}
   path(suffix=''){return this.sdk.ref(this.db,`games/${this.code}${suffix?'/'+suffix:''}`);}
   async create(capacity,title){
