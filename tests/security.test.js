@@ -20,7 +20,7 @@ function seed(n=16,phase='collecting'){
   const roster=Object.fromEntries(Array.from({length:n},(_,i)=>['p'+(i+1),{name:'生徒'+(i+1),nameKey:'生徒'+(i+1),authUid:'p'+(i+1),joinedAt:i}]));
   return {meta:{owner:'teacher',capacity:16,createdAt:1,closed:false,title:'test'},roster,members:Object.fromEntries(Object.keys(roster).map(id=>[id,id])),public:{phase,round:1,match:1,completed:0,matchKey:'match1',lockedAt:0,event:'none',config:defaultConfig(),progress:freshProgress(roster),history:{},revealed:[],submittedCount:0,deadline:0,revision:0}};
 }
-async function reset(n=16,phase='collecting'){await env.clearDatabase();await env.withSecurityRulesDisabled(async c=>set(ref(c.database()),{games:{[code]:seed(n,phase)},teachers:{teacher:true,newteacher:true}}));}
+async function reset(n=16,phase='collecting'){await env.clearDatabase();await env.withSecurityRulesDisabled(async c=>set(ref(c.database()),{games:{[code]:seed(n,phase)},teachers:{teacher:true,newteacher:true,realhost:true}}));}
 async function hostBackend(){const db=actor('teacher',true),b=new FirebaseBackend(()=>{});b.sdk=dbSDK;b.db=db;b.auth={currentUser:{uid:'teacher'}};b.online=true;b.role='teacher';b.code=code;b.roster=(await get(p(db,'roster'))).val();b.state=(await get(p(db,'public'))).val();return b;}
 async function sync(b){b.state=(await get(p(b.db,'public'))).val();b.roster=(await get(p(b.db,'roster'))).val();}
 before(async()=>{env=await initializeTestEnvironment({projectId:'demo-no15',database:{host:'127.0.0.1',port:9000,rules:await readFile(new URL('../database.rules.json',import.meta.url),'utf8')}});});
@@ -152,7 +152,7 @@ test('本番と同じDB経由で24試合を進行し、カード復活・累積�
 });
 test('実アプリの購読経路：ルーム作成→参加→人数同期→段階発表→リロード復帰',async()=>{
   const backends=[];
-  function backend(uid,teacher=false){const b=new FirebaseBackend(()=>{});b.sdk=dbSDK;b.db=actor(uid,teacher);b.auth={currentUser:{uid,providerData:teacher?[{providerId:'google.com'}]:[]}};b.init=async()=>{};b.online=true;backends.push(b);return b;}
+  function backend(uid,teacher=false){const b=new FirebaseBackend(()=>{});b.sdk=dbSDK;b.db=actor(uid,teacher);b.auth={currentUser:{uid,providerData:teacher?[{providerId:'password'}]:[]}};b.init=async()=>{};b.online=true;backends.push(b);return b;}
   async function until(fn){const end=Date.now()+6000;while(!fn()){if(Date.now()>end)throw Error('subscription timed out');await new Promise(r=>setTimeout(r,10));}}
   try{
     const host=backend('realhost',true);const newcode=await host.create(16,'購読テスト');
