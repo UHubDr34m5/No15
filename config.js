@@ -1,10 +1,8 @@
-// Firebase コンソール → プロジェクトの設定 → マイアプリ → SDK の設定と構成。
-// 以下を自分のプロジェクトの Web 用設定に置き換えてください。
-// ここに秘密鍵・サービスアカウント・管理者パスワードは入力しません。
+// Firebase Web用の公開接続設定
 export const firebaseConfig = {
-  apiKey: 'YOUR_API_KEY',
-  authDomain: 'YOUR_PROJECT_ID.firebaseapp.com',
-  databaseURL: 'https://YOUR_DATABASE_URL',
-  projectId: 'YOUR_PROJECT_ID',
-  appId: 'YOUR_APP_ID'
+  "apiKey": "AIzaSyCrhiZqDQOHF72dcxsgopnuUCqCa5voe7k",
+  "authDomain": "no15-classroom.firebaseapp.com",
+  "databaseURL": "https://no15-classroom-default-rtdb.asia-southeast1.firebasedatabase.app",
+  "projectId": "no15-classroom",
+  "appId": "1:370659831523:web:51184e8ff1303934165fd6"
 };
