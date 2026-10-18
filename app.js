@@ -1,6 +1,6 @@
-import {defaultConfig,validateConfig,csvText,EVENTS} from './core.js?v=20261018-id2';
-import {FirebaseBackend,DemoBackend} from './backend.js?v=20261018-id2';
-import {renderApp,settingsHTML,rulesHTML,esc,resultRows} from './view.js?v=20261018-id2';
+import {defaultConfig,validateConfig,csvText,EVENTS} from './core.js?v=20261018-id3';
+import {FirebaseBackend,DemoBackend} from './backend.js?v=20261018-id3';
+import {renderApp,settingsHTML,rulesHTML,esc,resultRows} from './view.js?v=20261018-id3';
 
 const root=document.getElementById('app'),modal=document.getElementById('modal'),modalBody=document.getElementById('modal-body'),toastEl=document.getElementById('toast');
 const ctx={backend:null,role:'student',tab:'game',selected:null,bet:false,busy:false,projection:false,sound:false,privateView:false,rankScope:'total',rankRound:null,historyRound:null,homeTeacher:false,savedRooms:{},joining:false,joinSent:false,recovering:false,draft:{code:'',name:''}};
@@ -58,7 +58,7 @@ async function action(act,el){
   if(act==='sound'){ctx.sound=!ctx.sound;if(ctx.sound)play(true);return notify();}
   if(act==='home'){
     if(s&&!await confirmAction('ホームへ戻りますか？','オンラインのルームデータは保持されます。教員が画面を離れている間は、集計・発表と提出人数の同期が止まります。','ホームへ戻る'))return;
-    b?.destroy();ctx.backend=null;ctx.joining=false;ctx.homeTeacher=false;ctx.tab='game';ctx.privateView=false;ctx.projection=false;try{localStorage.removeItem('no15-room');}catch{}return notify();
+    const teacher=!!b?.auth?.currentUser?.providerData?.some(p=>p.providerId==='password');if(teacher)b.clearRoom();else b?.destroy();ctx.backend=teacher?b:null;ctx.joining=false;ctx.homeTeacher=teacher;ctx.tab='game';ctx.privateView=false;ctx.projection=false;try{localStorage.removeItem('no15-room');}catch{}notify();if(teacher)return run(async()=>{ctx.savedRooms=await b.savedRooms();notify();});return;
   }
   if(act==='demo'){startDemo();return;}
   if(act==='demo-role'){ctx.role=ctx.role==='teacher'?'student':'teacher';ctx.privateView=false;ctx.tab='game';return notify();}

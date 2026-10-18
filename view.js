@@ -1,4 +1,4 @@
-import {CARDS,EVENTS,defaultConfig,isHidden,ranking,cardStats} from './core.js?v=20261018-id2';
+import {CARDS,EVENTS,defaultConfig,isHidden,ranking,cardStats} from './core.js?v=20261018-id3';
 export const esc=x=>String(x??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const btn=(text,act,classes='',attrs='')=>`<button type="button" class="btn ${classes}" data-act="${act}" ${attrs}>${text}</button>`;
 const disabled=x=>x?'disabled':'';

@@ -164,7 +164,7 @@ test('実アプリの購読経路：ルーム作成→参加→人数同期→�
     await host.closeMatch();await until(()=>host.state.phase==='locked');await host.beginReveal();await until(()=>host.state.phase==='reveal');
     await host.reveal();await until(()=>a.state.revealed?.length===1);assert.equal(a.state.revealed[0].card,10);assert.equal(a.state.progress.reala.used??null,null);
     await host.reveal();await until(()=>host.state.revealDone);assert.equal(host.state.phase,'reveal');
-    await host.reveal();await until(()=>a.state.phase==='result');assert.equal(a.state.progress.reala.total,30);assert.equal(b.state.progress.realb.total,10);
+    await host.reveal();await until(()=>a.state.phase==='result'&&b.state.phase==='result');assert.equal(a.state.progress.reala.total,30);assert.equal(b.state.progress.realb.total,10);
     a.destroy();const reload=backend('reala');await reload.open(newcode);await until(()=>reload.state?.phase==='result');assert.equal(reload.state.progress.reala.total,30);assert.equal(reload.pid,'reala');assert.equal(reload.ownSubmission.card,15);
   }finally{for(const b of backends)b.destroy();}
 });
