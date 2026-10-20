@@ -12,3 +12,5 @@
 
 /* Balanced round facts at every screen size. */
 .home-grid{margin-top:28px}.round-summary{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;width:100%;max-width:620px;margin:24px auto}.round-summary>div{min-width:0;text-align:center;padding:18px 6px;background:var(--surface2);border:1px solid var(--line);border-radius:14px}.round-summary b{font-size:clamp(30px,4vw,44px);font-variant-numeric:tabular-nums;line-height:1.2}.round-summary small{display:block;margin-top:10px;font-size:clamp(10px,1.2vw,13px);line-height:1.6;text-wrap:balance}.practice-banner{display:flex;align-items:center;flex-wrap:wrap;gap:10px;margin-bottom:8px}.practice-banner span{flex:1;min-width:180px}
+
+.game-header>div:first-child{min-width:0}.counter{flex-shrink:0}.counter-cell strong{white-space:nowrap}.round-summary small{word-break:keep-all;overflow-wrap:normal}
