@@ -91,7 +91,7 @@ test('段階公開は次の数字を含まず、最後の数字も表示して�
   await b.closeMatch();await sync(b);await b.beginReveal();await sync(b);await b.reveal();await sync(b);
   assert.equal(b.state.revealed.length,1);assert.equal(b.state.revealed[0].card,1);assert.equal(b.state.history??null,null);
   const publicData=(await get(p(a,'public'))).val();assert.ok(!JSON.stringify(publicData.revealed).includes('生徒2'));
-  await b.reveal();await sync(b);assert.equal(b.state.phase,'reveal');assert.equal(b.state.revealed[1].card,15);assert.equal(b.state.revealDone,true);
+  for(let card=2;card<=15;card++){await b.reveal();await sync(b);assert.equal(b.state.phase,'reveal');assert.equal(b.state.revealed.at(-1).card,card);if(card<15){assert.equal(b.state.revealed.at(-1).count,0);assert.ok(!JSON.stringify(b.state.revealed).includes('生徒2'));}}assert.equal(b.state.revealDone,true);
   await b.reveal();await sync(b);assert.equal(b.state.phase,'result');assert.equal(b.state.progress.p2.total,30);
 });
 test('全員未提出でも0点で確定し、カードを消費しない',async()=>{
@@ -162,8 +162,8 @@ test('実アプリの購読経路：ルーム作成→参加→人数同期→�
     await host.startMatch();await until(()=>a.state.phase==='collecting'&&b.state.phase==='collecting');
     await Promise.all([a.submit(15,true),b.submit(10,false)]);await until(()=>host.state.submittedCount===2&&a.ownSubmission&&b.ownSubmission);
     await host.closeMatch();await until(()=>host.state.phase==='locked');await host.beginReveal();await until(()=>host.state.phase==='reveal');
-    await host.reveal();await until(()=>a.state.revealed?.length===1);assert.equal(a.state.revealed[0].card,10);assert.equal(a.state.progress.reala.used??null,null);
-    await host.reveal();await until(()=>host.state.revealDone);assert.equal(host.state.phase,'reveal');
+    await host.reveal();await until(()=>a.state.revealed?.length===1);assert.equal(a.state.revealed[0].card,1);assert.equal(a.state.progress.reala.used??null,null);
+    for(let card=2;card<=15;card++){await host.reveal();await until(()=>a.state.revealed?.length===card&&b.state.revealed?.length===card);assert.equal(a.state.revealed.at(-1).card,card);}await until(()=>host.state.revealDone);assert.equal(host.state.phase,'reveal');
     await host.reveal();await until(()=>a.state.phase==='result'&&b.state.phase==='result');assert.equal(a.state.progress.reala.total,30);assert.equal(b.state.progress.realb.total,10);
     a.destroy();const reload=backend('reala');await reload.open(newcode);await until(()=>reload.state?.phase==='result');assert.equal(reload.state.progress.reala.total,30);assert.equal(reload.pid,'reala');assert.equal(reload.ownSubmission.card,15);
   }finally{for(const b of backends)b.destroy();}
