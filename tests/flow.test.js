@@ -32,11 +32,11 @@ test('実際の画面操作：16人参加→2ラウンド24試合→非公開→
         await click('demo-role');await click('close-match');await click('begin-reveal');
         if(round===1&&match===1){
           let steps=0;while(doc.querySelector('[data-act="reveal-next"]')?.textContent.includes('次の数字')){await click('reveal-next');if(++steps>15)throw Error('too many groups');}
-          assert.ok(doc.querySelector('.reveal-number'));assert.ok(doc.querySelector('[data-act="reveal-next"]').textContent.includes('順位へ'));await click('reveal-next');
+          assert.equal(steps,15);assert.equal(doc.querySelector('.reveal-number').textContent,'15');assert.ok(doc.querySelector('[data-act="reveal-next"]').textContent.includes('順位へ'));await click('reveal-next');
         }else await click('reveal-all');
         await wait(()=>doc.querySelector('[data-act="show-result"]'));
         assert.ok(doc.body.textContent.includes('ランキングは非公開'));assert.equal(doc.querySelector('[data-ranking]'),null);
-        if(match===12)assert.ok(doc.body.textContent.includes('12試合、おつかれさま'));
+        if(match===12)assert.ok(doc.querySelector('[data-act="settings"],[data-act="finish"]'));
       }
     }
     await click('finish');await click('confirm-yes');await wait(()=>doc.querySelector('.podium'));

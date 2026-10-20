@@ -1,5 +1,5 @@
-import {VERSION,endPractice,clone,nickname,createRound,makeEventPlan,scoreMatch,applyResult,defaultConfig} from './core.js?v=20261020-practice1';
-import {firebaseConfig} from './config.js?v=20261020-practice1';
+import {VERSION,CARDS,endPractice,clone,nickname,createRound,makeEventPlan,scoreMatch,applyResult,defaultConfig} from './core.js?v=20261020-reveal15';
+import {firebaseConfig} from './config.js?v=20261020-reveal15';
 
 export const configured=()=>!!firebaseConfig.apiKey&&!Object.values(firebaseConfig).some(v=>String(v).includes('YOUR_'));
 const uidToken=()=>crypto.randomUUID().replaceAll('-','').slice(0,18);
@@ -186,7 +186,7 @@ export class FirebaseBackend {
   async getPlan(){
     const s=clone(this.state);if(!['locked','reveal'].includes(s?.phase))throw Error('提出を締め切ってください。');
     const stored=(await this.sdk.get(this.path(`host/${s.matchKey}`))).val();
-    if(stored?.lockedAt===s.lockedAt)return {...stored,groups:stored.groups??[],missed:stored.missed??[]};
+    if(stored?.lockedAt===s.lockedAt)return {...stored,groups:CARDS.map(card=>(stored.groups??[]).find(g=>g.card===card)??{card,count:0,players:[]}),missed:stored.missed??[]};
     const submissions=(await this.sdk.get(this.path(`secrets/${s.matchKey}`))).val()??{};
     const plan={...scoreMatch(this.roster,s.progress,submissions,s.event,s.config.battle),lockedAt:s.lockedAt};
     await this.sdk.set(this.path(`host/${s.matchKey}`),plan);return plan;

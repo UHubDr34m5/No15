@@ -1,6 +1,6 @@
-import {defaultConfig,validateConfig,csvText,EVENTS} from './core.js?v=20261020-practice1';
-import {FirebaseBackend,DemoBackend} from './backend.js?v=20261020-practice1';
-import {renderApp,settingsHTML,rulesHTML,esc,resultRows} from './view.js?v=20261020-practice1';
+import {defaultConfig,validateConfig,csvText,EVENTS} from './core.js?v=20261020-reveal15';
+import {FirebaseBackend,DemoBackend} from './backend.js?v=20261020-reveal15';
+import {renderApp,settingsHTML,rulesHTML,esc,resultRows} from './view.js?v=20261020-reveal15';
 
 const root=document.getElementById('app'),modal=document.getElementById('modal'),modalBody=document.getElementById('modal-body'),toastEl=document.getElementById('toast');
 const ctx={backend:null,role:'student',tab:'game',selected:null,bet:false,busy:false,projection:false,sound:false,privateView:false,rankScope:'total',rankRound:null,historyRound:null,homeTeacher:false,savedRooms:{},joining:false,joinSent:false,recovering:false,draft:{code:'',name:''}};

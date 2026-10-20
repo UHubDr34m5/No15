@@ -74,7 +74,7 @@ export function scoreMatch(roster,progress,submissions,event='none',battleEnable
     const score=s.bet?(success?eventPoints*2:0):eventPoints;
     results[id]={id,name:p.name,card:s.card,bet:s.bet,count:count[s.card],base,eventPoints,score,success,missed:false};
   }
-  const groups=Object.keys(count).map(Number).sort((a,b)=>a-b).map(card=>({card,count:count[card],players:Object.values(results).filter(p=>p.card===card)}));
+  const groups=CARDS.map(card=>({card,count:count[card]??0,players:Object.values(results).filter(p=>p.card===card)}));
   return {results,groups,count,missed:Object.values(results).filter(p=>p.missed)};
 }
 export function freshProgress(roster,old={}){
