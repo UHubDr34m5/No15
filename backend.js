@@ -1,5 +1,5 @@
-import {VERSION,clone,nickname,createRound,makeEventPlan,scoreMatch,applyResult,defaultConfig} from './core.js?v=20261018-id3';
-import {firebaseConfig} from './config.js?v=20261018-id3';
+import {VERSION,endPractice,clone,nickname,createRound,makeEventPlan,scoreMatch,applyResult,defaultConfig} from './core.js?v=20261020-practice1';
+import {firebaseConfig} from './config.js?v=20261020-practice1';
 
 export const configured=()=>!!firebaseConfig.apiKey&&!Object.values(firebaseConfig).some(v=>String(v).includes('YOUR_'));
 const uidToken=()=>crypto.randomUUID().replaceAll('-','').slice(0,18);
@@ -160,6 +160,7 @@ export class FirebaseBackend {
     const r=await this.sdk.runTransaction(this.path('public'),s=>s?fn(clone(s)):s,{applyLocally:false});
     if(!r.committed)throw Error('別の画面で進行状況が更新されました。画面を確認してもう一度操作してください。');return r.snapshot.val();
   }
+  async endPractice(){await this.mutate(s=>endPractice(s,this.roster));}
   async beginRound(config){const plan=makeEventPlan(config),roster=clone(this.roster);await this.mutate(s=>createRound(s,roster,config,plan));}
   async startMatch(){
     const token=uidToken(),now=this.now();await this.mutate(s=>{
@@ -200,7 +201,7 @@ export class FirebaseBackend {
       return {...s,revealed:groups.slice(0,step+1),revealDone:step+1>=groups.length,revision:s.revision+1};
     });
   }
-  async finish(){await this.mutate(s=>s.phase==='roundEnd'?{...s,phase:'finished',hidden:false,revision:s.revision+1}:undefined);await this.sdk.update(this.path('meta'),{closed:true});}
+  async finish(){await this.mutate(s=>s.phase==='roundEnd'&&!s.practice?{...s,phase:'finished',hidden:false,revision:s.revision+1}:undefined);await this.sdk.update(this.path('meta'),{closed:true});}
   async deleteRoom(){const code=this.code,owner=this.auth.currentUser.uid;this.clearRoom();await this.sdk.remove(this.sdk.ref(this.db,`games/${code}`));await this.sdk.remove(this.sdk.ref(this.db,`teacherRooms/${owner}/${code}`));}
   destroy(){this.clearRoom();for(const f of this.globalUnsubs)f();this.globalUnsubs=[];}
 }
@@ -211,6 +212,7 @@ export class DemoBackend {
   }
   now(){return Date.now();}
   emit(){this.ownSubmission=this.submissions?.[this.pid]??null;this.notify();}
+  async endPractice(){this.state=endPractice(this.state,this.roster);this.submissions={};this.plan=null;this.emit();}
   async beginRound(config){this.state=createRound(this.state,this.roster,config);this.emit();}
   async startMatch(){
     const s=this.state,match=s.completed+1;if(!['ready','result'].includes(s.phase))throw Error('次の試合はまだ開始できません。');
@@ -226,7 +228,7 @@ export class DemoBackend {
   async cancelMatch(){this.state={...this.state,phase:'ready',match:this.state.completed,matchKey:'',submittedCount:0,revealed:[]};this.submissions={};this.emit();}
   async beginReveal(){this.plan=scoreMatch(this.roster,this.state.progress,this.submissions,this.state.event,this.state.config.battle);this.state.phase='reveal';this.state.revealDone=this.plan.groups.length===0;this.emit();}
   async reveal(all=false){const n=(this.state.revealed??[]).length;if(all||n>=this.plan.groups.length)this.state=applyResult(this.state,this.roster,this.plan,Date.now());else{this.state.revealed=this.plan.groups.slice(0,n+1);this.state.revealDone=n+1>=this.plan.groups.length;}this.emit();}
-  async finish(){this.state.phase='finished';this.state.hidden=false;this.emit();}
+  async finish(){if(this.state.practice)throw Error('練習は最終結果に含めません。');this.state.phase='finished';this.state.hidden=false;this.emit();}
   async removePlayer(id){if(this.state.phase!=='lobby')throw Error('開始前だけ削除できます。');delete this.roster[id];this.emit();}
   destroy(){}
 }

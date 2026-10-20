@@ -1,6 +1,6 @@
-import {defaultConfig,validateConfig,csvText,EVENTS} from './core.js?v=20261018-id3';
-import {FirebaseBackend,DemoBackend} from './backend.js?v=20261018-id3';
-import {renderApp,settingsHTML,rulesHTML,esc,resultRows} from './view.js?v=20261018-id3';
+import {defaultConfig,validateConfig,csvText,EVENTS} from './core.js?v=20261020-practice1';
+import {FirebaseBackend,DemoBackend} from './backend.js?v=20261020-practice1';
+import {renderApp,settingsHTML,rulesHTML,esc,resultRows} from './view.js?v=20261020-practice1';
 
 const root=document.getElementById('app'),modal=document.getElementById('modal'),modalBody=document.getElementById('modal-body'),toastEl=document.getElementById('toast');
 const ctx={backend:null,role:'student',tab:'game',selected:null,bet:false,busy:false,projection:false,sound:false,privateView:false,rankScope:'total',rankRound:null,historyRound:null,homeTeacher:false,savedRooms:{},joining:false,joinSent:false,recovering:false,draft:{code:'',name:''}};
@@ -80,7 +80,8 @@ async function action(act,el){
   if(act==='bet'){ctx.bet=!ctx.bet;return notify();}
   if(act==='submit')return run(async()=>{await b.submit(ctx.selected,ctx.bet);toast('提出が確定しました。発表をお待ちください。');});
   if(act==='projection'){ctx.projection=!ctx.projection;ctx.privateView=false;return notify();}
-  if(act==='settings')return showModal(settingsHTML({...defaultConfig(),...s.config}));
+  if(act==='settings')return showModal(settingsHTML({...defaultConfig(),...s.config},s.phase==='lobby'));
+  if(act==='end-practice'){if(await confirmAction('練習を終了しますか？','練習の得点・使用カード・履歴をリセットし、本番の第1ラウンドを設定します。','本番の設定へ'))return run(async()=>{await b.endPractice();ctx.historyRound=null;ctx.rankRound=null;ctx.tab='game';showModal(settingsHTML({...defaultConfig(),...b.state.config},true));});return;}
   if(act==='start-match')return run(()=>b.startMatch());
   if(act==='close-match'){
     const missing=Object.keys(b.roster).length-(s.submittedCount??0);
@@ -134,7 +135,7 @@ document.addEventListener('submit',e=>{
   if(form.id==='room-join-form')return run(async()=>{await ctx.backend.join(fd.get('name'),ctx.recovering?'recover':'join');ctx.joinSent=true;notify();});
   if(form.id==='create-form')return run(async()=>{await ctx.backend.create(Number(fd.get('capacity')),fd.get('title'));ctx.joining=false;ctx.role='teacher';ctx.tab='game';notify();});
   if(form.id==='settings-form'){
-    const c={battle:fd.has('battle'),events:fd.has('events'),eventMode:fd.get('eventMode'),eventCount:Number(fd.get('eventCount')),eventMatches:fd.getAll('eventMatches').map(Number),eventTypes:Object.fromEntries(Array.from({length:12},(_,i)=>[i+1,fd.get(`event-${i+1}`)])),hiddenAll:fd.has('hiddenAll'),hiddenMatches:fd.getAll('hiddenMatches').map(Number),seconds:Number(fd.get('seconds')),finalRound:fd.has('finalRound')};
+    const c={practice:fd.has('practice'),battle:fd.has('battle'),events:fd.has('events'),eventMode:fd.get('eventMode'),eventCount:Number(fd.get('eventCount')),eventMatches:fd.getAll('eventMatches').map(Number),eventTypes:Object.fromEntries(Array.from({length:12},(_,i)=>[i+1,fd.get(`event-${i+1}`)])),hiddenAll:fd.has('hiddenAll'),hiddenMatches:fd.getAll('hiddenMatches').map(Number),seconds:Number(fd.get('seconds')),finalRound:fd.has('finalRound')};
     return run(async()=>{validateConfig(c);await ctx.backend.beginRound(c);closeModal();ctx.tab='game';ctx.rankScope='total';ctx.privateView=false;notify();});
   }
   if(form.id==='recover-form')return run(async()=>{ctx.draft={code:String(fd.get('code')).trim().toUpperCase(),name:String(fd.get('name'))};ctx.recovering=true;ctx.joinSent=false;await openRoom(ctx.draft.code);await ctx.backend.join(ctx.draft.name,'recover');ctx.joinSent=true;closeModal();notify();});

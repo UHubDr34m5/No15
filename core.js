@@ -15,11 +15,11 @@ export function nickname(value){
   return {name,key:name.toLocaleLowerCase('ja-JP')};
 }
 export function defaultConfig(){
-  return {battle:true,events:true,eventMode:'manual',eventCount:3,eventMatches:[4,8,12],eventTypes:{4:'double',8:'low',12:'even'},hiddenAll:false,hiddenMatches:[],seconds:60,finalRound:false};
+  return {practice:false,battle:true,events:true,eventMode:'manual',eventCount:3,eventMatches:[4,8,12],eventTypes:{4:'double',8:'low',12:'even'},hiddenAll:false,hiddenMatches:[],seconds:60,finalRound:false};
 }
 export function validateConfig(c){
   const cfg={...defaultConfig(),...clone(c)};
-  if(typeof cfg.battle!=='boolean'||typeof cfg.events!=='boolean'||typeof cfg.finalRound!=='boolean'||typeof cfg.hiddenAll!=='boolean')throw Error('設定値が正しくありません。');
+  if(typeof cfg.practice!=='boolean'||typeof cfg.battle!=='boolean'||typeof cfg.events!=='boolean'||typeof cfg.finalRound!=='boolean'||typeof cfg.hiddenAll!=='boolean')throw Error('設定値が正しくありません。');
   if(!['manual','random'].includes(cfg.eventMode))throw Error('イベントの設定方法が正しくありません。');
   if(!Number.isInteger(cfg.seconds)||cfg.seconds<0||cfg.seconds>600)throw Error('制限時間は0〜600秒で指定してください。0は時間無制限です。');
   if(!Number.isInteger(cfg.eventCount)||cfg.eventCount<0||cfg.eventCount>12)throw Error('イベント回数は0〜12回で指定してください。');
@@ -83,8 +83,11 @@ export function freshProgress(roster,old={}){
 export function createRound(state,roster,config,plan){
   if(!['lobby','roundEnd'].includes(state.phase))throw Error('ラウンドの開始前だけ設定できます。');
   if(Object.keys(roster??{}).length<2)throw Error('開始には2人以上必要です。');
+  if(state.practice)throw Error('練習を終了してから本番を設定してください。');
+  if(config.practice&&state.phase!=='lobby')throw Error('練習は本番開始前だけ設定できます。');
   const cfg=validateConfig(config),round=Number(state.round??0)+1;
-  return {...state,phase:'ready',round,match:0,completed:0,config:cfg,plan:plan??makeEventPlan(cfg),hidden:cfg.hiddenAll||cfg.hiddenMatches.includes(1),progress:freshProgress(roster,state.progress),revealed:[],submittedCount:0,deadline:0,matchKey:'',event:'none',revision:(state.revision??0)+1};
+  if(cfg.practice)cfg.finalRound=false;
+  return {...state,practice:!!cfg.practice,phase:'ready',round,match:0,completed:0,config:cfg,plan:plan??makeEventPlan(cfg),hidden:cfg.hiddenAll||cfg.hiddenMatches.includes(1),progress:freshProgress(roster,state.progress),revealed:[],submittedCount:0,deadline:0,matchKey:'',event:'none',revision:(state.revision??0)+1};
 }
 export function applyResult(state,roster,scored,now){
   if(!['locked','reveal'].includes(state.phase))throw Error('この試合は確定できません。');
@@ -115,4 +118,9 @@ export function csvText(state,roster){
     rows.push([h.round,h.match,h.event,h.hidden,id,name,r.card||'',r.count,r.base,r.eventPoints,r.bet,r.success,r.missed,r.score,roundTotals[rk],totals[id],new Date(h.endedAt).toISOString()]);
   }
   return '\ufeff'+rows.map(row=>row.map(x=>'"'+String(x??'').replace(/"/g,'""')+'"').join(',')).join('\r\n')+'\r\n';
+}
+
+export function endPractice(state,roster){
+  if(!state.practice)throw Error('練習ラウンドではありません。');
+  return {phase:'lobby',practice:false,round:0,match:0,completed:0,revision:(state.revision??0)+1,hidden:false,config:{...state.config,practice:false,finalRound:false},progress:freshProgress(roster),history:{},revealed:[],missed:[],submittedCount:0,deadline:0,matchKey:'',event:'none',plan:{}};
 }

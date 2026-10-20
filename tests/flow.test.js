@@ -44,3 +44,19 @@ test('実際の画面操作：16人参加→2ラウンド24試合→非公開→
     assert.deepEqual(f.errors,[]);
   }finally{f.dom.window.close();}
 });
+
+test('練習を途中終了して本番へ切替：カードと得点と履歴を初期化',async()=>{
+ const f=await fixture(),{doc,click,wait}=f;
+ try{
+  await click('settings');let form=doc.getElementById('settings-form');form.elements.practice.checked=true;form.elements.seconds.value='0';
+  form.dispatchEvent(new f.dom.window.Event('submit',{bubbles:true,cancelable:true}));await wait(()=>doc.querySelector('.practice-banner'));
+  await click('start-match');await click('demo-fill');await click('close-match');await click('begin-reveal');await click('reveal-all');
+  await click('end-practice');await click('confirm-yes');await wait(()=>doc.getElementById('settings-form'));
+  form=doc.getElementById('settings-form');assert.equal(form.elements.practice.checked,false);form.elements.seconds.value='0';form.dispatchEvent(new f.dom.window.Event('submit',{bubbles:true,cancelable:true}));
+  await wait(()=>doc.querySelector('[data-act="start-match"]'));assert.equal(doc.querySelector('.practice-banner'),null);
+  assert.ok(doc.querySelector('.counter').textContent.includes('01'));await click('start-match');await click('demo-role');
+  assert.equal(doc.querySelectorAll('.number-card:not(:disabled)').length,15);assert.equal(doc.querySelector('.self-score strong').textContent,'0 pt');
+  doc.querySelector('[data-tab="logs"]').click();await wait(()=>doc.body.textContent.includes('確定した試合はまだありません。'));
+  assert.deepEqual(f.errors,[]);
+ }finally{f.dom.window.close();}
+});
